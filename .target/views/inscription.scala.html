@@ -1,0 +1,27 @@
+@main("Inscription") {
+	<form method="post">
+  
+	   <fieldset>
+	       <legend>Vos coordonnées</legend>
+	       <label for="nom">Nom:</label>
+	       <input type="text" name="nom" id="nom" />
+	 		<br>
+	       <label for="prenom">Prénom:</label>
+	       <input type="text" name="prenom" id="prenom" />
+	  		<br>
+	       <label for="email">E-mail:</label>
+	       <input type="email" name="email" id="email" />*
+	 		<br>
+	   </fieldset>
+	   <fieldset>
+	   		<label for="pseudo">Pseudo:</label>
+	       <input type="text" name="pseudo" id="pseudo" />*
+	       <br>
+	       <label for="mdp">Mot de passe:</label>
+	       <input type="password" name="mdp" id="mdp" />*
+	       <br>
+	   </fieldset>
+	   	
+		<input type="submit" value="Envoyer" />
+	</form>
+}

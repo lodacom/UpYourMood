@@ -1,0 +1,37 @@
+@(tweets: List[Tweet], tweetForm: Form[Tweet])
+@**
+*ci-dessus une variable tweets récupère la liste des tweets envoyés par la méthode GET
+*la varible tweetForm va permetre de générer le formulaire correspondant au tweet
+**@
+@import helper._
+
+@main("Tweet list"){
+	<h1>List of what you tweet</h1>
+	<ul>
+        @for(tweet <- tweets) {
+            <li>
+                @tweet.pseudo
+            </li>
+            <li>
+            	@tweet.commentaire
+            </li>
+            <li>
+            	@tweet.creationDate
+            </li>
+            @form(routes.ControlTweet.deleteTweet(tweet.id)) {
+                    <input class="bouton" type="submit" value="Delete">
+                }
+        }
+    </ul>
+    
+    <h2>Add a new tweet</h2>
+    
+    @form(routes.ControlTweet.newTweet()) {
+        
+        @inputText(tweetForm("pseudo")) 
+        @inputText(tweetForm("commentaire"))
+ 
+        <input class="bouton" type="submit" value="Create">
+        
+    }
+}
