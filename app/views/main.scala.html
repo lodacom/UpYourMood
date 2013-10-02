@@ -10,6 +10,13 @@
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
     <body>
+    	<h1>Up Your Mood</h1>
+    	<ul id="menu">
+    		<li class="sous_menu"><a href="@routes.ControlUser.index()">Inscription</a></li>
+    	</ul>
         @content
+        <span id="copyright">
+        	Copyright: Burc Pierre, Colombani Baptiste, Duplouy Olivier, Tristan Seguin 
+        </span>
     </body>
 </html>
