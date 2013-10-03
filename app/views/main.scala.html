@@ -13,7 +13,19 @@
     	<h1>Up Your Mood</h1>
     	<ul id="menu">
     		<li class="sous_menu"><a href="@routes.ControlUser.index()">Inscription</a></li>
+    		
     	</ul>
+    	<form method="post">
+	    	<fieldset>
+		   		<label for="pseudo">Pseudo:</label>
+		       <input type="text" name="pseudo" id="pseudo" />*
+		       <br>
+		       <label for="mdp">Mot de passe:</label>
+		       <input type="password" name="mdp" id="mdp" />*
+		       <br>
+		   </fieldset>
+		   <input type="submit" value="Connexion" />
+		</form>
         @content
         <span id="copyright">
         	Copyright: Burc Pierre, Colombani Baptiste, Duplouy Olivier, Tristan Seguin 
