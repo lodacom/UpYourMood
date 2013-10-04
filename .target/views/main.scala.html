@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, connected: Boolean)(content: Html)
 
 <!DOCTYPE html>
 
@@ -15,6 +15,7 @@
     		<li class="sous_menu"><a href="@routes.ControlUser.index()">Inscription</a></li>
     		
     	</ul>
+    	@if(!connected){
     	<form method="post">
 	    	<fieldset>
 		   		<label for="pseudo">Pseudo:</label>
@@ -26,6 +27,11 @@
 		   </fieldset>
 		   <input type="submit" value="Connexion" />
 		</form>
+		}else{
+			<form method="post">
+		  	 <input type="submit" value="Deconnexion" />
+			</form>
+		}
         @content
         <span id="copyright">
         	Copyright: Burc Pierre, Colombani Baptiste, Duplouy Olivier, Tristan Seguin 

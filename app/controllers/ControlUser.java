@@ -10,7 +10,8 @@ public class ControlUser extends Controller {
 	static Form<User> userForm = Form.form(User.class);
 	
 	public static Result index() {
-        return ok(inscription.render());
+		//TODO : il faudra changer le truc ci-dessous
+        return ok(inscription.render(false));
     }
 	
 	public static Result newUser() {
@@ -19,7 +20,8 @@ public class ControlUser extends Controller {
 			/*
 			 * on regarde si le formulaire a bien été rempli.
 			 */
-			return badRequest(inscription.render());
+			//TODO : il faudra changer le truc ci-dessous
+			return badRequest(inscription.render(false));
 		} else {
 			/*
 			 * quand c'est bon on récupère les champs et 

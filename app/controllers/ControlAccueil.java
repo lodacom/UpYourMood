@@ -6,6 +6,7 @@ import views.html.*;
 public class ControlAccueil extends Controller {
 	
 	public static Result index() {
-        return ok(accueil.render());
+		//TODO : il faudra changer e truc ci-dessous
+        return ok(accueil.render(false));
     }
 }

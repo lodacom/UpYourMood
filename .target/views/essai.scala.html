@@ -1,11 +1,11 @@
-@(tweets: List[Tweet], tweetForm: Form[Tweet])
+@(tweets: List[Tweet], tweetForm: Form[Tweet], connected: Boolean)
 @**
 *ci-dessus une variable tweets récupère la liste des tweets envoyés par la méthode GET
 *la varible tweetForm va permetre de générer le formulaire correspondant au tweet
 **@
 @import helper._
 
-@main("Tweet list"){
+@main("Tweet list",connected){
 	<h1>List of what you tweet</h1>
 	<ul>
         @for(tweet <- tweets) {
