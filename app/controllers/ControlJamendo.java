@@ -4,25 +4,23 @@ import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 
-import models.Jamendo;
 import play.mvc.*;
-import views.html.player;
+import views.html.*;
 
 public class ControlJamendo extends Controller{
 	
-	public static Jamendo jam=new Jamendo();
-	
 	public static Result index() throws ClientProtocolException, IOException{
 		//TODO : il faudra changer e truc ci-dessous
-		jam.play();
-        return ok(player.render(Application.maSession,jam.next()));
+		Application.jam.play();
+        return ok(accueil.render(Application.maSession,Application.jam.next()));
     }
 	
 	public static Result next(){
-		return ok(player.render(Application.maSession,jam.next()));
+		
+		return ok(player.render(Application.jam.next()));
 	}
 	
 	public static Result previous(){
-		return ok(player.render(Application.maSession,jam.previous()));
+		return ok(player.render(Application.jam.previous()));
 	}
 }

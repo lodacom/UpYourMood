@@ -12,6 +12,7 @@ public class Application extends Controller {
 	
 	static Form<ConnectionUtil> connectionUser = Form.form(ConnectionUtil.class);
 	public static SessionValues maSession=new SessionValues(false);
+	public static Jamendo jam=new Jamendo();
 	
     public static Result index() {
     	String user = session("connected");
@@ -30,7 +31,7 @@ public class Application extends Controller {
     	}
     	Form<ConnectionUtil> filledForm = connectionUser.bindFromRequest();
     	if(filledForm.hasErrors()) {
-    		return badRequest(accueil.render(maSession));
+    		return badRequest(accueil.render(maSession,Application.jam.current()));
     	} else {
     		ConnectionBase.open();
     		ResultSet res=ConnectionBase.requete("SELECT pseudo,mdp " +

@@ -41,6 +41,10 @@ public class Jamendo {
 		}
 	}
 	
+	public String current(){
+		return idMusiques.get(compteur);
+	}
+	
 	public String listArtistes(){
 		List<JsonNode> liste=node.findValues("artist_name");
 		String artistes="";

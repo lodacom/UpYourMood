@@ -1,4 +1,4 @@
-@(sessionValues: SessionValues)
+@(sessionValues: SessionValues, json: String)
 
 @main("Accueil",sessionValues) {
 	
@@ -6,6 +6,7 @@
 	*Ici intégrer le player Jamendo
 	*le slider pour la notation de la connotation
 	*@
+	@player(json) 
 	<form method="post">
 		<label for="sentiment">Marquez en un mot ce que vous ressentez:</label>
 		<input type="text" name="sentiment" id="sentiment" />
