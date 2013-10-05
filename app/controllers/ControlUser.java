@@ -11,7 +11,7 @@ public class ControlUser extends Controller {
 	
 	public static Result index() {
 		//TODO : il faudra changer le truc ci-dessous
-        return ok(inscription.render(false));
+        return ok(inscription.render(Application.maSession));
     }
 	
 	public static Result newUser() {
@@ -21,7 +21,7 @@ public class ControlUser extends Controller {
 			 * on regarde si le formulaire a bien été rempli.
 			 */
 			//TODO : il faudra changer le truc ci-dessous
-			return badRequest(inscription.render(false));
+			return badRequest(inscription.render(Application.maSession));
 		} else {
 			/*
 			 * quand c'est bon on récupère les champs et 

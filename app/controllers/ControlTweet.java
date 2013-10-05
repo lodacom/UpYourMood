@@ -23,7 +23,7 @@ public class ControlTweet extends Controller{
     		 * avec Tweet.all on envoie également la variable tweetForm
     		 * qui permetra de générer le formulaire
     		 */
-    		return ok(essai.render(Tweet.all(),tweetForm,false));
+    		return ok(essai.render(Tweet.all(),tweetForm,Application.maSession));
     	}else{
     		if (request().accepts("application/json")){
     			return ok(Json.toJson(Tweet.all()));
@@ -43,7 +43,7 @@ public class ControlTweet extends Controller{
     		   * on regarde si le formulaire a bien été rempli.
     		   */
     	    return badRequest(
-    	      essai.render(Tweet.all(), filledForm,false)
+    	      essai.render(Tweet.all(), filledForm,Application.maSession)
     	    );
     	  } else {
     		  /*
