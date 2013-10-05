@@ -48,6 +48,7 @@ public class Application extends Controller {
     				session("connected",filledForm.field("pseudo").value());
     				ConnectionBase.close();
     				maSession.setConnected(true);
+    				maSession.setPseudo(filledForm.field("pseudo").value());
     				return redirect(routes.Application.index()); 
     			}
     		} catch (SQLException e) {

@@ -1,0 +1,21 @@
+html{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 12pt;
+}
+
+#menu{
+	margin:0;
+	padding:0;
+	list-style-type:none;	
+}
+
+#menu li{
+	margin:0;
+	padding:0;
+	display:inline;
+}
+
+a{
+	text-decoration: none;
+	color:black;
+}

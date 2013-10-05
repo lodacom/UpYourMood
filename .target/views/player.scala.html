@@ -1,0 +1,17 @@
+@(sessionValues: SessionValues, json: String)
+
+<iframe id="widget" 
+	scrolling="no" frameborder="0" width="220" height="341" style="width: 220px; height: 341px;" 
+	src="//widgets.jamendo.com/v3/track/@json?autoplay=0&layout=standard&manualWidth=242&
+	width=220&theme=light&highlight=0&tracklist=false&tracklist_n=3&embedCode=">
+</iframe>
+<button>
+	<a href="@routes.ControlJamendo.next()">
+	Next
+	</a>
+</button>
+<button>
+	<a href="#">
+	Previous
+	</a>
+</button>
