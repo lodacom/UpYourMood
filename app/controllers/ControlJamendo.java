@@ -19,6 +19,10 @@ public class ControlJamendo extends Controller{
     }
 	
 	public static Result next(){
-		return redirect(routes.ControlJamendo.index());
+		return ok(player.render(Application.maSession,jam.next()));
+	}
+	
+	public static Result previous(){
+		return ok(player.render(Application.maSession,jam.previous()));
 	}
 }

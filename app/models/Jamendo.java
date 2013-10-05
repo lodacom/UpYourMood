@@ -12,7 +12,6 @@ public class Jamendo {
 	static final String CLIENT_ID = "b6747d04";
 	public JsonNode node;
 	public List<String> idMusiques;
-	public List<String> pochettesAlbums;
 	public int compteur=-1;
 	/*
 	 * artist_name
@@ -69,11 +68,11 @@ public class Jamendo {
 		return titres;
 	}
 	
-	public List<String> listPochetteAlbum(){
+	public String listPochetteAlbum(){
 		List<JsonNode> liste=node.findValues("album_image");
-		pochettesAlbums=new ArrayList<String>();
+		String pochettesAlbums="";
 		for (JsonNode element :liste){
-			pochettesAlbums.add(element.asText());
+			pochettesAlbums+=element.asText()+" ";
 		}
 		return pochettesAlbums;
 	}
