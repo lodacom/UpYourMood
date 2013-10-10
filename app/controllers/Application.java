@@ -1,8 +1,11 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import org.apache.http.client.ClientProtocolException;
 
@@ -69,5 +72,31 @@ public class Application extends Controller {
     public static Result deconnection(){
     	session().remove("connected");
     	return redirect(routes.Application.index());
+    }
+    
+    public static Result CheckWord(){
+    	final Map<String, String[]> values = request().body().asFormUrlEncoded();
+    	final String name = values.get("sentiment")[0];
+    	if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
+    		return redirect(routes.Application.index());
+    	}else{
+    		String utf_encoded="";
+    		try {
+				utf_encoded = URLEncoder.encode(name,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+    		String _url = "http://api.wordreference.com/78289/json/fren/" + utf_encoded;
+        	ReadURL ru = new ReadURL(_url);
+            Integer size = ru.getURLSize();
+            String result;
+            if (size>150){
+            	//on bon mot: on peut travailler avec
+            	
+            }
+            return redirect(routes.Application.index());
+    	}
+    	
+    	
     }
 }
