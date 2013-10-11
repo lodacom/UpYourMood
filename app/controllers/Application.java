@@ -93,7 +93,7 @@ public class Application extends Controller {
             	RDFBuilding rdf=RDFBuilding.getInstance();
             	WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
             	UserInformation userInf=new UserInformation();
-            	rdf.rdfUpYourMood(jam.currentInfo());
+            	rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
             }
             return redirect(routes.Application.index());
     	}

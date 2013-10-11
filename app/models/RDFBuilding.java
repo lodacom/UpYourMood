@@ -36,10 +36,10 @@ public class RDFBuilding {
 	 * fonction principale qu'il faudra appeler dans la classe Application
 	 * @param List<String> infoMusic information de la musique courante
 	 */
-	public void rdfUpYourMood(List<String> infoMusic,List<String> infoUser,String word, float connotation){
+	public void rdfUpYourMood(List<String> infoMusic,UserInformation userInfo,WordConnotation word){
 		ajouterMusique(infoMusic);
-		ajouterUtilisateur(infoUser);
-		ajouterMot_Connotation(word, connotation);
+		ajouterUtilisateur(userInfo);
+		ajouterMot_Connotation(word);
 	}
 	
 	/**
@@ -82,10 +82,10 @@ public class RDFBuilding {
 	 * 	<li>le pseudo</li>
 	 * </ul>
 	 */
-	private void ajouterUtilisateur(List<String> infoUser){
+	private void ajouterUtilisateur(UserInformation userInfo){
 		String user=m.getNsPrefixURI("user");
 		if (user!=null){
-			Resource User = m.createResource(user+infoUser.get(0));
+			Resource User = m.createResource(user+userInfo.getInfoUser().get(0));
 			m.add(User,RDF.type,m.getProperty("User"));
 		}else{
 			String userNs=prefixe+"user/";
@@ -94,9 +94,9 @@ public class RDFBuilding {
 		}
 	}
 	
-	private void ajouterMot_Connotation(String word, float connot){
+	private void ajouterMot_Connotation(WordConnotation word){
 		String mot=m.getNsPrefixURI("wordconnotation");
-		Literal connotation=m.createTypedLiteral(connot,XSDDatatype.XSDfloat);
+		Literal connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
 		if (mot!=null){
 			Resource Mot = m.createResource(mot+word);
 			Mot.addLiteral(APourConnotation, connotation);
