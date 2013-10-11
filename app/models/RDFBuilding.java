@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.util.FileManager;
 
@@ -26,9 +28,10 @@ public class RDFBuilding {
 	
 	/**
 	 * fonction principale qu'il faudra appeler dans la classe Application
+	 * @param List<String> infoMusic information de la musique courante
 	 */
-	public void rdfUpYourMood(){
-		ajouterMusique();
+	public void rdfUpYourMood(List<String> infoMusic){
+		ajouterMusique(infoMusic);
 		ajouterUtilisateur();
 		ajouterMot_Connotation();
 	}
@@ -43,13 +46,14 @@ public class RDFBuilding {
 	 * 	<li>url de la photo de l'album</li>
 	 * </ul>
 	 */
-	private void ajouterMusique(){
+	private void ajouterMusique(List<String> infoMusic){
 		String music=m.getNsPrefixURI("music");
 		if (music!=null){
 			
 		}else{
 			String musicNs=prefixe+"music/";
 			m.setNsPrefix("music", musicNs);
+			Resource Music = m.createResource(musicNs+"Music");
 		}
 	}
 	
@@ -67,6 +71,7 @@ public class RDFBuilding {
 		}else{
 			String userNs=prefixe+"user/";
 			m.setNsPrefix("user", userNs);
+			Resource User = m.createResource(userNs+"User");
 		}
 	}
 	
@@ -77,6 +82,7 @@ public class RDFBuilding {
 		}else{
 			String motNs=prefixe+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
+			Resource Mot = m.createResource(motNs+"WordConnotation");
 		}
 	}
 }

@@ -91,7 +91,7 @@ public class Application extends Controller {
             if (size>150){
             	//ok bon mot: on peut travailler avec
             	RDFBuilding rdf=RDFBuilding.getInstance();
-            	
+            	rdf.rdfUpYourMood(jam.currentInfo());
             }
             return redirect(routes.Application.index());
     	}

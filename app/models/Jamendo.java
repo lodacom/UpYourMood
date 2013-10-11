@@ -12,6 +12,10 @@ public class Jamendo {
 	static final String CLIENT_ID = "b6747d04";
 	public JsonNode node;
 	public List<String> idMusiques;
+	public List<String> artistes;
+	public List<String> albums;
+	public List<String> titres;
+	public List<String> pochetteAlbums;
 	public int compteur=-1;
 	/*
 	 * artist_name
@@ -25,6 +29,10 @@ public class Jamendo {
 		String result=JSONLoader.loadTracksJSON( TRACKS_URL +"&client_id="+CLIENT_ID);
 		node=Json.parse(result);
 		listIdMusique();
+		listAlbums();
+		listArtistes();
+		listPochetteAlbum();
+		listTitre();
 	}
 	
 	public String next(){
@@ -45,52 +53,58 @@ public class Jamendo {
 		return idMusiques.get(compteur);
 	}
 	
-	public String listArtistes(){
+	public List<String> currentInfo(){
+		List<String> info=new ArrayList<String>();
+		info.add(idMusiques.get(compteur));
+		info.add(albums.get(compteur));
+		info.add(artistes.get(compteur));
+		info.add(pochetteAlbums.get(compteur));
+		info.add(titres.get(compteur));
+		return info;
+	}
+	
+	private void listArtistes(){
 		List<JsonNode> liste=node.findValues("artist_name");
-		String artistes="";
+		artistes=new ArrayList<String>();
 		for (JsonNode element :liste){
-			artistes+=element.asText()+" ";
+			artistes.add(element.asText());
 		}
-		return artistes;
 	}
 	
-	public String listAlbums(){
+	private void listAlbums(){
 		List<JsonNode> liste=node.findValues("album_name");
-		String albums="";
+		albums=new ArrayList<String>();
 		for (JsonNode element :liste){
-			albums+=element.asText()+" ";
+			albums.add(element.asText());
 		}
-		return albums;
 	}
 	
-	public String listTitre(){
+	private void listTitre(){
 		List<JsonNode> liste=node.findValues("name");
-		String titres="";
+		titres=new ArrayList<String>();
 		for (JsonNode element :liste){
-			titres+=element.asText()+" ";
+			titres.add(element.asText());
 		}
-		return titres;
 	}
 	
-	public String listPochetteAlbum(){
+	private void listPochetteAlbum(){
 		List<JsonNode> liste=node.findValues("album_image");
-		String pochettesAlbums="";
+		pochetteAlbums=new ArrayList<String>();
 		for (JsonNode element :liste){
-			pochettesAlbums+=element.asText()+" ";
+			pochetteAlbums.add(element.asText());
 		}
-		return pochettesAlbums;
 	}
 	
-	public String listMusique(){
+	/*public String listMusique(){
 		List<JsonNode> liste=node.findValues("audio");
 		String musiques="";
 		for (JsonNode element :liste){
 			musiques+=element.asText()+" ";
 		}
 		return musiques;
-	}
+	}*/
 	
-	public void listIdMusique(){
+	private void listIdMusique(){
 		idMusiques=new ArrayList<String>();
 		List<JsonNode> liste=node.findValues("id");
 		for (JsonNode element :liste){
