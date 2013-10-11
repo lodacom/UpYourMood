@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class ConnectionBase {
 
-	public static Connection conn;
+	private static Connection conn;
 	
 	public static void open(){
 		try {

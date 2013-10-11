@@ -72,7 +72,7 @@ public class Application extends Controller {
     	return redirect(routes.Application.index());
     }
     
-    public static Result CheckWord(){
+    public static Result CheckWord() throws SQLException{
     	final Map<String, String[]> values = request().body().asFormUrlEncoded();
     	final String name = values.get("sentiment")[0];
     	if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
@@ -91,6 +91,8 @@ public class Application extends Controller {
             if (size>150){
             	//ok bon mot: on peut travailler avec
             	RDFBuilding rdf=RDFBuilding.getInstance();
+            	WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
+            	UserInformation userInf=new UserInformation();
             	rdf.rdfUpYourMood(jam.currentInfo());
             }
             return redirect(routes.Application.index());
