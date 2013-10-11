@@ -12,10 +12,10 @@ public class Jamendo {
 	static final String CLIENT_ID = "b6747d04";
 	public JsonNode node;
 	public List<String> idMusiques;
-	public List<String> artistes;
-	public List<String> albums;
-	public List<String> titres;
-	public List<String> pochetteAlbums;
+	private List<String> artistes;
+	private List<String> albums;
+	private List<String> titres;
+	private List<String> pochetteAlbums;
 	public int compteur=-1;
 	/*
 	 * artist_name
