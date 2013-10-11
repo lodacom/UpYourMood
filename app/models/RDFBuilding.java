@@ -6,6 +6,7 @@ import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.DC;
+import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class RDFBuilding {
@@ -14,7 +15,8 @@ public class RDFBuilding {
 	private final String prefixe = "http://www.upyourmood.com/";
 	private Model m=null;
 	Property TitreAlbum =null;
-	
+	Property APourConnotation=null;
+	Property AppartientA=null;
 	private RDFBuilding(){
 		m=FileManager.get().loadModel(rdf_file);
 	}
@@ -34,10 +36,10 @@ public class RDFBuilding {
 	 * fonction principale qu'il faudra appeler dans la classe Application
 	 * @param List<String> infoMusic information de la musique courante
 	 */
-	public void rdfUpYourMood(List<String> infoMusic){
+	public void rdfUpYourMood(List<String> infoMusic,List<String> infoUser,String word, float connotation){
 		ajouterMusique(infoMusic);
-		ajouterUtilisateur();
-		ajouterMot_Connotation();
+		ajouterUtilisateur(infoUser);
+		ajouterMot_Connotation(word, connotation);
 	}
 	
 	/**
@@ -60,13 +62,15 @@ public class RDFBuilding {
 			Resource Music = m.createResource(music+infoMusic.get(0));
 			Music.addLiteral(m.getProperty("AlbumTitle"), album);
 			Music.addLiteral(DC.creator, artiste);
-			Music.addLiteral(FOAF.logo, pochette);
+			Music.addLiteral(FOAF.depiction, pochette);
 			Music.addLiteral(DC.title, titre);
+			m.add(Music,RDF.type,m.getProperty("Music"));
 		}else{
 			String musicNs=prefixe+"music/";
 			m.setNsPrefix("music", musicNs);
 			Resource Music = m.createResource(musicNs+infoMusic.get(0));
 			TitreAlbum = m.createProperty(musicNs+"AlbumTitle");
+			AppartientA = m.createProperty(musicNs+"AppartientA");
 			m.add(TitreAlbum, RDFS.subPropertyOf, DC.title);
 		}
 	}
@@ -78,10 +82,11 @@ public class RDFBuilding {
 	 * 	<li>le pseudo</li>
 	 * </ul>
 	 */
-	private void ajouterUtilisateur(){
+	private void ajouterUtilisateur(List<String> infoUser){
 		String user=m.getNsPrefixURI("user");
 		if (user!=null){
-
+			Resource User = m.createResource(user+infoUser.get(0));
+			m.add(User,RDF.type,m.getProperty("User"));
 		}else{
 			String userNs=prefixe+"user/";
 			m.setNsPrefix("user", userNs);
@@ -89,14 +94,18 @@ public class RDFBuilding {
 		}
 	}
 	
-	private void ajouterMot_Connotation(){
+	private void ajouterMot_Connotation(String word, float connot){
 		String mot=m.getNsPrefixURI("wordconnotation");
+		Literal connotation=m.createTypedLiteral(connot,XSDDatatype.XSDfloat);
 		if (mot!=null){
-			
+			Resource Mot = m.createResource(mot+word);
+			Mot.addLiteral(APourConnotation, connotation);
+			m.add(Mot,RDF.type,m.getProperty("Word"));
 		}else{
 			String motNs=prefixe+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
 			Resource Mot = m.createResource(motNs+"WordConnotation");
+			Property APourConnotation = m.createProperty(motNs+"APourConnotation");
 		}
 	}
 }
