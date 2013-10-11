@@ -1,7 +1,14 @@
-@(message: String, sessionValues: SessionValues)
+@(sessionValues: SessionValues, json: String)
 
-@main("Welcome to Play",sessionValues) {
-
-    @play20.welcome(message, style = "Java")
-
+@main("Accueil",sessionValues) {
+	
+	@**
+	*le slider pour la notation de la connotation
+	*@
+	@player(json) 
+	<form method="post">
+		<label for="sentiment">Marquez en un mot ce que vous ressentez:</label>
+		<input type="text" name="sentiment" id="sentiment" />
+		<input type="submit" value="Associer" />
+	</form>
 }

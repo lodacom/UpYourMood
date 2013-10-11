@@ -8,19 +8,12 @@ POST	/							controllers.Application.connection()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-GET 	/essai.html					controllers.ControlTweet.listTweet()
-POST 	/essai.html					controllers.ControlTweet.newTweet()
-POST 	/essai.html:id/delete		controllers.ControlTweet.deleteTweet(id: Long)
-
-GET		/accueil.html				controllers.ControlAccueil.index()
-POST 	/accueil.html 				controllers.Application.connection()
 
 GET		/inscription.html			controllers.ControlUser.index()
 POST 	/inscription.html			controllers.ControlUser.newUser()
 
 GET		/player.html				controllers.ControlJamendo.index()
-GET		/player.html				controllers.ControlJamendo.next()
-GET		/player.html				controllers.ControlJamendo.previous()
+GET		/player.html/next				controllers.ControlJamendo.nextPrevious(decision: Long)
 
 GET		/profil.html				controllers.ControlProfil.index()
 POST	/profil.html				controllers.Application.connection()

@@ -24,11 +24,9 @@ public class Application extends Controller {
     	String user = session("connected");
     	jam.play();
     	  if(user != null) {
-    		  //return ok(index.render("Your new application is ready.",maSession));
-    		  return ok(accueil.render(maSession, jam.next()));
+    		  return ok(index.render(maSession, jam.next()));
     	  } else {
-    	    //return unauthorized(index.render("Your new application is ready.",maSession));
-    		  return unauthorized(accueil.render(maSession, jam.next()));
+    		  return unauthorized(index.render(maSession, jam.next()));
     	  }
     }
     
@@ -40,7 +38,7 @@ public class Application extends Controller {
     	}
     	Form<ConnectionUtil> filledForm = connectionUser.bindFromRequest();
     	if(filledForm.hasErrors()) {
-    		return badRequest(accueil.render(maSession,Application.jam.current()));
+    		return badRequest(index.render(maSession,Application.jam.current()));
     	} else {
     		ConnectionBase.open();
     		ResultSet res=ConnectionBase.requete("SELECT pseudo,mdp " +
@@ -53,7 +51,7 @@ public class Application extends Controller {
     				 *Mot de passe ou login mauvais 
     				 */
     				ConnectionBase.close();
-    				return redirect(routes.ControlAccueil.index());
+    				return redirect(routes.Application.index());
     			}else{
     				session("connected",filledForm.field("pseudo").value());
     				ConnectionBase.close();
@@ -91,7 +89,7 @@ public class Application extends Controller {
             Integer size = ru.getURLSize();
             String result;
             if (size>150){
-            	//on bon mot: on peut travailler avec
+            	//ok bon mot: on peut travailler avec
             	
             }
             return redirect(routes.Application.index());
