@@ -6,12 +6,11 @@ import com.hp.hpl.jena.util.FileManager;
 public class RDFBuilding {
 	private static volatile RDFBuilding instance = null;
 	private static final String rdf_file = "public/rdf/upyourmood.rdf";
-	private final String prefixe = "http://www.upyourmood.org/";
+	private final String prefixe = "http://www.upyourmood.com/";
 	private Model m;
 	
 	private RDFBuilding(){
 		m=FileManager.get().loadModel(rdf_file);
-		m.getNsPrefixURI("music");
 	}
 	
 	public final static RDFBuilding getInstance() {
@@ -45,7 +44,13 @@ public class RDFBuilding {
 	 * </ul>
 	 */
 	private void ajouterMusique(){
-		
+		String music=m.getNsPrefixURI("music");
+		if (music!=null){
+			
+		}else{
+			String musicNs=prefixe+"music/";
+			m.setNsPrefix("music", musicNs);
+		}
 	}
 	
 	/**
@@ -56,10 +61,22 @@ public class RDFBuilding {
 	 * </ul>
 	 */
 	private void ajouterUtilisateur(){
-		
+		String user=m.getNsPrefixURI("user");
+		if (user!=null){
+
+		}else{
+			String userNs=prefixe+"user/";
+			m.setNsPrefix("user", userNs);
+		}
 	}
 	
 	private void ajouterMot_Connotation(){
-		
+		String mot=m.getNsPrefixURI("wordconnotation");
+		if (mot!=null){
+			
+		}else{
+			String motNs=prefixe+"wordconnotation/";
+			m.setNsPrefix("wordconnotation", motNs);
+		}
 	}
 }
