@@ -3,6 +3,7 @@ package models;
 import java.util.List;
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.DC;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -59,6 +60,7 @@ public class RDFBuilding {
 			Resource Music = m.createResource(music+infoMusic.get(0));
 			Music.addLiteral(m.getProperty("AlbumTitle"), album);
 			Music.addLiteral(DC.creator, artiste);
+			Music.addLiteral(FOAF.logo, pochette);
 			Music.addLiteral(DC.title, titre);
 		}else{
 			String musicNs=prefixe+"music/";
