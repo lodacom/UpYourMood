@@ -90,6 +90,7 @@ public class Application extends Controller {
             String result;
             if (size>150){
             	//ok bon mot: on peut travailler avec
+            	RDFBuilding rdf=RDFBuilding.getInstance();
             	
             }
             return redirect(routes.Application.index());
