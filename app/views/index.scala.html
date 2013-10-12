@@ -6,7 +6,7 @@
 	*le slider pour la notation de la connotation
 	*@
 	@player(json) 
-	<form method="post">
+	<form method="post" action="@routes.Application.checkWord()">
 		<label for="sentiment">Marquez en un mot ce que vous ressentez:</label>
 		<input type="text" name="sentiment" id="sentiment" />
 		<input type="submit" value="Associer" />

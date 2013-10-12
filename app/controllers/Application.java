@@ -15,94 +15,93 @@ import play.mvc.*;
 import views.html.*;
 
 public class Application extends Controller {
-	
+
 	public static SessionValues maSession=SessionValues.getInstance();
 	static Form<ConnectionUtil> connectionUser = Form.form(ConnectionUtil.class);
-	static Form<FeltWord> felt = Form.form(FeltWord.class);
 	public static Jamendo jam=new Jamendo();
-	
-    public static Result index() throws ClientProtocolException, IOException {
-    	String user = session("connected");
-    	jam.play();
-    	  if(user != null) {
-    		  return ok(index.render(maSession, jam.next()));
-    	  } else {
-    		  return unauthorized(index.render(maSession, jam.next()));
-    	  }
-    }
-    
-    public static Result connection(){
-    	String user = session("connected");
-    	if(user != null) {
-    		maSession.setConnected(false);
-    		return deconnection();
-    	}
-    	Form<ConnectionUtil> filledForm = connectionUser.bindFromRequest();
-    	if(filledForm.hasErrors()) {
-    		return badRequest(index.render(maSession,Application.jam.current()));
-    	} else {
-    		ConnectionBase.open();
-    		ResultSet res=ConnectionBase.requete("SELECT pseudo,mdp " +
-    				"FROM User " +
-    				"WHERE pseudo='"+filledForm.field("pseudo").value()+"'"+
-    				"AND mdp='"+filledForm.field("mdp").value()+"'");
-    		try {
-    			if (!res.first()){
-    				/*
-    				 *Mot de passe ou login mauvais 
-    				 */
-    				ConnectionBase.close();
-    				return redirect(routes.Application.index());
-    			}else{
-    				session("connected",filledForm.field("pseudo").value());
-    				ConnectionBase.close();
-    				maSession.setConnected(true);
-    				maSession.setPseudo(filledForm.field("pseudo").value());
-    				return redirect(routes.Application.index()); 
-    			}
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-    		return redirect(routes.Application.index());  
-    	}
-    }
-    
-    public static Result deconnection(){
-    	session().remove("connected");
-    	return redirect(routes.Application.index());
-    }
-    
-    public static Result checkWord() throws SQLException{
-    	Form<FeltWord> filledForm = felt.bindFromRequest();
-    	if(!filledForm.hasErrors()){
-    		String name=filledForm.field("sentiment").value();
-	    	if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
-	    		return redirect(routes.Application.index());
-	    	}else{
-	    		String utf_encoded="";
-	    		try {
-					utf_encoded = URLEncoder.encode(name,"UTF-8");
-				} catch (UnsupportedEncodingException e) {
+
+	public static Result index() throws ClientProtocolException, IOException {
+		String user = session("connected");
+		jam.play();
+		if(user != null) {
+			return ok(index.render(maSession, jam.next()));
+		} else {
+			return unauthorized(index.render(maSession, jam.next()));
+		}
+	}
+
+	public static Result connection(){
+		String user = session("connected");
+		if(user != null) {
+			maSession.setConnected(false);
+			return deconnection();
+		}
+		Form<ConnectionUtil> filledForm = connectionUser.bindFromRequest();
+		if(filledForm.hasErrors()) {
+			return badRequest(index.render(maSession,Application.jam.current()));
+		} else {
+			ConnectionBase.open();
+			ResultSet res=ConnectionBase.requete("SELECT pseudo,mdp " +
+					"FROM User " +
+					"WHERE pseudo='"+filledForm.field("pseudo").value()+"'"+
+					"AND mdp='"+filledForm.field("mdp").value()+"'");
+			try {
+				if (!res.first()){
+					/*
+					 *Mot de passe ou login mauvais 
+					 */
+					ConnectionBase.close();
+					return redirect(routes.Application.index());
+				}else{
+					session("connected",filledForm.field("pseudo").value());
+					ConnectionBase.close();
+					maSession.setConnected(true);
+					maSession.setPseudo(filledForm.field("pseudo").value());
+					return redirect(routes.Application.index()); 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return redirect(routes.Application.index());  
+		}
+	}
+
+	public static Result deconnection(){
+		session().remove("connected");
+		return redirect(routes.Application.index());
+	}
+
+	public static Result checkWord(){
+		final Map<String, String[]> values = request().body().asFormUrlEncoded();
+		final String name = values.get("sentiment")[0];
+		System.out.println(name);
+		if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
+			return redirect(routes.ControlProfil.index());
+		}else{
+			String utf_encoded="";
+			try {
+				utf_encoded = URLEncoder.encode(name,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			String _url = "http://api.wordreference.com/78289/json/fren/" + utf_encoded;
+			ReadURL ru = new ReadURL(_url);
+			Integer size = ru.getURLSize();
+			if (size>150){
+				//ok bon mot: on peut travailler avec
+				RDFBuilding rdf=RDFBuilding.getInstance();
+				WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
+				UserInformation userInf=null;
+				try {
+					userInf = new UserInformation();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-	    		String _url = "http://api.wordreference.com/78289/json/fren/" + utf_encoded;
-	        	ReadURL ru = new ReadURL(_url);
-	            Integer size = ru.getURLSize();
-	            String result;
-	            if (size>150){
-	            	//ok bon mot: on peut travailler avec
-	            	RDFBuilding rdf=RDFBuilding.getInstance();
-	            	WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
-	            	UserInformation userInf=new UserInformation();
-	            	rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
-	            }
-	            return redirect(routes.Application.index());
-	    	}
-    	}else{
-    		return redirect(routes.Application.index());
-    	}
-    	
-    	
-    }
+				rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
+			}
+			return redirect(routes.Application.index());
+		}
+	}
 }
