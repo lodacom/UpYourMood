@@ -19,6 +19,7 @@ public class RDFBuilding {
 	Property AppartientA=null;
 	Property ListenMusic=null;
 	Property CorrespondA=null;
+	Property IsTag=null;
 	
 	private RDFBuilding(){
 		m=FileManager.get().loadModel(rdf_file);
@@ -86,6 +87,7 @@ public class RDFBuilding {
 			TitreAlbum = m.createProperty(musicNs+"AlbumTitle");
 			AppartientA = m.createProperty(musicNs+"AppartientA");
 			CorrespondA = m.createProperty(musicNs+"CorrespondA");
+			IsTag = m.createProperty(musicNs+"IsTag");
 			m.add(TitreAlbum, RDFS.subPropertyOf, DC.title);
 			
 			//Music.addLiteral(m.getProperty("AlbumTitle"), album);
