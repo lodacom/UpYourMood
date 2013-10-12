@@ -17,6 +17,7 @@ public class RDFBuilding {
 	Property TitreAlbum =null;
 	Property APourConnotation=null;
 	Property AppartientA=null;
+	Property ListenMusic=null;
 	
 	private RDFBuilding(){
 		m=FileManager.get().loadModel(rdf_file);
@@ -65,7 +66,7 @@ public class RDFBuilding {
 			Music.addLiteral(DC.creator, artiste);
 			Music.addLiteral(FOAF.depiction, pochette);
 			Music.addLiteral(DC.title, titre);
-			m.add(Music,RDF.type,m.getProperty("Music"));
+			m.add(Music,RDF.type,m.getResource("Music"));
 		}else{
 			String musicNs=prefixe+"music/";
 			m.setNsPrefix("music", musicNs);
@@ -73,6 +74,12 @@ public class RDFBuilding {
 			TitreAlbum = m.createProperty(musicNs+"AlbumTitle");
 			AppartientA = m.createProperty(musicNs+"AppartientA");
 			m.add(TitreAlbum, RDFS.subPropertyOf, DC.title);
+			
+			Music.addLiteral(m.getProperty("AlbumTitle"), album);
+			Music.addLiteral(DC.creator, artiste);
+			Music.addLiteral(FOAF.depiction, pochette);
+			Music.addLiteral(DC.title, titre);
+			m.add(Music,RDF.type,ListenMusic);
 		}
 	}
 	
@@ -87,7 +94,7 @@ public class RDFBuilding {
 		String user=m.getNsPrefixURI("user");
 		if (user!=null){
 			Resource User = m.createResource(user+userInfo.getInfoUser().get(0));
-			m.add(User,RDF.type,m.getProperty("User"));
+			m.add(User,RDF.type,m.getResource("User"));
 		}else{
 			String userNs=prefixe+"user/";
 			m.setNsPrefix("user", userNs);
@@ -101,7 +108,7 @@ public class RDFBuilding {
 		if (mot!=null){
 			Resource Mot = m.createResource(mot+word);
 			Mot.addLiteral(APourConnotation, connotation);
-			m.add(Mot,RDF.type,m.getProperty("Word"));
+			m.add(Mot,RDF.type,m.getResource("WordConnotation"));
 		}else{
 			String motNs=prefixe+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
