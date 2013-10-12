@@ -18,6 +18,7 @@ public class Application extends Controller {
 	
 	public static SessionValues maSession=SessionValues.getInstance();
 	static Form<ConnectionUtil> connectionUser = Form.form(ConnectionUtil.class);
+	static Form<FeltWord> felt = Form.form(FeltWord.class);
 	public static Jamendo jam=new Jamendo();
 	
     public static Result index() throws ClientProtocolException, IOException {
@@ -73,29 +74,33 @@ public class Application extends Controller {
     }
     
     public static Result CheckWord() throws SQLException{
-    	final Map<String, String[]> values = request().body().asFormUrlEncoded();
-    	final String name = values.get("sentiment")[0];
-    	if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
-    		return redirect(routes.Application.index());
+    	Form<FeltWord> filledForm = felt.bindFromRequest();
+    	if(!filledForm.hasErrors()){
+    		String name=filledForm.field("sentiment").value();
+	    	if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
+	    		return redirect(routes.Application.index());
+	    	}else{
+	    		String utf_encoded="";
+	    		try {
+					utf_encoded = URLEncoder.encode(name,"UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+	    		String _url = "http://api.wordreference.com/78289/json/fren/" + utf_encoded;
+	        	ReadURL ru = new ReadURL(_url);
+	            Integer size = ru.getURLSize();
+	            String result;
+	            if (size>150){
+	            	//ok bon mot: on peut travailler avec
+	            	RDFBuilding rdf=RDFBuilding.getInstance();
+	            	WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
+	            	UserInformation userInf=new UserInformation();
+	            	rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
+	            }
+	            return redirect(routes.Application.index());
+	    	}
     	}else{
-    		String utf_encoded="";
-    		try {
-				utf_encoded = URLEncoder.encode(name,"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-    		String _url = "http://api.wordreference.com/78289/json/fren/" + utf_encoded;
-        	ReadURL ru = new ReadURL(_url);
-            Integer size = ru.getURLSize();
-            String result;
-            if (size>150){
-            	//ok bon mot: on peut travailler avec
-            	RDFBuilding rdf=RDFBuilding.getInstance();
-            	WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
-            	UserInformation userInf=new UserInformation();
-            	rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
-            }
-            return redirect(routes.Application.index());
+    		return redirect(routes.Application.index());
     	}
     	
     	
