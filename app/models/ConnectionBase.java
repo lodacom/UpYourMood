@@ -8,7 +8,7 @@ public class ConnectionBase {
 	public static void open(){
 		try {
 			Class.forName("org.postgresql.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:mem:play", "loda", "loda");
+			conn = DriverManager.getConnection("jdbc:h2:mem:play", "sa", "");
 		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
