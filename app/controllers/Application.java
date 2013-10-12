@@ -73,7 +73,7 @@ public class Application extends Controller {
     	return redirect(routes.Application.index());
     }
     
-    public static Result CheckWord() throws SQLException{
+    public static Result checkWord() throws SQLException{
     	Form<FeltWord> filledForm = felt.bindFromRequest();
     	if(!filledForm.hasErrors()){
     		String name=filledForm.field("sentiment").value();
