@@ -1,5 +1,8 @@
 package models;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.*;
@@ -44,6 +47,16 @@ public class RDFBuilding {
 		ajouterMusique(infoMusic);
 		ajouterUtilisateur(userInfo);
 		ajouterMot_Connotation(word);
+		FileOutputStream outStream;
+		try {
+			outStream = new FileOutputStream("public/rdf/upyourmood.rdf");
+			m.write(outStream, "RDF/XML-ABBREV");
+	        outStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 	}
 	
 	/**

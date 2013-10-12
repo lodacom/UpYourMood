@@ -16,8 +16,12 @@ public class UserInformation {
 	private void retrieveInformation() throws SQLException{
 		ConnectionBase.open();
 		ResultSet res=ConnectionBase.requete("SELECT * FROM User");
-		while (res.next()){
-			infoUser.add(res.getString("pseudo"));
+		if (!res.first()){
+			infoUser.add("guest");
+		}else{
+			while (res.next()){
+				infoUser.add(res.getString("pseudo"));
+			}
 		}
 		ConnectionBase.close();
 	}
