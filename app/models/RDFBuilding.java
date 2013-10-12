@@ -17,6 +17,7 @@ public class RDFBuilding {
 	Property TitreAlbum =null;
 	Property APourConnotation=null;
 	Property AppartientA=null;
+	
 	private RDFBuilding(){
 		m=FileManager.get().loadModel(rdf_file);
 	}
