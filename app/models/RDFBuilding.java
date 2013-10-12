@@ -18,6 +18,7 @@ public class RDFBuilding {
 	Property APourConnotation=null;
 	Property AppartientA=null;
 	Property ListenMusic=null;
+	Property CorrespondA=null;
 	
 	private RDFBuilding(){
 		m=FileManager.get().loadModel(rdf_file);
@@ -56,30 +57,48 @@ public class RDFBuilding {
 	 */
 	private void ajouterMusique(List<String> infoMusic){
 		String music=m.getNsPrefixURI("music");
-		Literal album=m.createTypedLiteral(infoMusic.get(1),XSDDatatype.XSDstring);
+		//Literal album=m.createTypedLiteral(infoMusic.get(1),XSDDatatype.XSDstring);
 		Literal artiste=m.createTypedLiteral(infoMusic.get(2),XSDDatatype.XSDstring);
-		Literal pochette=m.createTypedLiteral(infoMusic.get(3),XSDDatatype.XSDanyURI);
-		Literal titre=m.createTypedLiteral(infoMusic.get(4),XSDDatatype.XSDstring);
+		//Literal pochette=m.createTypedLiteral(infoMusic.get(3),XSDDatatype.XSDanyURI);
+		//Literal titre=m.createTypedLiteral(infoMusic.get(4),XSDDatatype.XSDstring);
+		
+		Resource Music = m.createResource(music+infoMusic.get(0));
+		Resource Titre = m.createResource(music+infoMusic.get(4));
+		Resource Album = m.createResource(music+infoMusic.get(1));
+		Resource Pochette = m.createResource(music+infoMusic.get(3));
 		if (music!=null){
-			Resource Music = m.createResource(music+infoMusic.get(0));
-			Music.addLiteral(m.getProperty("AlbumTitle"), album);
+			
+			///Music.addLiteral(m.getProperty("AlbumTitle"), album);
 			Music.addLiteral(DC.creator, artiste);
-			Music.addLiteral(FOAF.depiction, pochette);
-			Music.addLiteral(DC.title, titre);
-			m.add(Music,RDF.type,m.getResource("Music"));
+			/*Music.addLiteral(FOAF.depiction, pochette);
+			Music.addLiteral(DC.title, titre);*/
+			m.add(Music,m.getProperty("CorrespondA"),Titre);
+			m.add(Album,RDF.type,m.getProperty("AlbumTitle"));
+			m.add(Titre,m.getProperty("AppartientA"),Album);
+			m.add(Titre,RDF.type,DC.title);
+			m.add(Album,m.getProperty("AppartientA"),Pochette);
+			m.add(Pochette,RDF.type,FOAF.depiction);
+			m.add(Music,RDF.type,Music);//TODO: à modifier à voir
 		}else{
 			String musicNs=prefixe+"music/";
 			m.setNsPrefix("music", musicNs);
-			Resource Music = m.createResource(musicNs+infoMusic.get(0));
+			Music = m.createResource(musicNs+infoMusic.get(0));
 			TitreAlbum = m.createProperty(musicNs+"AlbumTitle");
 			AppartientA = m.createProperty(musicNs+"AppartientA");
+			CorrespondA = m.createProperty(musicNs+"CorrespondA");
 			m.add(TitreAlbum, RDFS.subPropertyOf, DC.title);
 			
-			Music.addLiteral(m.getProperty("AlbumTitle"), album);
+			//Music.addLiteral(m.getProperty("AlbumTitle"), album);
 			Music.addLiteral(DC.creator, artiste);
-			Music.addLiteral(FOAF.depiction, pochette);
-			Music.addLiteral(DC.title, titre);
-			m.add(Music,RDF.type,ListenMusic);
+			/*Music.addLiteral(FOAF.depiction, pochette);
+			Music.addLiteral(DC.title, titre);*/
+			m.add(Music,m.getProperty("CorrespondA"),Titre);
+			m.add(Album,RDF.type,m.getProperty("AlbumTitle"));
+			m.add(Titre,m.getProperty("AppartientA"),Album);
+			m.add(Titre,RDF.type,DC.title);
+			m.add(Album,m.getProperty("AppartientA"),Pochette);
+			m.add(Pochette,RDF.type,FOAF.depiction);
+			m.add(Music,RDF.type,Music);
 		}
 	}
 	
@@ -92,27 +111,31 @@ public class RDFBuilding {
 	 */
 	private void ajouterUtilisateur(UserInformation userInfo){
 		String user=m.getNsPrefixURI("user");
+		Resource User = m.createResource(user+userInfo.getInfoUser().get(0));
 		if (user!=null){
-			Resource User = m.createResource(user+userInfo.getInfoUser().get(0));
-			m.add(User,RDF.type,m.getResource("User"));
+			m.add(User,RDF.type,User);//TODO: à modifier à voir
 		}else{
 			String userNs=prefixe+"user/";
 			m.setNsPrefix("user", userNs);
-			Resource User = m.createResource(userNs+"User");
+			User = m.createResource(userNs+"User");
+			Property AEcoute = m.createProperty(userNs+"HasListen");
+			m.add(AEcoute,RDFS.subPropertyOf,FOAF.knows);
+			m.add(User,RDF.type,User);
+			m.add(User,AEcoute,m.getResource("Music"));
 		}
 	}
 	
 	private void ajouterMot_Connotation(WordConnotation word){
 		String mot=m.getNsPrefixURI("wordconnotation");
 		Literal connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
+		Resource Mot = m.createResource(mot+word.getMot());
 		if (mot!=null){
-			Resource Mot = m.createResource(mot+word);
 			Mot.addLiteral(APourConnotation, connotation);
 			m.add(Mot,RDF.type,m.getResource("WordConnotation"));
 		}else{
 			String motNs=prefixe+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
-			Resource Mot = m.createResource(motNs+"WordConnotation");
+			Mot = m.createResource(motNs+"WordConnotation");
 			Property APourConnotation = m.createProperty(motNs+"APourConnotation");
 		}
 	}
