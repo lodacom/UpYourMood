@@ -2,6 +2,9 @@ package models;
 
 import java.io.*;
 import java.util.List;
+
+import org.openjena.riot.RiotException;
+
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
@@ -23,7 +26,11 @@ public class RDFBuilding {
 	Property IsTag=null;
 	
 	private RDFBuilding(){
-		m=FileManager.get().loadModel(rdf_file);
+		try{
+			m=FileManager.get().loadModel(rdf_file);
+		}catch(RiotException e){
+			m = ModelFactory.createDefaultModel();
+		}
 	}
 	
 	public final static RDFBuilding getInstance() {
@@ -48,7 +55,8 @@ public class RDFBuilding {
 		FileOutputStream outStream;
 		try {
 			outStream = new FileOutputStream("public/rdf/upyourmood.rdf");
-			m.write(outStream, "RDF/XML-ABBREV");
+			//m.write(outStream, "RDF/XML-ABBREV");
+			m.write(outStream, "TURTLE");
 	        outStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -143,8 +151,7 @@ public class RDFBuilding {
 		Literal connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
 		Resource Mot = m.createResource(mot+word.getMot());
 		if (mot!=null){
-			Mot.addLiteral(APourConnotation, connotation);
-			m.add(Mot,RDF.type,m.getResource("WordConnotation"));
+			Mot.addLiteral(m.getProperty("APourConnotation"), connotation);			m.add(Mot,RDF.type,m.getResource("WordConnotation"));
 		}else{
 			String motNs=prefixe+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
