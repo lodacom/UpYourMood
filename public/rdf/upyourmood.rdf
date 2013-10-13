@@ -1,0 +1,64 @@
+@prefix music: <http://www.upyourmood.com/music/> .
+@prefix wordconnotation: <http://www.upyourmood.com/wordconnotation/> .
+@prefix user:  <http://www.upyourmood.com/user/> .
+
+wordconnotation:chaussure
+        a                   <WordConnotation> ;
+        <APourConnotation>  "10.0"^^<http://www.w3.org/2001/XMLSchema#float> .
+
+<http://www.upyourmood.com/music/The Key>
+        a              <AlbumTitle> ;
+        <AppartientA>  <http://www.upyourmood.com/music/http://imgjam.com/albums/s123/123379/covers/1.200.jpg> .
+
+music:1046878  a       music:1046878 ;
+        <CorrespondA>  music:Awakening ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "Countdown"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+user:User  a            user:User ;
+        user:HasListen  <Music> .
+
+user:HasListen  <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                <http://xmlns.com/foaf/0.1/knows> .
+
+<nullhttp://imgjam.com/albums/s123/123234/covers/1.200.jpg>
+        a       <http://xmlns.com/foaf/0.1/depiction> .
+
+music:1046058  a       music:1046058 ;
+        <CorrespondA>  <nullCross> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "Sergey Kovchik"^^<http://www.w3.org/2001/XMLSchema#string> .
+
+<http://www.upyourmood.com/music/DJ Lava-(The track is made on a vocal (Richard_Durand ))>
+        a              <http://purl.org/dc/elements/1.1/title> ;
+        <AppartientA>  <http://www.upyourmood.com/music/Альбом (DJ Lava-Trance vok.)> .
+
+<http://www.upyourmood.com/music/Альбом (DJ Lava-Trance vok.)>
+        a              <AlbumTitle> ;
+        <AppartientA>  <http://www.upyourmood.com/music/http://imgjam.com/albums/s125/125278/covers/1.200.jpg> .
+
+music:Awakening  a     <http://purl.org/dc/elements/1.1/title> ;
+        <AppartientA>  <http://www.upyourmood.com/music/The Key> .
+
+<nullCross>  a         <http://purl.org/dc/elements/1.1/title> , <AlbumTitle> ;
+        <AppartientA>  <nullhttp://imgjam.com/albums/s123/123234/covers/1.200.jpg> , <nullCross> .
+
+wordconnotation:lunettes
+        a                   <WordConnotation> ;
+        <APourConnotation>  "10.0"^^<http://www.w3.org/2001/XMLSchema#float> .
+
+user:guest  a   user:guest .
+
+<http://www.upyourmood.com/music/http://imgjam.com/albums/s123/123379/covers/1.200.jpg>
+        a       <http://xmlns.com/foaf/0.1/depiction> .
+
+<http://www.upyourmood.com/music/http://imgjam.com/albums/s125/125278/covers/1.200.jpg>
+        a       <http://xmlns.com/foaf/0.1/depiction> .
+
+music:AlbumTitle  <http://www.w3.org/2000/01/rdf-schema#subPropertyOf>
+                <http://purl.org/dc/elements/1.1/title> .
+
+music:1061463  a       music:1061463 ;
+        <CorrespondA>  <http://www.upyourmood.com/music/DJ Lava-(The track is made on a vocal (Richard_Durand ))> ;
+        <http://purl.org/dc/elements/1.1/creator>
+                "DJ Lava"^^<http://www.w3.org/2001/XMLSchema#string> .
