@@ -1,14 +1,38 @@
 @(sessionValues: SessionValues, json: String)
 
+
 @main("Accueil",sessionValues) {
-	
+
+	<script language="javascript" src="public/javascripts/jquery-1.9.0.min.js"></script>
+    
 	@**
 	*le slider pour la notation de la connotation
 	*@
 	@player(json) 
-	<form method="post" action="@routes.Application.checkWord()">
+	
+	
 		<label for="sentiment">Marquez en un mot ce que vous ressentez:</label>
-		<input type="text" name="sentiment" id="sentiment" />
-		<input type="submit" value="Associer" />
-	</form>
+		<input type="text" name="sentiment" id="sentiment" onclick="clean()"/>
+		<input type="button" value="Associer" onclick="sendTo()" />
+
+	
+	<script type="text/javascript" charset="utf-8">
+	function sendTo(){
+		var s = $("#sentiment").val();
+		clean();
+      	$.ajax({
+    		type: "POST",
+			url: "@routes.Application.checkWord()",
+			data: { sentiment: s},
+			dataType: "text",
+			success: function (msg) {
+                $("#sentiment").val(msg);
+            }
+			});
+      	
+	}
+	function clean(){
+		$("#sentiment").val("");
+	}
+    </script>
 }

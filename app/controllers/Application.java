@@ -75,9 +75,8 @@ public class Application extends Controller {
 	public static Result checkWord(){
 		final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		final String name = values.get("sentiment")[0];
-		System.out.println(name);
 		if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
-			return redirect(routes.ControlProfil.index());
+			return ok("Incorrect symbols");
 		}else{
 			String utf_encoded="";
 			try {
@@ -100,8 +99,9 @@ public class Application extends Controller {
 					e.printStackTrace();
 				}
 				rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
+				return ok("");
 			}
-			return redirect(routes.Application.index());
+			return ok("Incorrect word");
 		}
 	}
 }
