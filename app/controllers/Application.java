@@ -75,9 +75,9 @@ public class Application extends Controller {
 	public static Result checkWord(){
 		final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		final String name = values.get("sentiment")[0];
-		System.out.println(name);
+		final Integer valeur = new Integer(values.get("valeur")[0]);
 		if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
-			return redirect(routes.ControlProfil.index());
+			return ok("Incorrect symbols");
 		}else{
 			String utf_encoded="";
 			try {
@@ -91,7 +91,7 @@ public class Application extends Controller {
 			if (size>150){
 				//ok bon mot: on peut travailler avec
 				RDFBuilding rdf=RDFBuilding.getInstance();
-				WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
+				WordConnotation word=new WordConnotation(name, valeur);//TODO: Attention le 10 est en dur!!
 				UserInformation userInf=null;
 				try {
 					userInf = new UserInformation();
@@ -100,8 +100,9 @@ public class Application extends Controller {
 					e.printStackTrace();
 				}
 				rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
+				return ok("");
 			}
-			return redirect(routes.Application.index());
+			return ok("Incorrect word");
 		}
 	}
 }
