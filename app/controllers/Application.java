@@ -75,6 +75,7 @@ public class Application extends Controller {
 	public static Result checkWord(){
 		final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		final String name = values.get("sentiment")[0];
+		final Integer valeur = new Integer(values.get("valeur")[0]);
 		if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
 			return ok("Incorrect symbols");
 		}else{
@@ -90,7 +91,7 @@ public class Application extends Controller {
 			if (size>150){
 				//ok bon mot: on peut travailler avec
 				RDFBuilding rdf=RDFBuilding.getInstance();
-				WordConnotation word=new WordConnotation(name, 10);//TODO: Attention le 10 est en dur!!
+				WordConnotation word=new WordConnotation(name, valeur);//TODO: Attention le 10 est en dur!!
 				UserInformation userInf=null;
 				try {
 					userInf = new UserInformation();
