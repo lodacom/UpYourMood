@@ -77,7 +77,7 @@ public class Application extends Controller {
 		final String name = values.get("sentiment")[0];
 		final Integer valeur = new Integer(values.get("valeur")[0]);
 		if (!name.matches("^[a-zA-ZÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ]+$")){
-			return ok("Incorrect symbols");
+			return ok("Symbol incorrect");
 		}else{
 			String utf_encoded="";
 			try {
@@ -102,7 +102,14 @@ public class Application extends Controller {
 				rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
 				return ok("");
 			}
-			return ok("Incorrect word");
+			return ok("Mot incorrect");
 		}
 	}
+	
+	public static Result addColor(){
+		final Map<String, String[]> values = request().body().asFormUrlEncoded();
+		final String color = values.get("color")[0];
+		return ok("");
+	}
+	
 }
