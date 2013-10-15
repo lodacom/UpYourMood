@@ -2,9 +2,7 @@ package models;
 
 import java.io.*;
 import java.util.List;
-
 import org.openjena.riot.RiotException;
-
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
@@ -13,6 +11,7 @@ import com.hp.hpl.jena.vocabulary.DC;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+@SuppressWarnings("deprecation")
 public class RDFBuilding {
 	private static volatile RDFBuilding instance = null;
 	private static final String rdf_file = "public/rdf/upyourmood.rdf";
@@ -84,19 +83,19 @@ public class RDFBuilding {
 		Literal titre=m.createTypedLiteral(infoMusic.get(4),XSDDatatype.XSDstring);
 		
 		Music = m.createResource(music+infoMusic.get(0));
-		Resource Titre = m.createResource(music+infoMusic.get(4));
-		Resource Album = m.createResource(music+infoMusic.get(1));
+		//Resource Titre = m.createResource(music+infoMusic.get(4));
+		//Resource Album = m.createResource(music+infoMusic.get(1));
 		//Resource Pochette = m.createResource(music+infoMusic.get(3));
 		if (music!=null){
 			
-			///Music.addLiteral(m.getProperty("AlbumTitle"), album);
+			Music.addLiteral(m.getProperty("AlbumTitle"), album);
 			Music.addLiteral(DC.creator, artiste);
-			/*Music.addLiteral(FOAF.depiction, pochette);
-			Music.addLiteral(DC.title, titre);*/
+			Music.addLiteral(FOAF.depiction, pochette);
+			Music.addLiteral(DC.title, titre);
 			//m.add(Music,m.getProperty("CorrespondA"),Titre);
 			//m.add(Album,RDF.type,m.getProperty("AlbumTitle"));
 			//m.add(Titre,m.getProperty("AppartientA"),Album);
-			m.add(Titre,RDF.type,DC.title);
+			//m.add(Titre,RDF.type,DC.title);
 			//m.add(Album,m.getProperty("AppartientA"),Pochette);
 			//m.add(Pochette,RDF.type,FOAF.depiction);
 			m.add(Music,RDF.type,Music);//TODO: à modifier à voir
@@ -149,16 +148,17 @@ public class RDFBuilding {
 	
 	private void ajouterMot_Connotation(WordConnotation word){
 		String mot=m.getNsPrefixURI("wordconnotation");
+		
 		Literal connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
 		Literal mon_mot=m.createTypedLiteral(word.getMot(),XSDDatatype.XSDstring);
-		Resource Mot = m.createResource(mot+word.getMot());
-		System.out.println(word.getMot());
+		
+		Resource Mot = m.createResource(mot+word.getMot()+"/"+word.getConnotation());
 		if (mot!=null){
 			//Mot.addLiteral(m.getProperty("APourConnotation"), connotation);			
 		}else{
 			String motNs=prefixe+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
-			Mot = m.createResource(motNs+"WordConnotation");
+			Mot = m.createResource(motNs+word.getMot()+"/"+word.getConnotation());
 			m.add(Mot,RDF.type,Mot);
 			Property APourConnotation = m.createProperty(motNs+"APourConnotation");
 			Mot.addLiteral(APourConnotation, mon_mot);			
