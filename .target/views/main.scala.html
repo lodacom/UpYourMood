@@ -16,6 +16,7 @@
     	<ul id="menu">
     		<li class="sous_menu"><a href="@routes.Application.index()">Accueil</a></li>
     		<li class="sous_menu"><a href="@routes.ControlUser.index()">Inscription</a></li>
+    		<li class="sous_menu"><a href="#">Hyper graphe</a></li>
     	</ul>
     	@if(!sessionValues.isConnected()){
     	<form method="post">
@@ -36,30 +37,39 @@
 			</form>
 		}
         @content
-        <div id="footer">
-	        <ul>
-	        UpYourMood
-	        	<li>Nos offres</li>
-	        	<li>Les fonctionnalités</li>
-	        	<li>A propos</li>
-	        </ul>
-	        <ul>
-	        Aide
-	        	</li>Aide & Contact</li>
-	        </ul>
-	        <ul>
-	        Legal
-	        	<li>Données personnelles</li>
-	        	<li>Mentions légales</li>
-	        </ul>
-	        <span id="copyright">
-        	Copyright: 
-        	<a href="mailto:kathibel@@gmail.com">Bel Kisialiova Katsiaryna</a>, 
-        	<a href="mailto:pierre.burc@@gmail.com">Burc Pierre</a>, 
-        	<a href="mailto:baptiste.colombani@@gmail.com">Colombani Baptiste</a>, 
-        	<a href="mailto:loda.compagnie@@gmail.com">Duplouy Olivier</a>, 
-        	<a href="mailto:tristan.seguin.feerik@@gmail.com">Tristan Seguin</a> 
-        </span>
-        </div>
+        <footer id="footer" class="page-footer">
+	        <div class="columns">
+		        <dl>
+		        	<dt>
+			        UpYourMood
+			        	<dd><a href="#">Nos offres</a></dd>
+			        	<dd><a href="#">Les fonctionnalités</a></dd>
+			        	<dd><a href="#">A propos</a></dd>
+			        </dt>
+			        <dt>
+			        Extras
+			        	<dd><a href="#">Développeurs</a></dd>
+			        	<dd><a href="#">Votre musique sur UpYourMood</a></dd>
+			        </dt>
+			        <dt>
+			        Aide
+			        	</dd><a href="#">Aide & Contact</a></dd>
+			        </dt>
+			        <dt>
+			        Legal
+			        	<dd><a href="#">Données personnelles</a></dd>
+			        	<dd><a href="#">Mentions légales</a></dd>
+			        </dt>
+		        </dl>
+	        </div>
+	    	<span id="copyright">
+	    	Copyright: 
+		    	<a href="mailto:kathibel@@gmail.com">Bel Kisialiova Katsiaryna</a>, 
+		    	<a href="mailto:pierre.burc@@gmail.com">Burc Pierre</a>, 
+		    	<a href="mailto:baptiste.colombani@@gmail.com">Colombani Baptiste</a>, 
+		    	<a href="mailto:loda.compagnie@@gmail.com">Duplouy Olivier</a>, 
+		    	<a href="mailto:tristan.seguin.feerik@@gmail.com">Tristan Seguin</a> 
+	    	</span>
+    	</footer>
     </body>
 </html>
