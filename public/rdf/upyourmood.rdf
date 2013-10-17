@@ -1,0 +1,45 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:wordconnotation="http://www.upyourmood.com/wordconnotation/"
+    xmlns:j.0="http://www.upyourmood.com/music/196156"
+    xmlns:j.1="http://xmlns.com/foaf/0.1/"
+    xmlns:j.2="http://www.upyourmood.com/wordconnotation/fun/7.0"
+    xmlns:user="http://www.upyourmood.com/user/"
+    xmlns:j.3="http://www.upyourmood.com/wordconnotation/soul/9.0"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:music="http://www.upyourmood.com/music/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/AlbumTitle">
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/soul/9.0">
+    <wordconnotation:IsAssociatedBy rdf:resource="http://www.upyourmood.com/user/guest"/>
+    <wordconnotation:Tag rdf:resource="http://www.upyourmood.com/music/196156"/>
+    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/APourConnotation"/>
+    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/soul/9.0"/>
+    <wordconnotation:APourConnotation rdf:datatype="http://www.w3.org/2001/XMLSchema#float">9.0</wordconnotation:APourConnotation>
+    <wordconnotation:APourConnotation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">soul</wordconnotation:APourConnotation>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/user/HasListen">
+    <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/196156">
+    <rdf:type rdf:resource="http://www.upyourmood.com/music/196156"/>
+    <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Masquerade</dc:title>
+    <j.1:depiction rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://imgjam.com/albums/s29/29254/covers/1.200.jpg</j.1:depiction>
+    <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S.U.N. (Scientific Universal Noncommercial)</dc:creator>
+    <music:AlbumTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The One</music:AlbumTitle>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/fun/7.0">
+    <wordconnotation:IsAssociatedBy rdf:resource="http://www.upyourmood.com/user/guest"/>
+    <wordconnotation:Tag rdf:resource="http://www.upyourmood.com/music/196156"/>
+    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/APourConnotation"/>
+    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/fun/7.0"/>
+    <wordconnotation:APourConnotation rdf:datatype="http://www.w3.org/2001/XMLSchema#float">7.0</wordconnotation:APourConnotation>
+    <wordconnotation:APourConnotation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fun</wordconnotation:APourConnotation>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
+    <user:HasListen rdf:resource="http://www.upyourmood.com/music/196156"/>
+    <rdf:type rdf:resource="http://www.upyourmood.com/user/guest"/>
+  </rdf:Description>
+</rdf:RDF>

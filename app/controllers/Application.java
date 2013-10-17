@@ -88,7 +88,11 @@ public class Application extends Controller {
 			String _url = "http://api.wordreference.com/78289/json/fren/" + utf_encoded;
 			ReadURL ru = new ReadURL(_url);
 			Integer size = ru.getURLSize();
-			if (size>150){
+			
+			String _url2 = "http://api.wordreference.com/78289/json/enfr/" + utf_encoded;
+			ReadURL ru2 = new ReadURL(_url2);
+			Integer size2 = ru2.getURLSize();
+			if (size>150 || size2>150){
 				//ok bon mot: on peut travailler avec
 				RDFBuilding rdf=RDFBuilding.getInstance();
 				WordConnotation word=new WordConnotation(name, valeur);//TODO: Attention le 10 est en dur!!
