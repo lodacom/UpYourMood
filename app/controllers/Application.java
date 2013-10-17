@@ -19,7 +19,8 @@ public class Application extends Controller {
 	public static SessionValues maSession=SessionValues.getInstance();
 	static Form<ConnectionUtil> connectionUser = Form.form(ConnectionUtil.class);
 	public static Jamendo jam=new Jamendo();
-
+	public static DBpediaQueries DBq=new DBpediaQueries();
+	
 	public static Result index() throws ClientProtocolException, IOException {
 		String user = session("connected");
 		jam.play();
@@ -94,8 +95,9 @@ public class Application extends Controller {
 			Integer size2 = ru2.getURLSize();
 			if (size>150 || size2>150){
 				//ok bon mot: on peut travailler avec
+				//DBq.queryImage(utf_encoded);
 				RDFBuilding rdf=RDFBuilding.getInstance();
-				WordConnotation word=new WordConnotation(name, valeur);//TODO: Attention le 10 est en dur!!
+				WordConnotation word=new WordConnotation(name, valeur);
 				UserInformation userInf=null;
 				try {
 					userInf = new UserInformation();

@@ -3,12 +3,12 @@
     xmlns:j.0="http://ns.inria.fr/nicetag/2010/09/09/voc.html#"
     xmlns:wordconnotation="http://www.upyourmood.com/wordconnotation/"
     xmlns:j.1="http://www.upyourmood.com/music/196156"
-    xmlns:j.4="http://www.upyourmood.com/wordconnotation/soul/6.0"
     xmlns:j.3="http://xmlns.com/foaf/0.1/"
     xmlns:j.2="http://www.upyourmood.com/"
     xmlns:user="http://www.upyourmood.com/user/"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:music="http://www.upyourmood.com/music/"
+    xmlns:j.4="http://www.upyourmood.com/wordconnotation/chocolat/7.0"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
   <rdf:Description rdf:about="http://ns.inria.fr/nicetag/2010/09/09/voc.html#makesMeFeel">
     <rdfs:subPropertyOf rdf:resource="http://ns.inria.fr/nicetag/2010/09/09/voc.html#isRelatedTo"/>
@@ -16,16 +16,16 @@
   <rdf:Description rdf:about="http://www.upyourmood.com/music/AlbumTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/soul/6.0">
+  <rdf:Description rdf:about="http://www.upyourmood.com/user/HasListen">
+    <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/chocolat/7.0">
     <j.2:IsAssociatedBy rdf:resource="http://www.upyourmood.com/user/guest"/>
     <j.0:makesMeFeel rdf:resource="http://www.upyourmood.com/music/196156"/>
     <rdf:type rdf:resource="http://www.upyourmood.com/IsConnoted"/>
-    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/soul/6.0"/>
-    <j.2:IsConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float">6.0</j.2:IsConnoted>
-    <j.2:IsConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#string">soul</j.2:IsConnoted>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/user/HasListen">
-    <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
+    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/chocolat/7.0"/>
+    <j.2:IsConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float">7.0</j.2:IsConnoted>
+    <j.2:IsConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#string">chocolat</j.2:IsConnoted>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/music/196156">
     <rdf:type rdf:resource="http://www.upyourmood.com/music/196156"/>
