@@ -47,6 +47,9 @@ public class RDFBuilding {
 		ajouterMusique(infoMusic);
 		ajouterUtilisateur(userInfo);
 		ajouterMot_Connotation(word);
+		//............................................................................................
+		m.add(NiceTag.makesMeFeel,RDFS.subPropertyOf,NiceTag.isRelatedTo);
+		//............................................................................................
 		FileOutputStream outStream;
 		try {
 			outStream = new FileOutputStream("public/rdf/upyourmood.rdf");
@@ -72,18 +75,20 @@ public class RDFBuilding {
 	 */
 	private void ajouterMusique(List<String> infoMusic){
 		String music=m.getNsPrefixURI("music");
-		Literal album=m.createTypedLiteral(infoMusic.get(1),XSDDatatype.XSDstring);
-		Literal artiste=m.createTypedLiteral(infoMusic.get(2),XSDDatatype.XSDstring);
-		Literal pochette=m.createTypedLiteral(infoMusic.get(3),XSDDatatype.XSDanyURI);
-		Literal titre=m.createTypedLiteral(infoMusic.get(4),XSDDatatype.XSDstring);
+		
+		Resource album = m.createResource(music+infoMusic.get(1));
+		Resource artiste = m.createResource(music+infoMusic.get(2));
+		Resource pochette = m.createResource(music+infoMusic.get(3));
+		Resource titre= m.createResource(music+infoMusic.get(4));
 		
 		Music = m.createResource(music+infoMusic.get(0));
 		if (music!=null){
 			Property TitreAlbum = m.createProperty(music+"AlbumTitle");
 			
-			Music.addLiteral(TitreAlbum, album);
-			Music.addLiteral(DC.creator, artiste);
-			Music.addLiteral(FOAF.depiction, pochette);
+			m.add(Music,TitreAlbum,album);
+			m.add(Music,DC.creator,artiste);
+			m.add(Music, FOAF.depiction,pochette);
+			m.add(Music,DC.title,titre);
 			Music.addLiteral(DC.title, titre);
 
 			m.add(Music,RDF.type,Music);
@@ -92,14 +97,18 @@ public class RDFBuilding {
 			m.setNsPrefix("music", musicNs);
 			
 			Music = m.createResource(musicNs+infoMusic.get(0));
+			album = m.createResource(musicNs+infoMusic.get(1));
+			artiste = m.createResource(musicNs+infoMusic.get(2));
+			pochette = m.createResource(musicNs+infoMusic.get(3));
+			titre= m.createResource(musicNs+infoMusic.get(4));
 			
 			Property TitreAlbum = m.createProperty(musicNs+"AlbumTitle");
 			m.add(TitreAlbum, RDFS.subPropertyOf, DC.title);
 			
-			Music.addLiteral(TitreAlbum, album);
-			Music.addLiteral(DC.creator, artiste);
-			Music.addLiteral(FOAF.depiction, pochette);
-			Music.addLiteral(DC.title, titre);
+			m.add(Music,TitreAlbum,album);
+			m.add(Music,DC.creator,artiste);
+			m.add(Music, FOAF.depiction,pochette);
+			m.add(Music,DC.title,titre);
 
 			m.add(Music,RDF.type,Music);
 		}
@@ -140,35 +149,32 @@ public class RDFBuilding {
 		Literal connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
 		Literal mon_mot=m.createTypedLiteral(word.getMot(),XSDDatatype.XSDstring);
 		
-		Resource Mot = m.createResource(mot+word.getMot()+"/"+word.getConnotation());
+		OntologyUpYourMood.Word = m.createResource(mot+word.getMot()+"/"+word.getConnotation());
 		if (mot!=null){
 			Property connot = m.createProperty(mot+"APourConnotation");
-			Property Tag = m.createProperty(mot+"Tag");
 			Property AssociePar = m.createProperty(mot+"IsAssociatedBy");
 			
-			Mot.addLiteral(connot, mon_mot);			
-			Mot.addLiteral(connot, connotation);
+			OntologyUpYourMood.Word.addLiteral(connot, mon_mot);			
+			OntologyUpYourMood.Word.addLiteral(connot, connotation);
 			
-			m.add(Mot,RDF.type,Mot);
-			m.add(Mot,RDF.type,connot);	
-			m.add(Mot,Tag,Music);
-			m.add(Mot,AssociePar,User);
+			m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.Word);
+			
+			m.add(OntologyUpYourMood.Word,RDF.type,connot);	
+			m.add(OntologyUpYourMood.Word,NiceTag.makesMeFeel,Music);
+			m.add(OntologyUpYourMood.Word,AssociePar,User);
 		}else{
 			String motNs=prefixe+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
-			Mot = m.createResource(motNs+word.getMot()+"/"+word.getConnotation());
+			OntologyUpYourMood.Word = m.createResource(motNs+word.getMot()+"/"+word.getConnotation());
 			
-			Property APourConnotation = m.createProperty(motNs+"APourConnotation");
-			Property Tag = m.createProperty(motNs+"Tag");
-			Property AssociePar = m.createProperty(motNs+"IsAssociatedBy");
+			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, mon_mot);			
+			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, connotation);
 			
-			Mot.addLiteral(APourConnotation, mon_mot);			
-			Mot.addLiteral(APourConnotation, connotation);
+			m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.Word);
+			m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.IsConnoted);
 			
-			m.add(Mot,RDF.type,Mot);
-			m.add(Mot,RDF.type,APourConnotation);
-			m.add(Mot,Tag,Music);
-			m.add(Mot,AssociePar,User);
+			m.add(OntologyUpYourMood.Word,NiceTag.makesMeFeel,Music);
+			m.add(OntologyUpYourMood.Word,OntologyUpYourMood.IsAssociatedBy,User);
 		}
 	}
 }

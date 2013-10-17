@@ -3,11 +3,7 @@
 
 @main("Accueil",sessionValues) {
 
-	<script language="javascript" src="@routes.Assets.at("javascripts/jquery-1.9.1.js")"></script>
-	<script language="javascript" src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
-	<script language="javascript" src="@routes.Assets.at("javascripts/word_colors.js")"></script>
-	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
-    
+	
     
 	@**
 	*le slider pour la notation de la connotation
@@ -44,93 +40,10 @@
 		</fieldset>
 		</div>
 		
+		<script text="javascript">
 		
-		<script type="text/javascript" charset="utf-8">
 	
-		window.onload = function() { addColors(); };
-	
-	function sendTo(){
-		var s = $("#sentiment").val();
-		var v = $( "#slider-range-max" ).slider( "value" );
-		if (s!="" && v!=0){
-			clean();
-	      	$.ajax({
-	    		type: "POST",
-				url: "@routes.Application.checkWord()",
-				data: { sentiment: s, valeur: v},
-				dataType: "text",
-				success: function (msg) {
-	                $("#sentiment").val(msg);
-	            }
-				});
-		}else{
-			if (s==""){
-				alert("Marquez un mot");
-			}else{
-				alert("Indiquez la valeur de ce mot sur le slider");
-			}
-		}
-      	
-	}
-	
-	function clean(){
-		$("#sentiment").val("");
-		$( "#slider-range-max" ).slider( "value", 0 );
-		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
-	}
-	
-	 $(function() {
-		$( "#slider-range-max" ).slider({
-		range: "max",
-		min: 0,
-		max: 10,
-		value: 0,
-		slide: function( event, ui ) {
-			$( "#amount" ).val( ui.value );
-			}
-		});
-		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
-	});
-	
-	
-	function sendColor(color){
-		$.ajax({
-	    		type: "POST",
-				url: "@routes.Application.addColor()",
-				data: { color: color},
-				dataType: "text",
-				success: function (msg) {
-	                alert("Vous avez associé une couleur à cette musique!");
-	            }
-		});
-	}
-	
-	function addColors(){
-	
-		var cols = new Array();
+		</script>
 		
-		cols[0] = "#FFDEAD";
-		cols[1] = "#FFFF00";
-		cols[2] = "#FFD700";
-		cols[3] = "#FFA500";
-		cols[4] = "#DAA520";
-		cols[5] = "#FF8C00";
-		cols[6] = "#FF7F50";
-		
-		cols[7] = "#FFFFFF";
-		cols[8] = "#C0C0C";
-		cols[9] = "#D3D3D3";
-		cols[10] = "#708090";
-		cols[11] = "#808080";
-		cols[12] = "#696969";
-		cols[13] = "#000000";
-		
-		$("#divcolors").empty();
-		for (i = 0; i < cols.length; i++){
-			$("#divcolors").append("<input type=\"button\" style=\"background-color:"+cols[i]+"; border:0;\" onclick=\"sendColor('"+cols[i]+"')\"/>");
-      	} 
-	}
-	
-    	</script>
 	
 }
