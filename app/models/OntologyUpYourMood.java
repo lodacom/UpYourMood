@@ -18,5 +18,15 @@ public class OntologyUpYourMood {
 	public static String getURI(){
 		return uym;
 	}
-
+/*
+ * PREFIX dbpprop: <http://dbpedia.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?img
+WHERE {
+    ?res dbpprop:hasPhotoCollection ?img .
+    ?res rdfs:label ?label
+    FILTER regex(?label, "^mot_utilisateur.","i") 
+}
+Merci de ne pas enlever la requête ci-dessus
+ */
 }
