@@ -8,8 +8,13 @@ public class ConnectionBase {
 	public static void open(){
 		try {
 			Class.forName("org.h2.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
 			conn = DriverManager.getConnection("jdbc:h2:mem:play", "sa", "");
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
