@@ -1,19 +1,19 @@
 package models;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.List;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
 
-import play.libs.Json;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class DBpediaQueries {
@@ -21,39 +21,78 @@ public class DBpediaQueries {
 	public String dbprop="PREFIX dbpprop: <http://dbpedia.org/property/>";
 	public String rdfs="PREFIX rdfs: <"+RDFS.getURI()+">";
 	public final String NL = System.getProperty("line.separator");
-	QueryExecution query;
-	public JsonNode node;
+	private QueryExecution query;
+	private ArrayList<String> urlListe;
 	
-	@SuppressWarnings("deprecation")
 	public void queryImage(String mot){
 		String etape1=dbprop + NL + rdfs + NL +
 		"SELECT ?img "+
 		"WHERE { "+
 		"?res dbpprop:hasPhotoCollection ?img . "+
 		"?res rdfs:label ?label "+
-		"FILTER regex(?label, \"^"+mot+".\",\"i\") " +
-		"LIMIT 10"+ 
-		"}";
-		System.out.println("Avant requête");
+		"FILTER regex(?label, \"^"+mot+".\",\"i\") " + 
+		"}" +
+		"LIMIT 10";
 		Query etape2 = QueryFactory.create(etape1);
-		etape1=URLEncoder.encode(etape2.toString());
-		service+=etape1+"&format=json";
+		query = QueryExecutionFactory.sparqlService(service, etape2.toString());
 		urlFromDBpedia();
 	}
 	
 	private void urlFromDBpedia(){
-		String resultat=null;
+		urlListe=new ArrayList<String>();
 		try {
-			resultat=JSONLoader.loadTracksJSON(service);
+			ResultSet results = query.execSelect();
+			while(results.hasNext()) {
+				QuerySolution sol = (QuerySolution) results.next();
+				String url=sol.get("?img").toString();
+				urlListe.add(url);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			query.close();
+		}
+		try {
+			retreiveImages();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		node=Json.parse(resultat);
-		List<JsonNode> liste=node.findValues("img");
-		for (JsonNode element :liste){
-			System.out.println(element.asText());
+	}
+	
+	private void retreiveImages() throws ClientProtocolException, IOException{
+		for (int i=0;i<urlListe.size();i++){
+			DefaultHttpClient   httpclient = new DefaultHttpClient(new BasicHttpParams());
+			HttpGet httpget = new HttpGet(urlListe.get(i));
+
+			HttpResponse response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+
+			InputStream inputStream=entity.getContent();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"), 8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			String recup = null;
+			String[] images =null;
+			
+			int j=0;
+			while ((line = reader.readLine()) != null){
+				if (line.matches("<p><a .+</p>")){
+					recup=line;
+					images=recup.split("<img src=\"");
+					while(j<images.length){
+						System.out.println(images[j].replaceAll("\"/>.+", ""));
+						j++;
+					}
+					j=0;
+				}
+			}
+			String result = sb.toString();
+			//System.out.println(result);
 		}
 	}
+	
+	
 	
 }
