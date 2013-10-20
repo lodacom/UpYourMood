@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
 
 public class Jamendo {
-	static final String TRACKS_URL = "http://api.jamendo.com/v3.0/tracks/?format=json&groupby=artist_id";
-	static final String CLIENT_ID = "b6747d04";
+	static final String TRACKS_URL = "http://api.jamendo.com/v3.0/tracks/?format=json&groupby=artist_id&limit=all";
+	static final String CLIENT_ID = "59336032";
 	public JsonNode node;
 	public List<String> idMusiques;
 	private List<String> artistes;
@@ -36,16 +36,40 @@ public class Jamendo {
 	}
 	
 	public String next(){
-		compteur++;
-		return idMusiques.get(compteur);
+		if (compteur<idMusiques.size()-1){
+			compteur++;
+			return idMusiques.get(compteur);
+		}else{
+			try {
+				play();
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			compteur=0;
+			return idMusiques.get(0);
+		}
 	}
 	
 	public String previous(){
-		if (compteur!=0){
+		if (compteur>0){
 			compteur--;
 			return idMusiques.get(compteur);
 		}else{
-			return idMusiques.get(idMusiques.size()-1);
+			try {
+				play();
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			compteur=0;
+			return idMusiques.get(0);
 		}
 	}
 	
