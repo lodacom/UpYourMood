@@ -19,11 +19,7 @@ create sequence user_seq;
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
-
-drop table if exists user;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists user cascade;
 
 drop sequence if exists user_seq;
 

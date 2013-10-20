@@ -1,6 +1,7 @@
 package models;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.List;
 import org.openjena.riot.RiotException;
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
@@ -10,6 +11,8 @@ import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.DC;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+
+import controllers.Application;
 
 @SuppressWarnings("deprecation")
 public class RDFBuilding {
@@ -123,6 +126,12 @@ public class RDFBuilding {
 	 */
 	private void ajouterUtilisateur(UserInformation userInfo){
 		String user=m.getNsPrefixURI("user");
+		try {
+			userInfo.retrieveInformation(Application.maSession.getPseudo());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		User = m.createResource(user+userInfo.getInfoUser().get(0));
 		if (user!=null){
 			Property AEcoute=m.createProperty(user+"HasListen");

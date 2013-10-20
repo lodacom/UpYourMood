@@ -7,13 +7,13 @@ public class ConnectionBase {
 	
 	public static void open(){
 		try {
-			Class.forName("org.h2.Driver");
+			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
-			conn = DriverManager.getConnection("jdbc:h2:mem:play", "sa", "");
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/UpYourMood_DB", "postgres", "loda");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,7 +23,7 @@ public class ConnectionBase {
 	public static ResultSet requete(String req){
 		Statement stmt;
 		try {
-			stmt = conn.createStatement();
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			return stmt.executeQuery(req);
 		} catch (SQLException e) {
 			System.out.println("Erreur requête : " + e.getMessage()); 

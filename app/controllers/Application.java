@@ -43,7 +43,7 @@ public class Application extends Controller {
 		} else {
 			ConnectionBase.open();
 			ResultSet res=ConnectionBase.requete("SELECT pseudo,mdp " +
-					"FROM User " +
+					"FROM \"UserInfo\" " +
 					"WHERE pseudo='"+filledForm.field("pseudo").value()+"'"+
 					"AND mdp='"+filledForm.field("mdp").value()+"'");
 			try {
@@ -51,6 +51,7 @@ public class Application extends Controller {
 					/*
 					 *Mot de passe ou login mauvais 
 					 */
+					res.close();
 					ConnectionBase.close();
 					return redirect(routes.Application.index());
 				}else{
@@ -98,13 +99,7 @@ public class Application extends Controller {
 				//DBq.queryImage(utf_encoded);
 				RDFBuilding rdf=RDFBuilding.getInstance();
 				WordConnotation word=new WordConnotation(name, valeur);
-				UserInformation userInf=null;
-				try {
-					userInf = new UserInformation();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				UserInformation userInf= new UserInformation();
 				rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
 				return ok("");
 			}

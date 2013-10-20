@@ -1,4 +1,4 @@
-@(sessionValues: SessionValues)
+@(sessionValues: SessionValues, infos: List[String])
 
 @main("Profil",sessionValues) {
 	<form method="post">
@@ -6,21 +6,21 @@
 	   <fieldset>
 	       <legend>Vos coordonnées</legend>
 	       <label for="nom">Nom:</label>
-	       <input type="text" name="nom" id="nom" />
+	       <input type="text" name="nom" id="nom" value="@infos.get(1)" />
 	 		<br>
 	       <label for="prenom">Prénom:</label>
-	       <input type="text" name="prenom" id="prenom" />
+	       <input type="text" name="prenom" id="prenom" value="@infos.get(2)" />
 	  		<br>
 	       <label for="email">E-mail:</label>
-	       <input type="email" name="email" id="email" />*
+	       <input type="email" name="email" id="email" value="@infos.get(4)" />*
 	 		<br>
 	   </fieldset>
 	   <fieldset>
 	   		<label for="pseudo">Pseudo:</label>
-	       <input type="text" name="pseudo" id="pseudo" />*
+	       <input type="text" name="pseudo" id="pseudo" value="@infos.get(0)" />*
 	       <br>
 	       <label for="mdp">Mot de passe:</label>
-	       <input type="password" name="mdp" id="mdp" />*
+	       <input type="password" name="mdp" id="mdp" value="@infos.get(3)" />*
 	       <br>
 	   </fieldset>
 	   	
