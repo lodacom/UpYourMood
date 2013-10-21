@@ -8,16 +8,12 @@ public class ConnectionBase {
 	public static void open(){
 		try {
 			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e1) {
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/UpYourMood_DB", "postgres", "loda");
+		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/UpYourMood_DB", "postgres", "loda");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 	}
 	
 	public static ResultSet requete(String req){
