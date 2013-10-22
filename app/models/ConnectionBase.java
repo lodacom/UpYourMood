@@ -22,7 +22,7 @@ public class ConnectionBase {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			return stmt.executeQuery(req);
 		} catch (SQLException e) {
-			System.out.println("Erreur requête : " + e.getMessage()); 
+			//System.out.println("Erreur requête : " + e.getMessage()); 
 			return null;
 		}
 	}

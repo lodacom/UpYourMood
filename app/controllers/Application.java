@@ -96,13 +96,15 @@ public class Application extends Controller {
 			Integer size2 = ru2.getURLSize();
 			if (size>150 || size2>150){
 				//ok bon mot: on peut travailler avec
-				
-				/*if (size>150){
-				 * DBq.queryImage(utf_encoded,"fr");
-				 * }else{
-				 * DBq.queryImage(utf_encoded,"en");
-				 * }
-				 */
+				/*Le téléchargement fonctionne et le gestionnaire aussi 
+				 * merci de ne pas décommenter ces lignes
+				 * tant qu'une interface de choix des images pour l'utilisateur n'a pas été mise en
+				 * place. Merci de votre compréhension :)
+				 * if (size>150){
+					DBq.queryImage(utf_encoded,"fr");
+				}else{
+					DBq.queryImage(utf_encoded,"en");
+				}*/
 				RDFBuilding rdf=RDFBuilding.getInstance();
 				WordConnotation word=new WordConnotation(name, valeur);
 				UserInformation userInf= new UserInformation();

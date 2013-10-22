@@ -42,7 +42,6 @@ public class DownloadManager
 			}
 			catch (IOException e){
 				System.out.println("Error while trying to download the file.");
-				e.printStackTrace();
 			}
 			finally{
 				try{
@@ -50,7 +49,7 @@ public class DownloadManager
 					input.close();
 				}
 				catch (IOException e){
-					e.printStackTrace();
+
 				}
 			}
 		}
@@ -74,7 +73,6 @@ public class DownloadManager
 			fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 
 		if (fileName==null){
@@ -84,7 +82,7 @@ public class DownloadManager
 		try {
 			if (!res.first()){
 				//l'image n'a pas encore été dl on insert dans la table
-				ConnectionBase.requete("INSERT INTO \"Image\" (urlFlickr,urlImage,nomImage) VALUES " +
+				ConnectionBase.requete("INSERT INTO \"Image\" (\"urlFlickr\",\"urlImage\",\"nomImage\") VALUES " +
 						"("+quoteCharacter+urlFlickrWrappr+quoteCharacter+","+
 						quoteCharacter+host+quoteCharacter+","+
 						quoteCharacter+fileName+quoteCharacter+")");
