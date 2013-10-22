@@ -96,7 +96,13 @@ public class Application extends Controller {
 			Integer size2 = ru2.getURLSize();
 			if (size>150 || size2>150){
 				//ok bon mot: on peut travailler avec
-				//DBq.queryImage(utf_encoded);
+				
+				/*if (size>150){
+				 * DBq.queryImage(utf_encoded,"fr");
+				 * }else{
+				 * DBq.queryImage(utf_encoded,"en");
+				 * }
+				 */
 				RDFBuilding rdf=RDFBuilding.getInstance();
 				WordConnotation word=new WordConnotation(name, valeur);
 				UserInformation userInf= new UserInformation();

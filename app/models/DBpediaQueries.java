@@ -23,21 +23,21 @@ public class DBpediaQueries {
 	public final String NL = System.getProperty("line.separator");
 	private QueryExecution query;
 	private ArrayList<String> urlListe;
-	
-	public void queryImage(String mot){
+
+	public void queryImage(String mot,String lang){
 		String etape1=dbprop + NL + rdfs + NL +
-		"SELECT ?img "+
-		"WHERE { "+
-		"?res dbpprop:hasPhotoCollection ?img . "+
-		"?res rdfs:label ?label "+
-		"FILTER regex(?label, \"^"+mot+".\",\"i\") " + 
-		"}" +
-		"LIMIT 10";
+				"SELECT ?img "+
+				"WHERE { "+
+				"?res dbpprop:hasPhotoCollection ?img . "+
+				"?res rdfs:label ?label "+
+				"FILTER (regex(?label, \"^"+mot+".+\",\"i\") && lang(?label)=\""+lang+"\") " + 
+				"}" +
+				"LIMIT 10";
 		Query etape2 = QueryFactory.create(etape1);
 		query = QueryExecutionFactory.sparqlService(service, etape2.toString());
 		urlFromDBpedia();
 	}
-	
+
 	private void urlFromDBpedia(){
 		urlListe=new ArrayList<String>();
 		try {
@@ -53,46 +53,44 @@ public class DBpediaQueries {
 		finally {
 			query.close();
 		}
-		try {
-			retreiveImages();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		retreiveImages();
 	}
-	
-	private void retreiveImages() throws ClientProtocolException, IOException{
+
+	private void retreiveImages(){
 		for (int i=0;i<urlListe.size();i++){
+
 			DefaultHttpClient   httpclient = new DefaultHttpClient(new BasicHttpParams());
 			HttpGet httpget = new HttpGet(urlListe.get(i));
+			try{
+				HttpResponse response = httpclient.execute(httpget);
+				HttpEntity entity = response.getEntity();
 
-			HttpResponse response = httpclient.execute(httpget);
-			HttpEntity entity = response.getEntity();
-
-			InputStream inputStream=entity.getContent();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"), 8);
-			StringBuilder sb = new StringBuilder();
-			String line = null;
-			String recup = null;
-			String[] images =null;
-			
-			int j=0;
-			while ((line = reader.readLine()) != null){
-				if (line.matches("<p><a .+</p>")){
-					recup=line;
-					images=recup.split("<img src=\"");
-					while(j<images.length){
-						System.out.println(images[j].replaceAll("\"/>.+", ""));
-						j++;
+				InputStream inputStream=entity.getContent();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"), 8);
+				//StringBuilder sb = new StringBuilder();
+				String line = null;
+				String recup = null;
+				String[] images =null;
+				String urlImage=null;
+				int j=1;
+				while ((line = reader.readLine()) != null){
+					if (line.matches("<p><a .+</p>")){
+						recup=line;
+						images=recup.split("<img src=\"");
+						while(j<images.length){
+							urlImage=images[j].replaceAll("\"/>.+", "");
+							DownloadManager.getFile(urlListe.get(i),urlImage);
+							j++;
+						}
+						j=1;
 					}
-					j=0;
 				}
+			}catch(IOException e){
+
 			}
-			String result = sb.toString();
-			//System.out.println(result);
 		}
 	}
-	
-	
-	
+
+
+
 }
