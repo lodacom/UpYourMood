@@ -7,8 +7,12 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public class OntologyUpYourMood {
-	public static final String uym="http://www.upyourmood.com/";
-	
+	private static final String uym="http://www.upyourmood.com/";
+	private static final String uymMusic=uym+"music/";
+	private static final String uymWordConnotation=uym+"wordconnotation/";
+	private static final String uymUser=uym+"user/";
+
+
 	public static Model m = ModelFactory.createDefaultModel();
 	
 	// Property
@@ -31,10 +35,23 @@ public class OntologyUpYourMood {
 	// Litteral
 	
 	public static Literal connotation=null;
-	public static Literal userWord=null;
 	
-	public static String getURI(){
+	// Prefixes
+	
+	public static String getUym(){
 		return uym;
+	}
+	
+	public static String getUymMusic(){
+		return uymMusic;
+	}
+	
+	public static String getUymWordConnotation(){
+		return uymWordConnotation;
+	}
+	
+	public static String getUymUser(){
+		return uymUser;
 	}
 /*
  * PREFIX dbpprop: <http://dbpedia.org/property/>
