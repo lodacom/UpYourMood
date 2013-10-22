@@ -18,11 +18,10 @@ import controllers.Application;
 public class RDFBuilding {
 	private static volatile RDFBuilding instance = null;
 	private static final String rdf_file = "public/rdf/upyourmood.rdf";
-	private final String prefixe = "http://www.upyourmood.com/";
+	//private final String prefixe = "http://www.upyourmood.com/";
 	private Model m=null;
-	Resource Music=null;
-	Resource User =null;
-	
+
+
 	private RDFBuilding(){
 		try{
 			m=FileManager.get().loadModel(rdf_file);
@@ -30,18 +29,18 @@ public class RDFBuilding {
 			m = ModelFactory.createDefaultModel();
 		}
 	}
-	
+
 	public final static RDFBuilding getInstance() {
-        if (RDFBuilding.instance == null) {
-           synchronized(RDFBuilding.class) {
-             if (RDFBuilding.instance == null) {
-            	 RDFBuilding.instance = new RDFBuilding();
-             }
-           }
-        }
-        return RDFBuilding.instance;
-    }
-	
+		if (RDFBuilding.instance == null) {
+			synchronized(RDFBuilding.class) {
+				if (RDFBuilding.instance == null) {
+					RDFBuilding.instance = new RDFBuilding();
+				}
+			}
+		}
+		return RDFBuilding.instance;
+	}
+
 	/**
 	 * fonction principale qu'il faudra appeler dans la classe Application
 	 * @param List<String> infoMusic information de la musique courante
@@ -58,14 +57,14 @@ public class RDFBuilding {
 			outStream = new FileOutputStream("public/rdf/upyourmood.rdf");
 			m.write(outStream, "RDF/XML");
 			//m.write(outStream, "N3");
-	        outStream.close();
+			outStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
+
 	}
-	
+
 	/**
 	 * Dans cette fonction on ajoute:
 	 * <ul>
@@ -78,45 +77,45 @@ public class RDFBuilding {
 	 */
 	private void ajouterMusique(List<String> infoMusic){
 		String music=m.getNsPrefixURI("music");
-		
-		Resource album = m.createResource(music+infoMusic.get(1));
-		Resource artiste = m.createResource(music+infoMusic.get(2));
-		Resource pochette = m.createResource(music+infoMusic.get(3));
-		Resource titre= m.createResource(music+infoMusic.get(4));
-		
-		Music = m.createResource(music+infoMusic.get(0));
+
+		OntologyUpYourMood.album = m.createResource(music+infoMusic.get(1));
+		OntologyUpYourMood.artiste = m.createResource(music+infoMusic.get(2));
+		OntologyUpYourMood.pochette = m.createResource(music+infoMusic.get(3));
+		OntologyUpYourMood.titre= m.createResource(music+infoMusic.get(4));
+
+		OntologyUpYourMood.Music = m.createResource(music+infoMusic.get(0));
 		if (music!=null){
-			Property TitreAlbum = m.createProperty(music+"AlbumTitle");
-			
-			m.add(Music,TitreAlbum,album);
-			m.add(Music,DC.creator,artiste);
-			m.add(Music, FOAF.depiction,pochette);
-			m.add(Music,DC.title,titre);
-			Music.addLiteral(DC.title, titre);
+			OntologyUpYourMood.AlbumTitle = m.createProperty(music+"AlbumTitle");
 
-			m.add(Music,RDF.type,Music);
+			m.add(OntologyUpYourMood.Music,OntologyUpYourMood.AlbumTitle,OntologyUpYourMood.album);
+			m.add(OntologyUpYourMood.Music,DC.creator,OntologyUpYourMood.artiste);
+			m.add(OntologyUpYourMood.Music, FOAF.depiction,OntologyUpYourMood.pochette);
+			m.add(OntologyUpYourMood.Music,DC.title,OntologyUpYourMood.titre);
+			OntologyUpYourMood.Music.addLiteral(DC.title, OntologyUpYourMood.titre);
+
+			m.add(OntologyUpYourMood.Music,RDF.type,OntologyUpYourMood.Music);
 		}else{
-			String musicNs=prefixe+"music/";
+			String musicNs=OntologyUpYourMood.getURI()+"music/";
 			m.setNsPrefix("music", musicNs);
-			
-			Music = m.createResource(musicNs+infoMusic.get(0));
-			album = m.createResource(musicNs+infoMusic.get(1));
-			artiste = m.createResource(musicNs+infoMusic.get(2));
-			pochette = m.createResource(musicNs+infoMusic.get(3));
-			titre= m.createResource(musicNs+infoMusic.get(4));
-			
-			Property TitreAlbum = m.createProperty(musicNs+"AlbumTitle");
-			m.add(TitreAlbum, RDFS.subPropertyOf, DC.title);
-			
-			m.add(Music,TitreAlbum,album);
-			m.add(Music,DC.creator,artiste);
-			m.add(Music, FOAF.depiction,pochette);
-			m.add(Music,DC.title,titre);
 
-			m.add(Music,RDF.type,Music);
+			OntologyUpYourMood.Music = m.createResource(musicNs+infoMusic.get(0));
+			OntologyUpYourMood.album = m.createResource(musicNs+infoMusic.get(1));
+			OntologyUpYourMood.artiste = m.createResource(musicNs+infoMusic.get(2));
+			OntologyUpYourMood.pochette = m.createResource(musicNs+infoMusic.get(3));
+			OntologyUpYourMood.titre= m.createResource(musicNs+infoMusic.get(4));
+
+			OntologyUpYourMood.AlbumTitle = m.createProperty(musicNs+"AlbumTitle");
+			m.add(OntologyUpYourMood.AlbumTitle, RDFS.subPropertyOf, DC.title);
+
+			m.add(OntologyUpYourMood.Music,OntologyUpYourMood.AlbumTitle,OntologyUpYourMood.album);
+			m.add(OntologyUpYourMood.Music,DC.creator,OntologyUpYourMood.artiste);
+			m.add(OntologyUpYourMood.Music, FOAF.depiction,OntologyUpYourMood.pochette);
+			m.add(OntologyUpYourMood.Music,DC.title,OntologyUpYourMood.titre);
+
+			m.add(OntologyUpYourMood.Music,RDF.type,OntologyUpYourMood.Music);
 		}
 	}
-	
+
 	/**
 	 * Dans cette fonction on ajoute:
 	 * a minima:
@@ -132,58 +131,58 @@ public class RDFBuilding {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		User = m.createResource(user+userInfo.getInfoUser().get(0));
+		OntologyUpYourMood.User = m.createResource(user+userInfo.getInfoUser().get(0));
 		if (user!=null){
-			Property AEcoute=m.createProperty(user+"HasListen");
-			
-			m.add(AEcoute,RDFS.subPropertyOf,FOAF.knows);
-			m.add(User,RDF.type,User);
-			m.add(User,AEcoute,Music);
+			OntologyUpYourMood.HasListen=m.createProperty(user+"HasListen");
+
+			m.add(OntologyUpYourMood.HasListen,RDFS.subPropertyOf,FOAF.knows);
+			m.add(OntologyUpYourMood.User,RDF.type,OntologyUpYourMood.User);
+			m.add(OntologyUpYourMood.User,OntologyUpYourMood.HasListen,OntologyUpYourMood.Music);
 		}else{
-			String userNs=prefixe+"user/";
+			String userNs=OntologyUpYourMood.getURI()+"user/";
 			m.setNsPrefix("user", userNs);
-			User = m.createResource(userNs+userInfo.getInfoUser().get(0));
-			
-			Property AEcoute = m.createProperty(userNs+"HasListen");
-			m.add(AEcoute,RDFS.subPropertyOf,FOAF.knows);
-			
-			m.add(User,RDF.type,User);
-			m.add(User,AEcoute,Music);
+			OntologyUpYourMood.User = m.createResource(userNs+userInfo.getInfoUser().get(0));
+
+			OntologyUpYourMood.HasListen = m.createProperty(userNs+"HasListen");
+			m.add(OntologyUpYourMood.HasListen,RDFS.subPropertyOf,FOAF.knows);
+
+			m.add(OntologyUpYourMood.User,RDF.type,OntologyUpYourMood.User);
+			m.add(OntologyUpYourMood.User,OntologyUpYourMood.HasListen,OntologyUpYourMood.Music);
 		}
 	}
-	
+
 	private void ajouterMot_Connotation(WordConnotation word){
 		String mot=m.getNsPrefixURI("wordconnotation");
-		
-		Literal connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
-		Literal mon_mot=m.createTypedLiteral(word.getMot(),XSDDatatype.XSDstring);
-		
+
+		OntologyUpYourMood.connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
+		OntologyUpYourMood.userWord=m.createTypedLiteral(word.getMot(),XSDDatatype.XSDstring);
+
 		OntologyUpYourMood.Word = m.createResource(mot+word.getMot()+"/"+word.getConnotation());
 		if (mot!=null){
-			Property connot = m.createProperty(mot+"APourConnotation");
-			Property AssociePar = m.createProperty(mot+"IsAssociatedBy");
-			
-			OntologyUpYourMood.Word.addLiteral(connot, mon_mot);			
-			OntologyUpYourMood.Word.addLiteral(connot, connotation);
-			
+			OntologyUpYourMood.IsConnoted = m.createProperty(mot+"IsConnoted");
+			OntologyUpYourMood.IsAssociatedBy = m.createProperty(mot+"IsAssociatedBy");
+
+			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, OntologyUpYourMood.userWord);			
+			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, OntologyUpYourMood.connotation);
+
 			m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.Word);
-			
-			m.add(OntologyUpYourMood.Word,RDF.type,connot);	
-			m.add(OntologyUpYourMood.Word,NiceTag.makesMeFeel,Music);
-			m.add(OntologyUpYourMood.Word,AssociePar,User);
+
+			m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.IsConnoted);	
+			m.add(OntologyUpYourMood.Word,NiceTag.makesMeFeel,OntologyUpYourMood.Music);
+			m.add(OntologyUpYourMood.Word,OntologyUpYourMood.IsAssociatedBy,OntologyUpYourMood.User);
 		}else{
-			String motNs=prefixe+"wordconnotation/";
+			String motNs=OntologyUpYourMood.getURI()+"wordconnotation/";
 			m.setNsPrefix("wordconnotation", motNs);
 			OntologyUpYourMood.Word = m.createResource(motNs+word.getMot()+"/"+word.getConnotation());
-			
-			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, mon_mot);			
-			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, connotation);
-			
+
+			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, OntologyUpYourMood.userWord);			
+			OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, OntologyUpYourMood.connotation);
+
 			m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.Word);
 			m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.IsConnoted);
-			
-			m.add(OntologyUpYourMood.Word,NiceTag.makesMeFeel,Music);
-			m.add(OntologyUpYourMood.Word,OntologyUpYourMood.IsAssociatedBy,User);
+
+			m.add(OntologyUpYourMood.Word,NiceTag.makesMeFeel,OntologyUpYourMood.Music);
+			m.add(OntologyUpYourMood.Word,OntologyUpYourMood.IsAssociatedBy,OntologyUpYourMood.User);
 		}
 	}
 }
