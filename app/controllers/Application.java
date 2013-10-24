@@ -99,11 +99,11 @@ public class Application extends Controller {
 				/*Le téléchargement fonctionne et le gestionnaire aussi 
 				 * merci de ne pas décommenter ces lignes
 				 * tant qu'une interface de choix des images pour l'utilisateur n'a pas été mise en
-				 * place. Merci de votre compréhension :)
-				 * if (size>150){
-					DBq.queryImage(utf_encoded,"fr");
+				 * place. Merci de votre compréhension :)*/
+				/*if (size>150){
+					DBq.queryImage(name,"fr");
 				}else{
-					DBq.queryImage(utf_encoded,"en");
+					DBq.queryImage(name,"en");
 				}*/
 				RDFBuilding rdf=RDFBuilding.getInstance();
 				WordConnotation word=new WordConnotation(name, valeur);
