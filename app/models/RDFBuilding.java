@@ -124,8 +124,8 @@ public class RDFBuilding {
 		}
 		//OntologyUpYourMood.HasListen=m.createProperty(OntologyUpYourMood.getUymUser()+"HasListen");
 		m.add(OntologyUpYourMood.HasListen,RDFS.subPropertyOf,FOAF.knows);
-		OntologyUpYourMood.musicalExperience=m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().get(0)+"/"+"musicalExperience"+cpt);
-		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().get(0));
+		OntologyUpYourMood.musicalExperience=m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo+"/"+"musicalExperience"+cpt);
+		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo);
 		OntologyUpYourMood.musicalExperience.addProperty(NiceTag.makesMeFeel,
 				m.createResource()
 				.addProperty(OntologyUpYourMood.IsAssociatedBy, word.getMot())
