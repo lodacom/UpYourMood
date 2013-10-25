@@ -1,54 +1,55 @@
 <rdf:RDF
-    xmlns:nicetag="http://ns.inria.fr/nicetag/2010/09/09/voc.html#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:nicetag="http://ns.inria.fr/nicetag/2010/09/09/voc.html#"
     xmlns:wordconnotation="http://www.upyourmood.com/wordconnotation/"
-    xmlns:j.0="http://www.upyourmood.com/music/196156"
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:uym="http://www.upyourmood.com/"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:user="http://www.upyourmood.com/user/"
     xmlns:music="http://www.upyourmood.com/music/"
-    xmlns:j.1="http://www.upyourmood.com/wordconnotation/chocolat/7.0"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
   <rdf:Description rdf:about="http://ns.inria.fr/nicetag/2010/09/09/voc.html#makesMeFeel">
     <rdfs:subPropertyOf rdf:resource="http://ns.inria.fr/nicetag/2010/09/09/voc.html#isRelatedTo"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/music/AlbumTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/rêve">
-    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/IsConnoted"/>
-    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/rêve"/>
-    <wordconnotation:IsConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float">10.0</wordconnotation:IsConnoted>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/661780">
-    <dc:title rdf:resource="http://www.upyourmood.com/music/bastelslicer"/>
-    <foaf:depiction rdf:resource="http://www.upyourmood.com/music/http://imgjam.com/albums/s76/76784/covers/1.200.jpg"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/Dj Racecorner"/>
-    <music:AlbumTitle rdf:resource="http://www.upyourmood.com/music/Veitstanz"/>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/1026350">
+    <dc:title rdf:resource="http://www.upyourmood.com/music/destruirparaconstruir"/>
+    <foaf:depiction rdf:resource="http://www.upyourmood.com/music/http://imgjam.com/albums/s120/120662/covers/1.200.jpg"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/Vientonegro"/>
+    <music:AlbumTitle rdf:resource="http://www.upyourmood.com/music/sujetos"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/HasListen">
     <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/chocolat/7.0">
-    <uym:IsConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#string">chocolat</uym:IsConnoted>
-    <uym:IsConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float">7.0</uym:IsConnoted>
-    <rdf:type rdf:resource="http://www.upyourmood.com/wordconnotation/chocolat/7.0"/>
-    <rdf:type rdf:resource="http://www.upyourmood.com/IsConnoted"/>
-    <nicetag:makesMeFeel rdf:resource="http://www.upyourmood.com/music/196156"/>
-    <uym:IsAssociatedBy rdf:resource="http://www.upyourmood.com/user/guest"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/196156">
-    <music:AlbumTitle rdf:resource="http://www.upyourmood.com/music/The One"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/S.U.N. (Scientific Universal Noncommercial)"/>
-    <foaf:depiction rdf:resource="http://www.upyourmood.com/music/http://imgjam.com/albums/s29/29254/covers/1.200.jpg"/>
-    <dc:title rdf:resource="http://www.upyourmood.com/music/Masquerade"/>
-    <rdf:type rdf:resource="http://www.upyourmood.com/music/196156"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
-    <wordconnotation:IsAssociatedBy rdf:resource="http://www.upyourmood.com/wordconnotation/rêve"/>
-    <user:HasListen rdf:resource="http://www.upyourmood.com/music/661780"/>
-    <rdf:type rdf:resource="http://www.upyourmood.com/user/guest"/>
-    <user:HasListen rdf:resource="http://www.upyourmood.com/music/196156"/>
+    <user:HasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience2">
+        <user:HasListen>1026350</user:HasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:IsConnoted>1.0</wordconnotation:IsConnoted>
+          <wordconnotation:IsAssociatedBy>chat</wordconnotation:IsAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:HasMusicalExperience>
+    <user:HasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
+        <user:HasListen>1026350</user:HasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:IsConnoted>6.0</wordconnotation:IsConnoted>
+          <wordconnotation:IsAssociatedBy>chien</wordconnotation:IsAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:HasMusicalExperience>
+    <user:HasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience0">
+        <user:HasListen>1026350</user:HasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:IsConnoted>5.0</wordconnotation:IsConnoted>
+          <wordconnotation:IsAssociatedBy>chocolat</wordconnotation:IsAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:HasMusicalExperience>
   </rdf:Description>
 </rdf:RDF>
