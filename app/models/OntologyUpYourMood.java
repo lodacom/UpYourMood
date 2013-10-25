@@ -21,6 +21,7 @@ public class OntologyUpYourMood {
 	public static Property IsAssociatedBy =m.createProperty(uymWordConnotation+"IsAssociatedBy");
 	public static Property AlbumTitle=m.createProperty(uymMusic+"AlbumTitle");
 	public static Property HasListen=m.createProperty(uymUser+"HasListen");
+	public static Property HasMusicalExperience=m.createProperty(uymUser+"HasMusicalExperience");
 			
 	// Resource
 	
@@ -31,6 +32,7 @@ public class OntologyUpYourMood {
 	public static Resource artiste=null; 
 	public static Resource pochette=null; 
 	public static Resource titre=null;
+	public static Resource musicalExperience=null;
 	
 	// Litteral
 	

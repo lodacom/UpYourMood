@@ -23,7 +23,7 @@ public class RDFBuilding {
 	private static final String rdf_file = "public/rdf/upyourmood.rdf";
 	//private final String prefixe = "http://www.upyourmood.com/";
 	private static Model m=null;
-
+	public static int cpt = 0;
 
 	private RDFBuilding(){
 		try{
@@ -47,6 +47,7 @@ public class RDFBuilding {
 					m.setNsPrefix("foaf", FOAF.getURI());
 					m.setNsPrefix("dc", DC.getURI());
 					m.setNsPrefix("nicetag", NiceTag.getURI());
+
 				}
 			}
 		}
@@ -59,9 +60,9 @@ public class RDFBuilding {
 	 */
 	public void rdfUpYourMood(List<String> infoMusic,UserInformation userInfo,WordConnotation word){
 		ajouterMusique(infoMusic);
-		ajouterUtilisateur(userInfo, infoMusic);
+		ajouterUtilisateur(userInfo, infoMusic, word);
 		//ajouterMot_Connotation(word);
-		
+
 		//............................................................................................
 		m.add(NiceTag.makesMeFeel,RDFS.subPropertyOf,NiceTag.isRelatedTo);
 		//............................................................................................
@@ -113,7 +114,7 @@ public class RDFBuilding {
 	 * 	<li>le pseudo</li>
 	 * </ul>
 	 */
-	private void ajouterUtilisateur(UserInformation userInfo, List<String> infoMusic ){
+	private void ajouterUtilisateur(UserInformation userInfo, List<String> infoMusic, WordConnotation word ){
 
 		try {
 			userInfo.retrieveInformation(Application.maSession.getPseudo());
@@ -123,25 +124,16 @@ public class RDFBuilding {
 		}
 		//OntologyUpYourMood.HasListen=m.createProperty(OntologyUpYourMood.getUymUser()+"HasListen");
 		m.add(OntologyUpYourMood.HasListen,RDFS.subPropertyOf,FOAF.knows);
-<<<<<<< HEAD
-<<<<<<< HEAD
-		OntologyUpYourMood.User= m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo)
-								.addProperty(OntologyUpYourMood.HasListen, OntologyUpYourMood.Music);
-=======
-=======
->>>>>>> 8bc0d3f5f532242d347442e4c3603a096a81e946
-		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().get(0))
-								.addProperty(OntologyUpYourMood.HasListen, OntologyUpYourMood.getUymMusic()+infoMusic.get(0));
-		OntologyUpYourMood.User.addProperty(NiceTag.makesMeFeel,
-							    m.createResource()
-							    .addProperty(OntologyUpYourMood.IsAssociatedBy, "test")
-							    .addProperty(OntologyUpYourMood.IsConnoted, "test2"));
-<<<<<<< HEAD
->>>>>>> 8bc0d3f5f532242d347442e4c3603a096a81e946
-=======
->>>>>>> 8bc0d3f5f532242d347442e4c3603a096a81e946
-        		
-        /*m.createResource()
+		OntologyUpYourMood.musicalExperience=m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().get(0)+"/"+"musicalExperience"+cpt);
+		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().get(0));
+		OntologyUpYourMood.musicalExperience.addProperty(NiceTag.makesMeFeel,
+				m.createResource()
+				.addProperty(OntologyUpYourMood.IsAssociatedBy, word.getMot())
+				.addProperty(OntologyUpYourMood.IsConnoted, String.valueOf(word.getConnotation())));
+		OntologyUpYourMood.musicalExperience.addProperty(OntologyUpYourMood.HasListen, infoMusic.get(0));
+		m.add(OntologyUpYourMood.User,OntologyUpYourMood.HasMusicalExperience,OntologyUpYourMood.musicalExperience);
+		cpt++;
+		/*m.createResource()
         .addProperty(OntologyUpYourMood.IsAssociatedBy, OntologyUpYourMood.Word)
         .addProperty(OntologyUpYourMood.IsConnoted, OntologyUpYourMood.connotation));
 		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().get(0));
@@ -152,7 +144,7 @@ public class RDFBuilding {
 	}
 
 	/*private void ajouterMot_Connotation(WordConnotation word){
-		
+
 		OntologyUpYourMood.Word = m.createResource(OntologyUpYourMood.getUymWordConnotation()+word.getMot());
 		OntologyUpYourMood.connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
 
