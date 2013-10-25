@@ -1,8 +1,5 @@
 package models;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,28 +24,18 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 
 public class OntologyDescription {
-	public FileOutputStream rdf_file = null;
 	private  OntModel m=null;
 
-	private OntologyDescription(){
+	public OntologyDescription(){
 		
 		m = ModelFactory.createOntologyModel ();
 	}
 	
-	public void OwlDescription(){
-		
-		FileOutputStream fichierSortie = null;
-
-		try {
-			fichierSortie = new FileOutputStream (new File ("public/rdf/ontologyDescription.rdf"));
-		}
-		catch (FileNotFoundException ex) {
-			Logger.getLogger (Main.class.getName ()).log (Level.SEVERE, null, ex);
-		}
-		
+	public String OwlDescription(){
 		constructionOfOWLOntology();
-		m.write (fichierSortie,"RDF/XML-ABBREV");
-		
+		OutputStream out = new ByteArrayOutputStream();
+		m.write (out,"RDF/XML-ABBREV");
+		return out.toString();
 	}
 	
 	private void constructionOfOWLOntology(){
