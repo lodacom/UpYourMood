@@ -17,10 +17,10 @@ public class OntologyUpYourMood {
 	
 	// Property
 	
-	public static Property IsConnoted =null; //m.createProperty(uym+"IsConnoted");
-	public static Property IsAssociatedBy =null; //m.createProperty(uym+"IsAssociatedBy");
-	public static Property AlbumTitle=null;
-	public static Property HasListen=null;
+	public static Property IsConnoted =m.createProperty(uymWordConnotation+"IsConnoted");
+	public static Property IsAssociatedBy =m.createProperty(uymWordConnotation+"IsAssociatedBy");
+	public static Property AlbumTitle=m.createProperty(uymMusic+"AlbumTitle");
+	public static Property HasListen=m.createProperty(uymUser+"HasListen");
 			
 	// Resource
 	
