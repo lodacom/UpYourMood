@@ -3,7 +3,6 @@ package controllers;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -41,22 +40,16 @@ public class Application extends Controller {
 		if(filledForm.hasErrors()) {
 			return badRequest(index.render(maSession,Application.jam.current()));
 		} else {
-			ConnectionBase.open();
-			ResultSet res=ConnectionBase.requete("SELECT pseudo,mdp " +
-					"FROM \"UserInfo\" " +
-					"WHERE pseudo='"+filledForm.field("pseudo").value()+"'"+
-					"AND mdp='"+filledForm.field("mdp").value()+"'");
+			UserInformation ui=new UserInformation();
+			
 			try {
-				if (!res.first()){
+				if (!ui.connectionAllowed(filledForm.field("pseudo").value(), filledForm.field("mdp").value())){
 					/*
 					 *Mot de passe ou login mauvais 
 					 */
-					res.close();
-					ConnectionBase.close();
 					return redirect(routes.Application.index());
 				}else{
 					session("connected",filledForm.field("pseudo").value());
-					ConnectionBase.close();
 					maSession.setConnected(true);
 					maSession.setPseudo(filledForm.field("pseudo").value());
 					return redirect(routes.Application.index()); 

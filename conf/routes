@@ -19,3 +19,4 @@ GET		/player.html/next				controllers.ControlJamendo.nextPrevious(decision: Long
 
 GET		/profil.html				controllers.ControlProfil.index()
 POST	/profil.html				controllers.Application.connection()
+POST	/profil.html/update			controllers.ControlProfil.update()
