@@ -124,15 +124,21 @@ public class RDFBuilding {
 		//OntologyUpYourMood.HasListen=m.createProperty(OntologyUpYourMood.getUymUser()+"HasListen");
 		m.add(OntologyUpYourMood.HasListen,RDFS.subPropertyOf,FOAF.knows);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		OntologyUpYourMood.User= m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo)
 								.addProperty(OntologyUpYourMood.HasListen, OntologyUpYourMood.Music);
 =======
+=======
+>>>>>>> 8bc0d3f5f532242d347442e4c3603a096a81e946
 		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().get(0))
 								.addProperty(OntologyUpYourMood.HasListen, OntologyUpYourMood.getUymMusic()+infoMusic.get(0));
 		OntologyUpYourMood.User.addProperty(NiceTag.makesMeFeel,
 							    m.createResource()
 							    .addProperty(OntologyUpYourMood.IsAssociatedBy, "test")
 							    .addProperty(OntologyUpYourMood.IsConnoted, "test2"));
+<<<<<<< HEAD
+>>>>>>> 8bc0d3f5f532242d347442e4c3603a096a81e946
+=======
 >>>>>>> 8bc0d3f5f532242d347442e4c3603a096a81e946
         		
         /*m.createResource()
