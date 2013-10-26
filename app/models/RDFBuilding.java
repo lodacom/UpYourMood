@@ -46,10 +46,10 @@ public class RDFBuilding {
 					m.setNsPrefix("foaf", FOAF.getURI());
 					m.setNsPrefix("dc", DC.getURI());
 					m.setNsPrefix("nicetag", NiceTag.getURI());
-					m.add(OntologyUpYourMood.AlbumTitle, RDFS.subPropertyOf, DC.title);
+					m.add(OntologyUpYourMood.albumTitle, RDFS.subPropertyOf, DC.title);
 					m.add(NiceTag.makesMeFeel,RDFS.subPropertyOf,NiceTag.isRelatedTo);
-					m.add(OntologyUpYourMood.SongTitle, RDFS.subPropertyOf, DC.title);
-					m.add(OntologyUpYourMood.HasListen,RDFS.subPropertyOf,FOAF.knows);
+					m.add(OntologyUpYourMood.songTitle, RDFS.subPropertyOf, DC.title);
+					m.add(OntologyUpYourMood.hasListen,RDFS.subPropertyOf,FOAF.knows);
 
 				}
 			}
@@ -93,15 +93,15 @@ public class RDFBuilding {
 	private void ajouterMusique(List<String> infoMusic){
 
 		OntologyUpYourMood.Music = m.createResource(OntologyUpYourMood.getUymMusic()+infoMusic.get(0));
-		OntologyUpYourMood.album = m.createResource(OntologyUpYourMood.getUymMusic()+infoMusic.get(1));
-		OntologyUpYourMood.artist = m.createResource(OntologyUpYourMood.getUymMusic()+infoMusic.get(2));
-		OntologyUpYourMood.albumCover = m.createResource(infoMusic.get(3));
-		OntologyUpYourMood.title= m.createResource(OntologyUpYourMood.getUymMusic()+infoMusic.get(4));
+		OntologyUpYourMood.Album = m.createResource(OntologyUpYourMood.getUymMusic()+infoMusic.get(1));
+		OntologyUpYourMood.Artist = m.createResource(OntologyUpYourMood.getUymMusic()+infoMusic.get(2));
+		OntologyUpYourMood.AlbumCover = m.createResource(infoMusic.get(3));
+		OntologyUpYourMood.Title= m.createResource(OntologyUpYourMood.getUymMusic()+infoMusic.get(4));
 
-		m.add(OntologyUpYourMood.Music,OntologyUpYourMood.AlbumTitle,OntologyUpYourMood.album);
-		m.add(OntologyUpYourMood.Music,DC.creator,OntologyUpYourMood.artist);
-		m.add(OntologyUpYourMood.Music, FOAF.depiction,OntologyUpYourMood.albumCover);
-		m.add(OntologyUpYourMood.Music,OntologyUpYourMood.SongTitle,OntologyUpYourMood.title);
+		m.add(OntologyUpYourMood.Music,OntologyUpYourMood.albumTitle,OntologyUpYourMood.Album);
+		m.add(OntologyUpYourMood.Music,DC.creator,OntologyUpYourMood.Artist);
+		m.add(OntologyUpYourMood.Music, FOAF.depiction,OntologyUpYourMood.AlbumCover);
+		m.add(OntologyUpYourMood.Music,OntologyUpYourMood.songTitle,OntologyUpYourMood.Title);
 
 	}
 
@@ -120,14 +120,14 @@ public class RDFBuilding {
 			e.printStackTrace();
 		}
 		
-		OntologyUpYourMood.musicalExperience=m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo+"/"+"musicalExperience"+cpt);
+		OntologyUpYourMood.MusicalExperience=m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo+"/"+"musicalExperience"+cpt);
 		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo);
-		OntologyUpYourMood.musicalExperience.addProperty(NiceTag.makesMeFeel,
+		OntologyUpYourMood.MusicalExperience.addProperty(NiceTag.makesMeFeel,
 				m.createResource()
-				.addProperty(OntologyUpYourMood.IsAssociatedBy, word.getMot())
-				.addProperty(OntologyUpYourMood.IsConnoted, String.valueOf(word.getConnotation())));
-		OntologyUpYourMood.musicalExperience.addProperty(OntologyUpYourMood.HasListen, infoMusic.get(0));
-		m.add(OntologyUpYourMood.User,OntologyUpYourMood.HasMusicalExperience,OntologyUpYourMood.musicalExperience);
+				.addProperty(OntologyUpYourMood.isAssociatedBy, word.getMot())
+				.addProperty(OntologyUpYourMood.isConnoted, String.valueOf(word.getConnotation())));
+		OntologyUpYourMood.MusicalExperience.addProperty(OntologyUpYourMood.hasListen, infoMusic.get(0));
+		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
 		cpt++;
 
 	}

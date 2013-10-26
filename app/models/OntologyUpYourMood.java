@@ -17,23 +17,23 @@ public class OntologyUpYourMood {
 	
 	// Property
 	
-	public static Property IsConnoted =m.createProperty(uymWordConnotation+"IsConnoted");
-	public static Property IsAssociatedBy =m.createProperty(uymWordConnotation+"IsAssociatedBy");
-	public static Property AlbumTitle=m.createProperty(uymMusic+"AlbumTitle");
-	public static Property HasListen=m.createProperty(uymUser+"HasListen");
-	public static Property HasMusicalExperience=m.createProperty(uymUser+"HasMusicalExperience");
-	public static Property SongTitle=m.createProperty(uymMusic+"SongTitle");
+	public static Property isConnoted =m.createProperty(uymWordConnotation+"isConnoted");
+	public static Property isAssociatedBy =m.createProperty(uymWordConnotation+"isAssociatedBy");
+	public static Property albumTitle=m.createProperty(uymMusic+"albumTitle");
+	public static Property hasListen=m.createProperty(uymUser+"hasListen");
+	public static Property hasMusicalExperience=m.createProperty(uymUser+"hasMusicalExperience");
+	public static Property songTitle=m.createProperty(uymMusic+"songTitle");
 
 	// Resource
 	
 	public static Resource Word = null;
 	public static Resource Music=null;
 	public static Resource User =null;
-	public static Resource album=null; 
-	public static Resource artist=null; 
-	public static Resource albumCover=null; 
-	public static Resource title=null;
-	public static Resource musicalExperience=null;
+	public static Resource Album=null; 
+	public static Resource Artist=null; 
+	public static Resource AlbumCover=null; 
+	public static Resource Title=null;
+	public static Resource MusicalExperience=null;
 	
 	// Litteral
 	
