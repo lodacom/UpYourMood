@@ -3,7 +3,6 @@
 
 @main("Accueil",sessionValues) {
 
-	    <script language="javascript" src="@routes.Assets.at("javascripts/jquery-1.9.1.js")"></script>
 	<script language="javascript" src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
 	<script language="javascript" src="@routes.Assets.at("javascripts/word_colors.js")"></script>
 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
@@ -12,14 +11,23 @@
 	@**
 	*le slider pour la notation de la connotation
 	*@
-	@player(json) 
-	
-		<div style="width: 440px;">
+
+        <div style="width: 360px;" class="columns">
+            <br/>
+            <div align="center">   
+		@player(json)		
+            </div>
+        </div>
+	<div style="width: 440px;" class="columns">
+        <br/>
+        <br/>
+        <div>
 		<fieldset>
 		<label for="sentiment">Marquez en un mot ce que vous ressentez:</label><br/>
 		<input type="text" name="sentiment" id="sentiment" onclick="clean()"/>*<br/>
 		<label for="amount">Indiquez sur le slider la valeur de ce mot: 1(negatif) / 10(positif):</label>
-		<input type="text" id="amount" style="border: 0; color: #800080; font-weight: bold; width:20px;"/><br/>
+		<input type="text" id="amount" style="border: 0; color: #60067C; font-weight: bold; width:20px;"/>
+		<br/>
 		<div>
 			<div style="width: 10px; float:left">&nbsp;</div>
 			<div style="width: 210px; float:left">
@@ -33,21 +41,15 @@
 			</div>
 		</div>
 		</fieldset>
-		</div>
-		<br/>
-		
-		<div style="width: 440px;">
+	</div>
+	<br/>
+	<div>
 		<fieldset>
-		<label for="color">Choisissez la couleur pour associée à cette musique:</label><br/>
+		<label for="color">Cliquez sur la couleur pour associée à cette musique:</label><br/>
 		<div id="divcolors">
 		</div>
 		</fieldset>
-		</div>
-		
-		<script text="javascript">
-		
-	
-		</script>
-		
-	
+	</div>
+
+        </div>
 }

@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index()
 POST	/							controllers.Application.connection()
 POST	/felt						controllers.Application.checkWord()
 POST	/color						controllers.Application.addColor()
+GET		/menu						controllers.ControlMenu.showPage()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -15,7 +16,7 @@ GET		/inscription.html			controllers.ControlUser.index()
 POST 	/inscription.html			controllers.ControlUser.newUser()
 
 GET		/player.html				controllers.ControlJamendo.index()
-GET		/player.html/next				controllers.ControlJamendo.nextPrevious(decision: Long)
+GET		/player.html/next			controllers.ControlJamendo.nextPrevious(decision: Long)
 
 GET		/profil.html				controllers.ControlProfil.index()
 POST	/profil.html				controllers.Application.connection()

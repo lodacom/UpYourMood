@@ -1,6 +1,13 @@
 html{
 	font-family: "Times New Roman", Times, serif;
 	font-size: 12pt;
+	margin:0;
+	padding:0;
+}
+
+body{
+	margin:0;
+	padding:0;
 }
 
 #menu{
@@ -17,5 +24,34 @@ html{
 
 a{
 	text-decoration: none;
-	color:black;
+	color:#60067C;
 }
+
+.columns{
+	float:left;
+}
+
+#div_footer_menu{
+	height:115px;
+	background-color:#CACACA;
+}
+
+#div_main{
+	width: 800px; 
+	background-color:#E6E6E6;
+	left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+
+.bold{
+	color:black;
+	font-weight:bold;
+}
+
+#content{
+	height: 380px;
+}
+
