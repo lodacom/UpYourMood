@@ -22,16 +22,17 @@ public class OntologyUpYourMood {
 	public static Property AlbumTitle=m.createProperty(uymMusic+"AlbumTitle");
 	public static Property HasListen=m.createProperty(uymUser+"HasListen");
 	public static Property HasMusicalExperience=m.createProperty(uymUser+"HasMusicalExperience");
-			
+	public static Property SongTitle=m.createProperty(uymMusic+"SongTitle");
+
 	// Resource
 	
 	public static Resource Word = null;
 	public static Resource Music=null;
 	public static Resource User =null;
 	public static Resource album=null; 
-	public static Resource artiste=null; 
-	public static Resource pochette=null; 
-	public static Resource titre=null;
+	public static Resource artist=null; 
+	public static Resource albumCover=null; 
+	public static Resource title=null;
 	public static Resource musicalExperience=null;
 	
 	// Litteral
