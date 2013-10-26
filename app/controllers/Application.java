@@ -15,7 +15,7 @@ import views.html.*;
 
 public class Application extends Controller {
 
-	public static SessionValues maSession=SessionValues.getInstance();
+	public static SessionValues maSession=new SessionValues(false);
 	static Form<ConnectionUtil> connectionUser = Form.form(ConnectionUtil.class);
 	public static Jamendo jam=new Jamendo();
 	public static DBpediaQueries DBq=new DBpediaQueries();
@@ -64,6 +64,8 @@ public class Application extends Controller {
 
 	public static Result deconnection(){
 		session().remove("connected");
+		maSession.setConnected(false);
+		maSession.setPseudo(null);
 		return redirect(routes.Application.index());
 	}
 
