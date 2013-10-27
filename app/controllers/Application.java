@@ -86,10 +86,7 @@ public class Application extends Controller {
 			ReadURL ru = new ReadURL(_url);
 			Integer size = ru.getURLSize();
 			
-			String _url2 = "http://api.wordreference.com/78289/json/enfr/" + utf_encoded;
-			ReadURL ru2 = new ReadURL(_url2);
-			Integer size2 = ru2.getURLSize();
-			if (size>150 || size2>150){
+			if (size>150){
 				//ok bon mot: on peut travailler avec
 				/*Le téléchargement fonctionne et le gestionnaire aussi 
 				 * merci de ne pas décommenter ces lignes
@@ -100,13 +97,18 @@ public class Application extends Controller {
 				}else{
 					DBq.queryImage(name,"en");
 				}*/
-				RDFBuilding rdf=RDFBuilding.getInstance();
-				WordConnotation word=new WordConnotation(name, valeur);
-				UserInformation userInf= new UserInformation();
-				rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
+				addToRDF(name, valeur);
 				return ok("");
+			}else{
+				String _url2 = "http://api.wordreference.com/78289/json/enfr/" + utf_encoded;
+				ReadURL ru2 = new ReadURL(_url2);
+				Integer size2 = ru2.getURLSize();
+				if (size2>150){
+					addToRDF(name, valeur);
+					return ok("");
+				}
+				return ok("Mot incorrect");
 			}
-			return ok("Mot incorrect");
 		}
 	}
 	
@@ -116,4 +118,10 @@ public class Application extends Controller {
 		return ok("");
 	}
 	
+	private static void addToRDF(String name, Integer valeur){
+		RDFBuilding rdf=RDFBuilding.getInstance();
+		WordConnotation word=new WordConnotation(name, valeur);
+		UserInformation userInf= new UserInformation();
+		rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
+	}
 }
