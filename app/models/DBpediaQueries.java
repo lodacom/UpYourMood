@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -33,7 +32,7 @@ public class DBpediaQueries {
 				"?res rdfs:label ?label "+
 				"FILTER (regex(?label, \"^"+mot+".+\",\"i\") && lang(?label)=\""+lang+"\") " + 
 				"}" +
-				"LIMIT 5";
+				"LIMIT 2";
 		Query etape2 = QueryFactory.create(etape1);
 		query = QueryExecutionFactory.sparqlService(service, etape2.toString());
 		urlFromDBpedia();

@@ -24,9 +24,9 @@ public class Application extends Controller {
 		String user = session("connected");
 		jam.play();
 		if(user != null) {
-			return ok(index.render(maSession, jam.next()));
+			return ok(index.render(maSession, jam.current()));
 		} else {
-			return unauthorized(index.render(maSession, jam.next()));
+			return unauthorized(index.render(maSession, jam.current()));
 		}
 	}
 

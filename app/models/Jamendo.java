@@ -16,7 +16,7 @@ public class Jamendo {
 	private List<String> albums;
 	private List<String> titres;
 	private List<String> pochetteAlbums;
-	public int compteur=-1;
+	public int compteur=0;
 	/*
 	 * artist_name
 	 * album_name
