@@ -86,6 +86,10 @@ public class Application extends Controller {
 			ReadURL ru = new ReadURL(_url);
 			Integer size = ru.getURLSize();
 			
+			String _url2 = "http://api.wordreference.com/78289/json/enfr/" + utf_encoded;
+			ReadURL ru2 = new ReadURL(_url2);
+			Integer size2 = ru2.getURLSize();
+			
 			if (size>150){
 				//ok bon mot: on peut travailler avec
 				/*Le téléchargement fonctionne et le gestionnaire aussi 
@@ -100,9 +104,6 @@ public class Application extends Controller {
 				addToRDF(name, valeur);
 				return ok("");
 			}else{
-				String _url2 = "http://api.wordreference.com/78289/json/enfr/" + utf_encoded;
-				ReadURL ru2 = new ReadURL(_url2);
-				Integer size2 = ru2.getURLSize();
 				if (size2>150){
 					addToRDF(name, valeur);
 					return ok("");
