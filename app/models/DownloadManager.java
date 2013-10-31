@@ -8,11 +8,17 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DownloadManager
 {
 	public final String quoteCharacter="'";
-
+	public ArrayList<String> nomImages;
+	
+	public DownloadManager(){
+		nomImages=new ArrayList<String>();
+	}
+	
 	public void getFile(String urlFlickrWrappr,String host)
 	{
 
@@ -32,6 +38,7 @@ public class DownloadManager
 
 				input = connection.getInputStream();
 				String fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
+				nomImages.add(fileName);
 				writeFile = new FileOutputStream("public/downloadImages/"+fileName);
 				byte[] buffer = new byte[1024];
 				int read;
@@ -125,5 +132,25 @@ public class DownloadManager
 			ConnectionBase.close();
 			return false;
 		}
+	}
+	
+	public void prepareImage(ArrayList<String> urlTraversed){
+		ConnectionBase.open();
+		for (int i=0;i<urlTraversed.size();i++){
+			ResultSet res=ConnectionBase.requete("SELECT nomImage FROM \"Image\" WHERE \"urlFlickr\"="+quoteCharacter+urlTraversed.get(i)+quoteCharacter);
+			try {
+				while(!res.next()){
+					nomImages.add(res.getString("nomImage"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		ConnectionBase.close();
+	}
+	
+	public ArrayList<String> nameImageToPrint(){
+		return nomImages;
 	}
 }

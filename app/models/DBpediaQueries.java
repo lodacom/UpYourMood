@@ -22,6 +22,7 @@ public class DBpediaQueries {
 	public final String NL = System.getProperty("line.separator");
 	private QueryExecution query;
 	private ArrayList<String> urlListe;
+	public ArrayList<String> urlTraversed;
 	private DownloadManager DM=new DownloadManager();
 	
 	public void queryImage(String mot,String lang){
@@ -40,6 +41,7 @@ public class DBpediaQueries {
 
 	private void urlFromDBpedia(){
 		urlListe=new ArrayList<String>();
+		urlTraversed=new ArrayList<String>();
 		try {
 			ResultSet results = query.execSelect();
 			while(results.hasNext()) {
@@ -47,6 +49,8 @@ public class DBpediaQueries {
 				String url=sol.get("?img").toString();
 				if (!DM.hasBeenAlreadyTraversed(url)){
 					urlListe.add(url);
+				}else{
+					urlTraversed.add(url);
 				}
 			}
 		}catch(Exception e){
@@ -55,7 +59,11 @@ public class DBpediaQueries {
 		finally {
 			query.close();
 		}
-		retreiveImages();
+		if (urlListe.isEmpty()){
+			DM.prepareImage(urlTraversed);
+		}else{
+			retreiveImages();
+		}
 	}
 
 	private void retreiveImages(){
