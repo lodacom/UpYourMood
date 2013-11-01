@@ -21,24 +21,29 @@ public class HyperGraph {
 		pochettesGraph=new ArrayList<String>();
 	}
 
-	/*
-	 * struct1 [margin=0 shape=box, style=bold,filled, fillcolor=white,label=<<TABLE border="0" cellborder="0">
-<TR><TD><IMG SCALE="true" FIXEDSIZE="true" SRC="public/pochette/image_name.jpg"/></TD></TR>
-</TABLE>>]
+	/**
+	 * Premet de faire commencer le graphe
 	 */
-
 	public void startGraph(){
 		gv.addln(gv.start_graph());
 	}
 
+	/**
+	 * Permet d'ajouter la relation pochette d'album vers le mot
+	 * @param pochette la pochette en question
+	 * @param mot le mot en question
+	 */
 	public void ajouterPochetteMotRelation(String pochette,String mot){
 		getFile(pochette);
-		gv.addln("struct"+nbreStruct+"->"+mot+";");
+		gv.addln("struct"+nbreStruct+"->"+mot+";");//PS: ne pas oublier le ; dans la string
 	}
 
+	/**
+	 * Permet de finir le graphe et de fabriquer l'image résultante
+	 */
 	public void endGraph(){
 		gv.addln(gv.end_graph());
-		System.out.println(gv.getDotSource());
+		//System.out.println(gv.getDotSource());
 		String type = "jpg";
 		File out = new File("public/graph/hypergraph." + type);
 		gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
@@ -78,7 +83,7 @@ public class HyperGraph {
 						"</td></tr>"+
 						"</table>>];");
 				pochettesGraph.add(fileName);
-				
+
 				try{
 					writeFile.close();
 					input.close();

@@ -36,6 +36,10 @@ public class UpQueries {
 		hg=new HyperGraph();
 	}
 
+	/**
+	 * Fonction permettant de construire l'hyper-graphe de toutes les 
+	 * expériences musicales de tous les utilisateurs
+	 */
 	public void hyperGraph(){
 		ResultSet rs=null;
 		String req1=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
@@ -66,6 +70,11 @@ public class UpQueries {
 		}
 	}
 	
+	/**
+	 * Fonction permettant de construire l'hyper-graphe de toutes les 
+	 * expériences musicales de l'utilisateur en param
+	 * @param pseudo l'utilisateur courant
+	 */
 	public ResultSet hyperGraphOfAUser(String pseudo){
 		ResultSet rs=null;
 		String req2=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +

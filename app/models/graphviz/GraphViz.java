@@ -110,7 +110,7 @@ public class GraphViz
 	/**
 	 * Define the index in the image size array.
 	 */
-	private int currentDpiPos = 7;
+	private int currentDpiPos = 7;//correspond en gros à la taille de l'image
 
 	/**
 	 * Increase the image size (dpi).
@@ -249,9 +249,18 @@ public class GraphViz
 			Runtime rt = Runtime.getRuntime();
 
 			// patch by Mike Chenault
-			String[] args = {DOT, "-T"+type, "-Kdot","-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
+			String[] args = {DOT, "-T"+type, "-Kcirco","-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
 			Process p = rt.exec(args);
-
+			/*
+			 * différente manière de représenter le graphe:
+			 * -dot
+			 * -neato
+			 * -fdp
+			 * -sfdp
+			 * -twopi
+			 * -circo
+			 * à modifer dans -K
+			 */
 			p.waitFor();
 
 			FileInputStream in = new FileInputStream(img.getAbsolutePath());
