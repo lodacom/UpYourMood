@@ -1,9 +1,12 @@
 package models;
 
+import models.graphviz.HyperGraph;
+
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -23,14 +26,16 @@ public class UpQueries {
 	public final String prolog6 = "PREFIX wordconnotation: <http://www.upyourmood.com/wordconnotation/>";
 	public final String prolog7 = "PREFIX nicetag: <http://ns.inria.fr/nicetag/2010/09/09/voc.html#>";
 	private Model m;
-
+	private HyperGraph hg;
+	
 	public UpQueries(){
 		m = ModelFactory.createOntologyModel();
 		String fil_URL = "file:public/rdf/upyourmood.rdf";
 		m.read(fil_URL);
+		hg=new HyperGraph();
 	}
 
-	public ResultSet hyperGraph(){
+	public void hyperGraph(){
 		ResultSet rs=null;
 		String req1=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
 				"SELECT ?mot ?pochette " +
@@ -46,13 +51,21 @@ public class UpQueries {
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);
 		try{
 			rs = qexec.execSelect() ;
-			ResultSetFormatter.out(System.out, rs, query);
+			
+			hg.startGraph();
+			while(rs.hasNext()) {
+				System.out.println("coucou");
+				QuerySolution sol = (QuerySolution) rs.next();
+				String pochette=sol.get("?pochette").toString();
+				String mot=sol.get("?mot").toString();
+				hg.ajouterPochetteMotRelation(pochette, mot);
+			}
+			hg.endGraph();
 		}finally{
 			qexec.close();
 		}
-		return rs;
 	}
-
+	
 	public ResultSet hyperGraphOfAUser(String pseudo){
 		ResultSet rs=null;
 		String req2=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
