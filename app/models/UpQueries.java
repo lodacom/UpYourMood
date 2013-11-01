@@ -1,5 +1,6 @@
 package models;
 
+
 import models.graphviz.HyperGraph;
 
 import com.hp.hpl.jena.query.Query;
@@ -54,7 +55,6 @@ public class UpQueries {
 			
 			hg.startGraph();
 			while(rs.hasNext()) {
-				System.out.println("coucou");
 				QuerySolution sol = (QuerySolution) rs.next();
 				String pochette=sol.get("?pochette").toString();
 				String mot=sol.get("?mot").toString();
@@ -83,6 +83,15 @@ public class UpQueries {
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);
 		try{
 			rs = qexec.execSelect() ;
+			
+			hg.startGraph();
+			while(rs.hasNext()) {
+				QuerySolution sol = (QuerySolution) rs.next();
+				String pochette=sol.get("?pochette").toString();
+				String mot=sol.get("?mot").toString();
+				hg.ajouterPochetteMotRelation(pochette, mot);
+			}
+			hg.endGraph();
 		}finally{
 			qexec.close();
 		}

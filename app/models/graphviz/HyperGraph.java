@@ -12,13 +12,15 @@ import java.util.ArrayList;
 
 public class HyperGraph {
 
-	public GraphViz gv;
-	public ArrayList<String> pochettes;
-	public long nbreStruct=0;
+	private GraphViz gv;
+	private ArrayList<String> pochettes;
+	private ArrayList<String> pochettesGraph;
+	private long nbreStruct=0;
 	
 	public HyperGraph(){
 		gv = new GraphViz();
 		pochettes=new ArrayList<String>();
+		pochettesGraph=new ArrayList<String>();
 	}
 
 	/*
@@ -32,7 +34,6 @@ public class HyperGraph {
 	}
 	
 	public void ajouterPochetteMotRelation(String pochette,String mot){
-		System.out.println(pochette+"->"+mot);
 		getFile(pochette);
 		gv.addln("struct"+nbreStruct+"->"+mot+";");
 	}
@@ -76,7 +77,7 @@ public class HyperGraph {
 				
 				gv.addln("struct"+nbreStruct+" [margin=0 shape=box, style=filled, fillcolor=white, color=red, label=" +
 						"<<table border=\"0\" cellborder=\"0\">"+
-						"<tr><td><img scal=\"true\" fixedsize=\"true\" width=\"70\" height=\"100\" src=\"public/pochette/"+fileName+"\"/>" +
+						"<tr><td fixedsize=\"true\" width=\"50\" height=\"80\"><img scale=\"true\" src=\"public/pochette/"+fileName+"\"/>" +
 						"</td></tr>"+
 						"</table>>];");
 			}
@@ -97,11 +98,14 @@ public class HyperGraph {
 			try {
 				url = new URL(host);
 				String fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
-				gv.addln("struct"+nbreStruct+" [margin=0 shape=box, style=filled, fillcolor=white, color=red, label=" +
-						"<<table border=\"0\" cellborder=\"0\">"+
-						"<tr><td><img scal=\"true\" fixedsize=\"true\" width=\"70\" height=\"100\" src=\"public/pochette/"+fileName+"\"/>" +
-						"</td></tr>"+
-						"</table>>];");
+				if (!pochettesGraph.contains(fileName)){
+					gv.addln("struct"+nbreStruct+" [margin=0 shape=box, style=filled, fillcolor=white, color=red, label=" +
+							"<<table border=\"0\" cellborder=\"0\">"+
+							"<tr><td fixedsize=\"true\" width=\"70\" height=\"100\"><img scale=\"true\" src=\"public/pochette/"+fileName+"\"/>" +
+							"</td></tr>"+
+							"</table>>];");
+					pochettesGraph.add(fileName);
+				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
