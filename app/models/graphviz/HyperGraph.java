@@ -45,8 +45,9 @@ public class HyperGraph {
 		gv.addln(gv.end_graph());
 		//System.out.println(gv.getDotSource());
 		String type = "jpg";
+		String representationType="dot";
 		File out = new File("public/graph/hypergraph." + type);
-		gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
+		gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type , representationType), out );
 	}
 
 	private void getFile(String host)

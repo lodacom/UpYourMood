@@ -53,8 +53,9 @@ import java.util.Properties;
  *    System.out.println(gv.getDotSource());
  *
  *    String type = "gif";
+ *    String representationType="dot";
  *    File out = new File("out." + type);   // out.gif in this example
- *    gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
+ *    gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type, representationType ), out );
  * </pre>
  * </dd>
  *
@@ -76,7 +77,7 @@ public class GraphViz
 	 * Detects the client's operating system.
 	 */
 	private final static String osName = System.getProperty("os.name").replaceAll("\\s","");
-	
+
 	/**
 	 * Load the config.properties file.
 	 */
@@ -92,13 +93,13 @@ public class GraphViz
 	/**
 	 * The dir. where temporary files will be created.
 	 */
-  private static String TEMP_DIR = configFile.getProperty("tempDirFor" + osName);
-			
+	private static String TEMP_DIR = configFile.getProperty("tempDirFor" + osName);
+
 	/**
 	 * Where is your dot program located? It will be called externally.
 	 */
-  private static String DOT = configFile.getProperty("dotFor" + osName);
-	
+	private static String DOT = configFile.getProperty("dotFor" + osName);
+
 	/**
 	 * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.
 	 * Lower values 10% lower each.
@@ -144,7 +145,7 @@ public class GraphViz
 	 * a graph.
 	 */
 	public GraphViz() {
-		
+
 	}
 
 	/**
@@ -184,9 +185,19 @@ public class GraphViz
 	 * Returns the graph as an image in binary format.
 	 * @param dot_source Source of the graph to be drawn.
 	 * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
+	 * @param representationType Type of how you want to represent the graph:
+	 * <ul>
+	 * 	<li>dot</li>
+	 * 	<li>neato</li>
+	 * 	<li>fdp</li>
+	 * 	<li>sfdp</li>
+	 * 	<li>twopi</li>
+	 * 	<li>circo</li>
+	 * </ul>
+	 * @see http://www.graphviz.org under the Roadmap title
 	 * @return A byte array containing the image of the graph.
 	 */
-	public byte[] getGraph(String dot_source, String type)
+	public byte[] getGraph(String dot_source, String type, String representationType)
 	{
 		File dot;
 		byte[] img_stream = null;
@@ -195,7 +206,7 @@ public class GraphViz
 			dot = writeDotSourceToFile(dot_source);
 			if (dot != null)
 			{
-				img_stream = get_img_stream(dot, type);
+				img_stream = get_img_stream(dot, type, representationType);
 				if (dot.delete() == false) 
 					System.err.println("Warning: " + dot.getAbsolutePath() + " could not be deleted!");
 				return img_stream;
@@ -237,9 +248,19 @@ public class GraphViz
 	 * binary format.
 	 * @param dot Source of the graph (in dot language).
 	 * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
+	 * @param representationType Type of how you want to represent the graph:
+	 * <ul>
+	 * 	<li>dot</li>
+	 * 	<li>neato</li>
+	 * 	<li>fdp</li>
+	 * 	<li>sfdp</li>
+	 * 	<li>twopi</li>
+	 * 	<li>circo</li>
+	 * </ul>
+	 * @see http://www.graphviz.org under the Roadmap title
 	 * @return The image of the graph in .gif format.
 	 */
-	private byte[] get_img_stream(File dot, String type)
+	private byte[] get_img_stream(File dot, String type, String representationType)
 	{
 		File img;
 		byte[] img_stream = null;
@@ -249,18 +270,8 @@ public class GraphViz
 			Runtime rt = Runtime.getRuntime();
 
 			// patch by Mike Chenault
-			String[] args = {DOT, "-T"+type, "-Kcirco","-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
+			String[] args = {DOT, "-T"+type, "-K"+representationType, "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
 			Process p = rt.exec(args);
-			/*
-			 * différente manière de représenter le graphe:
-			 * -dot
-			 * -neato
-			 * -fdp
-			 * -sfdp
-			 * -twopi
-			 * -circo
-			 * à modifer dans -K
-			 */
 			p.waitFor();
 
 			FileInputStream in = new FileInputStream(img.getAbsolutePath());
@@ -336,7 +347,7 @@ public class GraphViz
 	 * Returns a string that is used to end a graph.
 	 * @return A string to close a graph.
 	 */
-    public String end_subgraph() {
+	public String end_subgraph() {
 		return "}";
 	}
 
