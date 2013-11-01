@@ -23,3 +23,5 @@ POST	/profil.html				controllers.Application.connection()
 POST	/profil.html/update			controllers.ControlProfil.update()
 
 GET 	/ontology.html				controllers.ControlOntology.index()
+
+GET		/hypergraph.html			controllers.ControlHyperGraph.index()
