@@ -40,6 +40,7 @@ public class RDFBuilding {
 			m = ModelFactory.createDefaultModel();
 		}
 		cpt=Integer.parseInt(configFile.getProperty("compteur"));
+		cpt++;
 	}
 
 	public final static RDFBuilding getInstance() {
@@ -139,7 +140,16 @@ public class RDFBuilding {
 		OntologyUpYourMood.MusicalExperience.addProperty(OntologyUpYourMood.hasListen, infoMusic.get(0));
 		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
 		cpt++;
-		configFile.setProperty("compteur", String.valueOf(cpt));
+		try {
+			FileOutputStream fichier=new FileOutputStream(cfgProp);
+			String compteur="compteur "+cpt;
+			fichier.write(compteur.getBytes());
+			fichier.flush();
+			fichier.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*private void ajouterMot_Connotation(WordConnotation word){
