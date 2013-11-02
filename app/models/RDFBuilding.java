@@ -3,6 +3,7 @@ package models;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 import org.h2.command.ddl.CreateRole;
 import org.openjena.riot.RiotException;
@@ -23,13 +24,22 @@ public class RDFBuilding {
 	private static final String rdf_file = "public/rdf/upyourmood.rdf";
 	private static Model m=null;
 	public static int cpt = 0;
-
+	private final static String cfgProp = "app/models/compteur.properties";
+	private final static Properties configFile = new Properties() {
+		private final static long serialVersionUID = 1L; {
+			try {
+				load(new FileInputStream(cfgProp));
+			} catch (Exception e) {}
+		}
+	};
+	
 	private RDFBuilding(){
 		try{
 			m=FileManager.get().loadModel(rdf_file);
 		}catch(RiotException e){
 			m = ModelFactory.createDefaultModel();
 		}
+		cpt=Integer.parseInt(configFile.getProperty("compteur"));
 	}
 
 	public final static RDFBuilding getInstance() {
@@ -129,7 +139,7 @@ public class RDFBuilding {
 		OntologyUpYourMood.MusicalExperience.addProperty(OntologyUpYourMood.hasListen, infoMusic.get(0));
 		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
 		cpt++;
-
+		configFile.setProperty("compteur", String.valueOf(cpt));
 	}
 
 	/*private void ajouterMot_Connotation(WordConnotation word){
