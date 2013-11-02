@@ -75,7 +75,7 @@ public class UpQueries {
 	 * expériences musicales de l'utilisateur en param
 	 * @param pseudo l'utilisateur courant
 	 */
-	public ResultSet hyperGraphOfAUser(String pseudo){
+	public void hyperGraphOfAUser(String pseudo){
 		ResultSet rs=null;
 		String req2=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
 				"SELECT ?mot ?pochette " +
@@ -104,7 +104,19 @@ public class UpQueries {
 		}finally{
 			qexec.close();
 		}
-		return rs;
+	}
+	
+	public void userQueriesFromEndPoint(String user_query){
+		ResultSet rs=null;
+		String req1=prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL +
+				prolog5 + NL + prolog6 + NL + prolog7 + NL + user_query;
+		Query query = QueryFactory.create(req1);
+		QueryExecution qexec = QueryExecutionFactory.create(query, m);
+		try{
+			rs = qexec.execSelect() ;
+		}finally{
+			qexec.close();
+		}
 	}
 	
 	public void truc(){

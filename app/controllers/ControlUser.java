@@ -1,7 +1,6 @@
 package controllers;
 
 import java.sql.SQLException;
-
 import models.User;
 import models.UserInformation;
 import play.data.Form;
