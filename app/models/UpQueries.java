@@ -62,6 +62,7 @@ public class UpQueries {
 				QuerySolution sol = (QuerySolution) rs.next();
 				String pochette=sol.get("?pochette").toString();
 				String mot=sol.get("?mot").toString();
+				//System.out.println(pochette+"->"+mot);
 				hg.ajouterPochetteMotRelation(pochette, mot);
 			}
 			hg.endGraph();

@@ -13,12 +13,12 @@ import java.util.ArrayList;
 public class HyperGraph {
 
 	private GraphViz gv;
-	private ArrayList<String> pochettesGraph;
+	private ArrayList<String> hosts;
 	private long nbreStruct=0;
 
 	public HyperGraph(){
 		gv = new GraphViz();
-		pochettesGraph=new ArrayList<String>();
+		hosts=new ArrayList<String>();
 	}
 
 	/**
@@ -57,20 +57,21 @@ public class HyperGraph {
 		FileOutputStream writeFile = null;
 		try
 		{
-			URL url = new URL(host);
-			URLConnection connection = url.openConnection();
-			int fileLength = connection.getContentLength();
+			if (!hosts.contains(host)){
+				hosts.add(host);
+				URL url = new URL(host);
+				URLConnection connection = url.openConnection();
+				int fileLength = connection.getContentLength();
 
-			if (fileLength == -1){
-				System.out.println("Invalid URL or file.");
-			}
+				if (fileLength == -1){
+					System.out.println("Invalid URL or file.");
+				}
 
-			input = connection.getInputStream();
-			String fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
-			File pochette = new File("public/pochette/"+fileName);
-			if (!pochette.exists()){
+				input = connection.getInputStream();
+				String fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
+
 				nbreStruct++;
-				writeFile = new FileOutputStream("public/pochette/"+fileName);
+				writeFile = new FileOutputStream("public/pochette/"+nbreStruct+fileName);
 				byte[] buffer = new byte[1024];
 				int read;
 
@@ -80,10 +81,9 @@ public class HyperGraph {
 
 				gv.addln("struct"+nbreStruct+" [margin=0 shape=box, style=filled, fillcolor=white, color=red, label=" +
 						"<<table border=\"0\" cellborder=\"0\">"+
-						"<tr><td fixedsize=\"true\" width=\"50\" height=\"80\"><img scale=\"true\" src=\"public/pochette/"+fileName+"\"/>" +
+						"<tr><td fixedsize=\"true\" width=\"50\" height=\"80\"><img scale=\"true\" src=\"public/pochette/"+nbreStruct+fileName+"\"/>" +
 						"</td></tr>"+
 						"</table>>];");
-				pochettesGraph.add(fileName);
 
 				try{
 					writeFile.close();
@@ -91,16 +91,6 @@ public class HyperGraph {
 				}
 				catch (IOException e){
 
-				}
-			}else{
-				if (!pochettesGraph.contains(fileName)){
-					nbreStruct++;
-					gv.addln("struct"+nbreStruct+" [margin=0 shape=box, style=filled, fillcolor=white, color=red, label=" +
-							"<<table border=\"0\" cellborder=\"0\">"+
-							"<tr><td fixedsize=\"true\" width=\"50\" height=\"80\"><img scale=\"true\" src=\"public/pochette/"+fileName+"\"/>" +
-							"</td></tr>"+
-							"</table>>];");
-					pochettesGraph.add(fileName);
 				}
 			}
 		}
