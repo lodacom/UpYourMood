@@ -26,4 +26,8 @@ public class ControlMenu extends Controller {
 			 }
 	}
 	
+	public static Result getInscriptForm(){
+		return ok(inscription.render());
+	}
+	
 }

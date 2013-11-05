@@ -13,7 +13,8 @@ GET		/menu						controllers.ControlMenu.showPage()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET		/inscription.html			controllers.ControlUser.index()
-POST 	/inscription.html			controllers.ControlUser.newUser()
+POST 	/inscription				controllers.ControlUser.newUser()
+GET		/inscription				controllers.ControlMenu.getInscriptForm()
 
 GET		/player.html				controllers.ControlJamendo.index()
 GET		/player.html/next			controllers.ControlJamendo.nextPrevious(decision: Long)

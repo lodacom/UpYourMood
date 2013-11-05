@@ -37,7 +37,7 @@ a{
 }
 
 #div_main{
-	width: 800px; 
+	width: 900px; 
 	background-color:#E6E6E6;
 	left: 0;
     right: 0;
@@ -52,6 +52,6 @@ a{
 }
 
 #content{
-	height: 380px;
+	height: 400px;
 }
 
