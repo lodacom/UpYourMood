@@ -8,29 +8,17 @@
     xmlns:user="http://www.upyourmood.com/user/"
     xmlns:music="http://www.upyourmood.com/music/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/907963">
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Mhz"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/J.Blasco"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s107/107419/covers/1.200.jpg"/>
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/k10 Original Mix"/>
+  <rdf:Description rdf:about="http://ns.inria.fr/nicetag/2010/09/09/voc.html#makesMeFeel">
+    <rdfs:subPropertyOf rdf:resource="http://ns.inria.fr/nicetag/2010/09/09/voc.html#isRelatedTo"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/music/songTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/music/907961">
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/escape"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/Djmotekno"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s107/107366/covers/1.200.jpg"/>
     <music:songTitle rdf:resource="http://www.upyourmood.com/music/escape"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ns.inria.fr/nicetag/2010/09/09/voc.html#makesMeFeel">
-    <rdfs:subPropertyOf rdf:resource="http://ns.inria.fr/nicetag/2010/09/09/voc.html#isRelatedTo"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/908018">
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/I See"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s107/107871/covers/1.200.jpg"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/Asche"/>
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Wave"/>
+    <foaf:depiction rdf:resource="http://imgjam.com/albums/s107/107366/covers/1.200.jpg"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/Djmotekno"/>
+    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/escape"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/hasListen">
     <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
@@ -38,93 +26,53 @@
   <rdf:Description rdf:about="http://www.upyourmood.com/music/albumTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
+  <rdf:Description rdf:about="http://www.upyourmood.com/user/loda">
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience10">
-        <user:hasListen>908018</user:hasListen>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/loda/musicalExperience4">
+        <user:hasListen>907961</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>transformation</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>basse</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience9">
-        <user:hasListen>908018</user:hasListen>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/loda/musicalExperience3">
+        <user:hasListen>907961</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
           <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>techno</wordconnotation:isAssociatedBy>
+          <wordconnotation:isAssociatedBy>électrique</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience2">
+        <user:hasListen>907961</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isConnoted>5.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>vibration</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
       <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
+        <user:hasListen>907961</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isConnoted>2.0</wordconnotation:isConnoted>
           <wordconnotation:isAssociatedBy>vibes</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>5.0</wordconnotation:isConnoted>
         </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience0">
         <user:hasListen>907961</user:hasListen>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience2">
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>techno</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>4.0</wordconnotation:isConnoted>
-        </nicetag:makesMeFeel>
-        <user:hasListen>907961</user:hasListen>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience3">
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>vibration</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>4.0</wordconnotation:isConnoted>
-        </nicetag:makesMeFeel>
-        <user:hasListen>907961</user:hasListen>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience4">
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>mix</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>4.0</wordconnotation:isConnoted>
-        </nicetag:makesMeFeel>
-        <user:hasListen>907963</user:hasListen>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience5">
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>techno</wordconnotation:isAssociatedBy>
           <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>techno</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
-        <user:hasListen>907963</user:hasListen>
       </rdf:Description>
     </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience6">
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>coeur</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>3.0</wordconnotation:isConnoted>
-        </nicetag:makesMeFeel>
-        <user:hasListen>907963</user:hasListen>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience7">
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>rock</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>8.0</wordconnotation:isConnoted>
-        </nicetag:makesMeFeel>
-        <user:hasListen>907984</user:hasListen>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/907984">
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Smiley"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/We Is Shore Dedicated"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s107/107370/covers/1.200.jpg"/>
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Two Men From NJ "/>
   </rdf:Description>
 </rdf:RDF>

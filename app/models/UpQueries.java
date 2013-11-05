@@ -1,6 +1,9 @@
 package models;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.graphviz.HyperGraph;
 
 import com.hp.hpl.jena.query.Query;
@@ -107,17 +110,34 @@ public class UpQueries {
 		}
 	}
 	
-	public void userQueriesFromEndPoint(String user_query){
+	public EndPointQueries userQueriesFromEndPoint(String user_query){
 		ResultSet rs=null;
 		String req1=prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL +
 				prolog5 + NL + prolog6 + NL + prolog7 + NL + user_query;
 		Query query = QueryFactory.create(req1);
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);
+		ArrayList<ArrayList<String>> renvoie=new ArrayList<ArrayList<String>>();
+		ArrayList<String> intermed=new ArrayList<String>();
 		try{
 			rs = qexec.execSelect() ;
+			String req=user_query.replaceAll("SELECT |select ", "");
+			req=req.replaceAll("WHERE .*|where .*", "");
+			String[] recup=req.split("\\s");
+			while(rs.hasNext()){
+				QuerySolution sol = (QuerySolution) rs.next();
+				for (int i=0;i<recup.length;i++){
+					String rec=sol.get(recup[i]).toString();
+					intermed.add(rec);
+				}
+				renvoie.add(intermed);
+			}
+			
 		}finally{
 			qexec.close();
 		}
+		EndPointQueries epq=new EndPointQueries();
+		epq.response=renvoie;
+		return epq;
 	}
 	
 	public void truc(){

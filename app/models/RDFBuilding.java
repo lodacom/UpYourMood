@@ -40,7 +40,6 @@ public class RDFBuilding {
 			m = ModelFactory.createDefaultModel();
 		}
 		cpt=Integer.parseInt(configFile.getProperty("compteur"));
-		cpt++;
 	}
 
 	public final static RDFBuilding getInstance() {
