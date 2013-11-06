@@ -44,9 +44,11 @@ function CreateUser(){
 				dataType: "text",
 				success: function (msg) {
 	                if (msg=="OK"){
-	                	$("#content").empty();
-						$("#content").append("<br/> Votre inscription a été validée avec succès. Maintenant vous pouvez rentrez dans l'application!");
-	                }else{
+	                	//$("#content").empty();
+						//$("#content").append("<br/> Votre inscription a été validée avec succès. Maintenant vous pouvez rentrez dans l'application!");
+						var adresseActuelle = window.location;
+  						window.location = adresseActuelle;
+					}else{
 	                	$("#error").text("*"+msg);
 	                }
 	            }

@@ -3,6 +3,7 @@ package controllers;
 import java.sql.SQLException;
 import java.util.Map;
 
+import models.SessionValues;
 import models.User;
 import models.UserInformation;
 import play.data.Form;
@@ -31,6 +32,10 @@ public class ControlUser extends Controller {
 			if (!ui.pseudoAlreadyExists(pseudo)){
 				User u = new User(pseudo, mdp, nom, prenom, email);
 				User.create(u);
+				session("connected",pseudo);
+				Application.maSession.setConnected(true);
+				Application.maSession.setPseudo(pseudo);
+				 
 			}else{
 				return ok("Cet utilisateur exist déjà! ");
 			}
