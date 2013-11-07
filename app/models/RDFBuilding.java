@@ -24,22 +24,28 @@ public class RDFBuilding {
 	private static final String rdf_file = "public/rdf/upyourmood.rdf";
 	private static Model m=null;
 	public static int cpt = 0;
-	private final static String cfgProp = "app/models/compteur.properties";
-	private final static Properties configFile = new Properties() {
-		private final static long serialVersionUID = 1L; {
-			try {
-				load(new FileInputStream(cfgProp));
-			} catch (Exception e) {}
-		}
-	};
-	
+	private final static String cfgProp = "app/models/compteur.txt";
+
 	private RDFBuilding(){
 		try{
 			m=FileManager.get().loadModel(rdf_file);
 		}catch(RiotException e){
 			m = ModelFactory.createDefaultModel();
 		}
-		cpt=Integer.parseInt(configFile.getProperty("compteur"));
+		String chaine="";
+		try{
+			InputStream ips=new FileInputStream(cfgProp); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			while ((ligne=br.readLine())!=null){
+				chaine+=ligne;
+			}
+			br.close();
+		}catch(IOException ex){
+			
+		}
+		cpt=Integer.parseInt(chaine.split("\\s")[1]);
 	}
 
 	public final static RDFBuilding getInstance() {
@@ -77,7 +83,7 @@ public class RDFBuilding {
 		//ajouterMot_Connotation(word);
 
 		//............................................................................................
-		
+
 		//............................................................................................
 		FileOutputStream outStream;
 		try {
@@ -129,7 +135,7 @@ public class RDFBuilding {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		OntologyUpYourMood.MusicalExperience=m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo+"/"+"musicalExperience"+cpt);
 		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+userInfo.getInfoUser().pseudo);
 		OntologyUpYourMood.MusicalExperience.addProperty(NiceTag.makesMeFeel,
