@@ -92,13 +92,17 @@ public class OntologyDescription {
 		 ****************************************************************************************************************
 		 ****************************************************************************************************************/
 
+		// foaf:knows
+		ObjectProperty foafKnows = m.createObjectProperty(FOAF.getURI()+"knows");
+		
 		// hasListen
 		ObjectProperty hasListen = m.createObjectProperty(OntologyUpYourMood.getUymUser()+"hasListen");
 		hasListen.addRange(MusicClass);
 		hasListen.addDomain(UserClass);
 		hasListen.addLabel("A User has listen a music", "en");
 		hasListen.addComment("Link a Music resource to a User", "en");
-
+		hasListen.addSuperProperty(foafKnows);
+		
 		// isConnoted
 		ObjectProperty isConnoted = m.createObjectProperty(OntologyUpYourMood.getUymWordConnotation()+"isConnoted");
 		isConnoted.addRange(WordConnotationClass);
@@ -112,21 +116,29 @@ public class OntologyDescription {
 		isAssociatedBy.addDomain(MusicClass);
 		isAssociatedBy.addLabel("A word is associate to a Music by a User", "en");
 		isAssociatedBy.addComment("??", "en");
-
+		
+		// isRelatedTo
+		ObjectProperty isRelatedTo = m.createObjectProperty(NiceTag.getURI()+"isRelatedTo");
+		
 		// makesMeFeel
 		ObjectProperty makesMeFeel = m.createObjectProperty(OntologyUpYourMood.getUymMusic()+"makesMeFeel");
 		makesMeFeel.addRange(WordConnotationClass);
 		makesMeFeel.addDomain(MusicClass);
 		makesMeFeel.addLabel("a Music provokes emotions to a User", "en");
 		makesMeFeel.addComment("Link a User Resource to a Music", "en");
-
+		makesMeFeel.addSuperProperty(isRelatedTo);
+		
+		// dc:title
+		ObjectProperty dcTitle = m.createObjectProperty(DC.getURI()+"title");
+		
 		// albumTitle
 		ObjectProperty albumTitle = m.createObjectProperty(OntologyUpYourMood.getUymMusic()+"albumTitle");
 		albumTitle.addRange(AlbumClass);
 		albumTitle.addDomain(MusicClass);
 		albumTitle.addLabel("a Music is in an Album", "en");
 		albumTitle.addComment("Link a Album Resource to a Music", "en");
-
+		albumTitle.addSuperProperty(dcTitle);
+		
 		// hasMusicalExperience
 		ObjectProperty hasMusicalExperience = m.createObjectProperty(OntologyUpYourMood.getUymUser()+"hasMusicalExperience");
 		hasMusicalExperience.addRange(MusicalExperienceClass);
@@ -140,6 +152,7 @@ public class OntologyDescription {
 		songTitle.addDomain(MusicClass);
 		songTitle.addLabel("A Music has a Title", "en");
 		songTitle.addComment("Link a Title Resource to a Music", "en");
+		songTitle.addSuperProperty(dcTitle);
 		
 		// DC.creator
 		ObjectProperty creator = m.createObjectProperty(DC.getURI()+"creator");
