@@ -3,12 +3,8 @@ package models;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
-
 import org.h2.command.ddl.CreateRole;
 import org.openjena.riot.RiotException;
-
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.util.FileManager;
