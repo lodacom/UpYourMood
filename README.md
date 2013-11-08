@@ -12,13 +12,17 @@ Détails techniques pour les développeurs
 ----------------------------------------
 Vous êtes développeurs, et vous voulez tester et/ou améliorer notre application chez vous?
 Pour cela rien de plus simple:
+
 1. Tout d'abord si ce n'est déjà fait installer la base de données [Postgres](http://www.postgresql.org/download/),
 nous vous conseillons fortement de prendre la version "Graphical" pour votre système d'exploitation.
 Lors de l'installation de la BD, si vous effectuez votre propre configuration, pensez à changer le fichier
 de configuration "application.conf".
+
 2. Ensuite créez une nouvelle base de données appelée "UpYourMood_DB" (là encore vous pouvez l'appeler
 autrement, mais ce sera à vous de modifier le fichier de configuration.
+
 3. Dans cette BD vous devez effectuer les créations suivantes:
+
 	3.1. CREATE TABLE "User"
 (
   pseudo character varying(255) NOT NULL,
@@ -31,6 +35,7 @@ autrement, mais ce sera à vous de modifier le fichier de configuration.
 WITH (
   OIDS=FALSE
 );
+
 	3.2. CREATE TABLE "Image"
 (
   "urlFlickr" character varying(255),
@@ -41,6 +46,7 @@ WITH (
 WITH (
   OIDS=FALSE
 ); 
+
 	3.3. CREATE OR REPLACE VIEW "UserInfo" AS 
  SELECT "User".pseudo, 
     "User".mdp, 
@@ -48,12 +54,15 @@ WITH (
     "User".prenom, 
     "User".email
    FROM "User";
+   
    3.4. CREATE OR REPLACE VIEW "UrlImage" AS 
  SELECT "Image"."urlImage"
    FROM "Image";
+   
    3.5. CREATE OR REPLACE VIEW "UrlFlickr" AS 
  SELECT "Image"."urlFlickr"
    FROM "Image";
+   
  4. Vous êtes sous Mac ou sur Linux? Félicitation, vous pouvez tester toute notre application.
  En effet, vous devez installer le logiciel [Graphviz](http://www.graphviz.org/Download..php), 
  la "current stable release" (correspondant au GUI). Pour l'instant nous n'avons pas encore
