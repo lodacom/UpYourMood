@@ -18,10 +18,10 @@ public class ControlEndPointSparql extends Controller{
 		return ok(endpoint_sparql.render());
 	}
 	
-	public static Result query(){
-		final Map<String, String[]> values = request().body().asFormUrlEncoded();
+	public static Result query(String query,String format){
+		/*final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		String query=values.get("query")[0];
-		String format=values.get("format")[0];
+		String format=values.get("format")[0];*/
 		/*Form<EndPointQueries> filledForm = edqForm.bindFromRequest();
 		if (filledForm.hasErrors()){
 			return ok(endpoint_sparql.render());

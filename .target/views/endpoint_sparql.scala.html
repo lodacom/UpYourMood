@@ -5,7 +5,7 @@
 	<a href="#">Namespace prefixes</a>|
 	<a href="#">Inference rules</a>
 </div>
-<form method="post" action="@routes.ControlEndPointSparql.query()">
+<form method="get" action="/sparql/response">
 	<fieldset>
 		<label for="query">Query Text</label><br>
 		<textarea rows="18" cols="80" name="query" id="query">select distinct * where {?s rdfs:label ?l} LIMIT 100

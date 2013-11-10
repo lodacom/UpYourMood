@@ -113,7 +113,7 @@ public class UpQueries {
 	
 	public EndPointQueries userQueriesFromEndPoint(String user_query){
 		/*
-		 * SELECT ?user WHERE { ?user user:hasMusicalExperience ?experi }
+		 * SELECT DISTINCT ?user WHERE { ?user user:hasMusicalExperience ?experi }
 		 */
 		ResultSet rs=null;
 		String req1=prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL +
