@@ -1,4 +1,23 @@
 @(param: EndPointQueries)
-<table>
-
-</table>
+<html>
+	<head>
+        <title>EndPointResponse</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    </head>
+	<table>
+		<tr>
+		@for(head <- param.headOfArray){
+			<th>
+			@head
+			</th>
+		}
+		</tr>
+		@for(tab <- param.colonne()){
+			<tr>
+				<td>
+				@tab
+				</td>
+			</tr>
+		}
+	</table>
+</html>

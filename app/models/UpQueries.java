@@ -15,6 +15,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.sparql.function.library.e;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.vocabulary.DC;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -111,6 +112,9 @@ public class UpQueries {
 	}
 	
 	public EndPointQueries userQueriesFromEndPoint(String user_query){
+		/*
+		 * SELECT ?user WHERE { ?user user:hasMusicalExperience ?experi }
+		 */
 		ResultSet rs=null;
 		String req1=prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL +
 				prolog5 + NL + prolog6 + NL + prolog7 + NL + user_query;
@@ -118,11 +122,13 @@ public class UpQueries {
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);
 		ArrayList<ArrayList<String>> renvoie=new ArrayList<ArrayList<String>>();
 		ArrayList<String> intermed=new ArrayList<String>();
+		//System.out.println(user_query);
+		String[] recup;
 		try{
 			rs = qexec.execSelect() ;
-			String req=user_query.replaceAll("SELECT |select ", "");
-			req=req.replaceAll("WHERE .*|where .*", "");
-			String[] recup=req.split("\\s");
+			String req=user_query.replaceAll("SELECT DISTINCT |SELECT REDUCED |SELECT ", "");
+			req=req.replaceAll("WHERE .*", "");
+			recup=req.split("\\s");
 			while(rs.hasNext()){
 				QuerySolution sol = (QuerySolution) rs.next();
 				for (int i=0;i<recup.length;i++){
@@ -137,6 +143,10 @@ public class UpQueries {
 		}
 		EndPointQueries epq=new EndPointQueries();
 		epq.response=renvoie;
+		epq.headOfArray=new ArrayList<String>();
+		for (int i=0;i<recup.length;i++){
+			epq.headOfArray.add(recup[i].substring(1));
+		}
 		return epq;
 	}
 	

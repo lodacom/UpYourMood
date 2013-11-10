@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import models.EndPointQueries;
 import models.UpQueries;
@@ -18,24 +19,29 @@ public class ControlEndPointSparql extends Controller{
 	}
 	
 	public static Result query(){
-		Form<EndPointQueries> filledForm = edqForm.bindFromRequest();
+		final Map<String, String[]> values = request().body().asFormUrlEncoded();
+		String query=values.get("query")[0];
+		String format=values.get("format")[0];
+		/*Form<EndPointQueries> filledForm = edqForm.bindFromRequest();
 		if (filledForm.hasErrors()){
 			return ok(endpoint_sparql.render());
-		}else{
+		}else{*/
 			UpQueries uq=new UpQueries();
-			EndPointQueries epq=uq.userQueriesFromEndPoint(filledForm.field("query").value());
+			//String query=filledForm.field("query").value();
+			//String format=filledForm.field("format").value();
+			//System.out.println(query);
+			EndPointQueries epq=uq.userQueriesFromEndPoint(query);
 			
-			if(filledForm.field("format").value().equals("auto") || 
-					filledForm.field("format").value().equals("text/html")){
+			if(format.equals("auto") || format.equals("text/html")){
 				return ok(endpoint_response.render(epq));
 			}
-			if(filledForm.field("format").value().contains("json")){
+			if(format.contains("json")){
 				
 			}
-			if(filledForm.field("format").value().contains("rdf+xml")){
+			if(format.contains("rdf+xml")){
 				
 			}
 			return ok(endpoint_sparql.render());
-		}
+		//}
 	}
 }
