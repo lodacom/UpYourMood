@@ -1,0 +1,55 @@
+@(sessionValues: SessionValues, json: String)
+
+
+@main("Accueil",sessionValues) {
+
+	<script language="javascript" src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
+	<script language="javascript" src="@routes.Assets.at("javascripts/word_colors.js")"></script>
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
+   
+    
+	@**
+	*le slider pour la notation de la connotation
+	*@
+
+        <div style="width: 360px;" class="columns">
+            <br/>
+            <div align="center">   
+		@player(json)		
+            </div>
+        </div>
+	<div style="width: 440px;" class="columns">
+        <br/>
+        <br/>
+        <div>
+		<fieldset>
+		<label for="sentiment">Marquez en un mot ce que vous ressentez:</label><br/>
+		<input type="text" name="sentiment" id="sentiment" onclick="clean()"/>*<br/>
+		<label for="amount">Indiquez sur le slider la valeur de ce mot: 1(negatif) / 10(positif):</label>
+		<input type="text" id="amount" style="border: 0; color: #60067C; font-weight: bold; width:20px;"/>
+		<br/>
+		<div>
+			<div style="width: 10px; float:left">&nbsp;</div>
+			<div style="width: 210px; float:left">
+   				<div id="slider-range-max" style="width:200px; top:3px;"></div>
+			</div>
+			<div style="width: 10px; float:left">
+   				*
+			</div>
+			<div style="float:right">
+   				<input type="button" value="Associer" onclick="sendTo()" />
+			</div>
+		</div>
+		</fieldset>
+	</div>
+	<br/>
+	<div>
+		<fieldset>
+		<label for="color">Cliquez sur la couleur pour associée à cette musique:</label><br/>
+		<div id="divcolors">
+		</div>
+		</fieldset>
+	</div>
+
+        </div>
+}

@@ -117,10 +117,16 @@ public class Application extends Controller {
 		return ok("");
 	}
 	
-	private static void addToRDF(String name, Integer valeur,String urlImage){
+	private static void addToRDF(String name, Integer valeur, String urlImage){
 		RDFBuilding rdf=RDFBuilding.getInstance();
 		WordConnotation word=new WordConnotation(name, valeur);
 		UserInformation userInf= new UserInformation();
 		rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
 	}
+	
+	public static Result validationFormulaire(){
+		return TODO;
+		//A COMPLETER via la route addToRDF(name, valeur, urlImage);
+	}
+	
 }

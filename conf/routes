@@ -7,6 +7,8 @@ GET     /                           controllers.Application.index()
 POST	/							controllers.Application.connection()
 POST	/felt						controllers.Application.checkWord()
 POST	/color						controllers.Application.addColor()
+POST    /validation				    controllers.Application.validationFormulaire()
+
 GET		/menu						controllers.ControlMenu.showPage()
 
 # Map static resources from the /public folder to the /assets URL path
@@ -29,3 +31,4 @@ GET		/hypergraph.html			controllers.ControlHyperGraph.index()
 
 GET 	/sparql						controllers.ControlEndPointSparql.index()
 GET 	/sparql/response			controllers.ControlEndPointSparql.query(query: String,format: String)
+

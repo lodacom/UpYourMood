@@ -1,0 +1,101 @@
+@(title: String, sessionValues: SessionValues)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script language="javascript" src="@routes.Assets.at("javascripts/jquery-1.9.1.js")"></script>
+        <script language="javascript" src="@routes.Assets.at("javascripts/main.js")"></script>
+	
+    </head>
+    <body style="background-color: #F9F9F9;">
+        <div id="div_main">
+        <div style="height: 80px;">
+    	<h2 align="center">
+    		<a href="@routes.Application.index()">Up Your Mood</a>
+    	</h2>
+    	<ul id="menu">
+    		<li class="sous_menu"><a href="@routes.Application.index()">Accueil</a></li>
+    		<li class="sous_menu"><a href="#" onClick="Inscription();return false;">Inscription</a></li>
+    		<li class="sous_menu"><a href="@routes.ControlHyperGraph.index()">Hyper graphe</a></li>
+    	</ul>
+        </div>
+        
+    	<div style="background-color:#CACACA;">
+    	@if(!sessionValues.isConnected()){
+    	<form method="post">
+                       <label for="pseudo">Pseudo:</label>
+		       <input type="text" name="pseudo" id="pseudo" />*
+		       <br>
+		       <label for="mdp">Mot de passe:</label>
+		       <input type="password" name="mdp" id="mdp" />*
+		       &nbsp;
+		   <input type="submit" value="Connexion" />
+                </form>
+		}else{
+			<form method="post">
+		  	 <input type="submit" value="Deconnexion" />
+		  	 <a href="@routes.ControlProfil.index()">@sessionValues.getPseudo()</a>
+                        </form>
+		}
+		</div>
+        
+        <div id="content">
+			@content
+        </div>
+        
+        <div id="div_footer_menu">
+	        <div class="columns">
+		        <dl>
+                    <dt>
+			        	<dd class="bold">UpYourMood</dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_nos_offres',this);return false;">Nos offres</a></dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_les_fonctionnalites',this);return false;">Les fonctionnalités</a></dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_a_propos',this);return false;">A propos</a></dd>
+			        </dt>
+                        </dl>
+                </div>
+                <div class="columns">
+		        <dl>
+			        <dt>
+			        	<dd class="bold">Extras</dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_developpeurs',this);return false;">Développeurs</a></dd>
+			        	<dd><a href="@routes.ControlOntology.index()">Notre ontologie</a></dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_votre_musique',this);return false;">Votre musique sur UpYourMood</a></dd>
+			        </dt>
+                        </dl>
+                </div>
+                <div class="columns">
+		        <dl>
+			        <dt>
+			        	<dd class="bold">Aide</dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_aide_et_contact',this);return false;">Aide & Contact</a></dd>
+			        </dt>
+                        </dl>
+                </div>
+                <div class="columns">
+		        <dl>
+			        <dt>
+			        	<dd class="bold">Legal</dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_donnees_personnelles',this);return false;">Données personnelles</a></dd>
+			        	<dd><a href="#" onClick="ShowContent('menu_mentions_legales',this);return false;">Mentions légales</a></dd>
+			        </dt>
+		        </dl>
+	        </div>
+        </div>
+        <div>
+	    <footer id="footer" class="page-footer">
+                <span id="copyright">
+	    		Exprimer vos sentiments à travers la musique avec Up Your Mood - Copyright: 2013 
+	    	</span>
+            </footer>
+        </div>
+    	
+    	
+        </div>
+    </body>
+</html>
+

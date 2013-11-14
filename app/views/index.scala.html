@@ -5,6 +5,7 @@
 
 	<script language="javascript" src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
 	<script language="javascript" src="@routes.Assets.at("javascripts/word_colors.js")"></script>
+	<script language="javascript" src="@routes.Assets.at("javascripts/formulaire.js")"></script>
 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
    
     
@@ -24,7 +25,7 @@
         <div>
 		<fieldset>
 		<label for="sentiment">Marquez en un mot ce que vous ressentez:</label><br/>
-		<input type="text" name="sentiment" id="sentiment" onclick="clean()"/>*<br/>
+		<input type="text" name="sentiment" id="sentiment" />*<br/>
 		<label for="amount">Indiquez sur le slider la valeur de ce mot: 1(negatif) / 10(positif):</label>
 		<input type="text" id="amount" style="border: 0; color: #60067C; font-weight: bold; width:20px;"/>
 		<br/>
@@ -37,7 +38,7 @@
    				*
 			</div>
 			<div style="float:right">
-   				<input type="button" value="Associer" onclick="sendTo()" />
+   				<input type="button" value="Associer" id="linkWord" />
 			</div>
 		</div>
 		</fieldset>

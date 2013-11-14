@@ -1,4 +1,3 @@
-
 function ShowContent(f,a){
 	$.ajax({
 	    		type: "GET",
