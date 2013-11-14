@@ -62,6 +62,8 @@ public class RDFBuilding {
 					m.add(NiceTag.makesMeFeel,RDFS.subPropertyOf,NiceTag.isRelatedTo);
 					m.add(OntologyUpYourMood.songTitle, RDFS.subPropertyOf, DC.title);
 					m.add(OntologyUpYourMood.hasListen,RDFS.subPropertyOf,FOAF.knows);
+					m.add(OntologyUpYourMood.makesMeThink,RDFS.subPropertyOf,NiceTag.makesMeFeel);
+
 
 				}
 			}
@@ -137,7 +139,8 @@ public class RDFBuilding {
 		OntologyUpYourMood.MusicalExperience.addProperty(NiceTag.makesMeFeel,
 				m.createResource()
 				.addProperty(OntologyUpYourMood.isAssociatedBy, word.getMot())
-				.addProperty(OntologyUpYourMood.isConnoted, String.valueOf(word.getConnotation())));
+				.addProperty(OntologyUpYourMood.isConnoted, String.valueOf(word.getConnotation()))
+				.addProperty(OntologyUpYourMood.makesMeThink, "test"));
 		OntologyUpYourMood.MusicalExperience.addProperty(OntologyUpYourMood.hasListen, infoMusic.get(0));
 		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
 		cpt++;

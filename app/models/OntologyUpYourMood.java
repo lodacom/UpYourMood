@@ -23,6 +23,7 @@ public class OntologyUpYourMood {
 	public static Property hasListen=m.createProperty(uymUser+"hasListen");
 	public static Property hasMusicalExperience=m.createProperty(uymUser+"hasMusicalExperience");
 	public static Property songTitle=m.createProperty(uymMusic+"songTitle");
+	public static Property makesMeThink=m.createProperty(uymWordConnotation+"makesMeThink");
 
 	// Resource
 	
