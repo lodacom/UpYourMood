@@ -5,11 +5,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.Map;
-
 import org.apache.http.client.ClientProtocolException;
-
 import models.*;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 
@@ -92,24 +91,23 @@ public class Application extends Controller {
 			
 			if (size>150){
 				//ok bon mot: on peut travailler avec
-				/*Le téléchargement fonctionne et le gestionnaire aussi 
-				 * merci de ne pas décommenter ces lignes
-				 * tant qu'une interface de choix des images pour l'utilisateur n'a pas été mise en
-				 * place. Merci de votre compréhension :)*/
-				/*if (size>150){
-					DBq.queryImage(name,"fr");
-				}else{
-					DBq.queryImage(name,"en");
-				}*/
-				addToRDF(name, valeur);
-				return ok("");
+				DBq.queryImage(name,"fr");
+				
+				//addToRDF(name, valeur);
+				return ok(Json.toJson(DBq.urlImagesReturn()));
 			}else{
 				if (size2>150){
-					addToRDF(name, valeur);
-					return ok("");
+					DBq.queryImage(name,"en");
+					
+					//addToRDF(name, valeur);
+					return ok(Json.toJson(DBq.urlImagesReturn()));
 				}
 				return ok("Mot incorrect");
 			}
+			/*Le téléchargement fonctionne et le gestionnaire aussi 
+			 * merci de ne pas décommenter ces lignes
+			 * tant qu'une interface de choix des images pour l'utilisateur n'a pas été mise en
+			 * place. Merci de votre compréhension :)*/
 		}
 	}
 	
@@ -119,7 +117,7 @@ public class Application extends Controller {
 		return ok("");
 	}
 	
-	private static void addToRDF(String name, Integer valeur){
+	private static void addToRDF(String name, Integer valeur,String urlImage){
 		RDFBuilding rdf=RDFBuilding.getInstance();
 		WordConnotation word=new WordConnotation(name, valeur);
 		UserInformation userInf= new UserInformation();

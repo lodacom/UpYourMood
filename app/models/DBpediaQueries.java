@@ -23,9 +23,11 @@ public class DBpediaQueries {
 	private QueryExecution query;
 	private ArrayList<String> urlListe;
 	public ArrayList<String> urlTraversed;
-	private DownloadManager DM=new DownloadManager();
+	//private DownloadManager DM=new DownloadManager();
+	private ArrayList<String> urlImages;
 	
 	public void queryImage(String mot,String lang){
+		urlImages=new ArrayList<String>();
 		String etape1=dbprop + NL + rdfs + NL +
 				"SELECT ?img "+
 				"WHERE { "+
@@ -47,11 +49,11 @@ public class DBpediaQueries {
 			while(results.hasNext()) {
 				QuerySolution sol = (QuerySolution) results.next();
 				String url=sol.get("?img").toString();
-				if (!DM.hasBeenAlreadyTraversed(url)){
+				//if (!DM.hasBeenAlreadyTraversed(url)){
 					urlListe.add(url);
-				}else{
+				/*}else{
 					urlTraversed.add(url);
-				}
+				}*/
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -59,11 +61,11 @@ public class DBpediaQueries {
 		finally {
 			query.close();
 		}
-		if (urlListe.isEmpty()){
+		/*if (urlListe.isEmpty()){
 			DM.prepareImage(urlTraversed);
-		}else{
+		}else{*/
 			retreiveImages();
-		}
+		//}
 	}
 
 	private void retreiveImages(){
@@ -89,7 +91,8 @@ public class DBpediaQueries {
 						images=recup.split("<img src=\"");
 						while(j<images.length){
 							urlImage=images[j].replaceAll("\"/>.+", "");
-							DM.getFile(urlListe.get(i),urlImage);
+							urlImages.add(urlImage);
+							//DM.getFile(urlListe.get(i),urlImage);
 							j++;
 						}
 						j=1;
@@ -101,6 +104,8 @@ public class DBpediaQueries {
 		}
 	}
 
-
+	public ArrayList<String> urlImagesReturn(){
+		return urlImages;
+	}
 
 }
