@@ -89,18 +89,26 @@ public class Application extends Controller {
 			ReadURL ru2 = new ReadURL(_url2);
 			Integer size2 = ru2.getURLSize();
 			
+			Optimizer opti=new Optimizer();
 			if (size>150){
 				//ok bon mot: on peut travailler avec
-				DBq.queryImage(name,"fr");
+				if (!opti.wordHasBeenAlreadyViewed(name)){
+					//le mot n'a jamais été cherché par un utilisateur
+					DBq.queryImage(name,"fr");
+				}
+				//le mot a déjà été recherché par un utilisateur
+				opti.prepareImage(name);
+				return ok(Json.toJson(opti.urlImageToPrint()));
 				
 				//addToRDF(name, valeur);
-				return ok(Json.toJson(DBq.urlImagesReturn()));
 			}else{
 				if (size2>150){
-					DBq.queryImage(name,"en");
-					
+					if (!opti.wordHasBeenAlreadyViewed(name)){
+						DBq.queryImage(name,"en");
+					}
 					//addToRDF(name, valeur);
-					return ok(Json.toJson(DBq.urlImagesReturn()));
+					opti.prepareImage(name);
+					return ok(Json.toJson(opti.urlImageToPrint()));
 				}
 				return ok("Mot incorrect");
 			}
@@ -125,8 +133,8 @@ public class Application extends Controller {
 	}
 	
 	public static Result validationFormulaire(){
+		System.out.println(request().body().asJson());
 		return TODO;
-		//A COMPLETER via la route addToRDF(name, valeur, urlImage);
 	}
 	
 }

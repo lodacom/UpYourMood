@@ -22,11 +22,12 @@ public class DBpediaQueries {
 	public final String NL = System.getProperty("line.separator");
 	private QueryExecution query;
 	private ArrayList<String> urlListe;
-	public ArrayList<String> urlTraversed;
-	//private DownloadManager DM=new DownloadManager();
+	private Optimizer Opti=new Optimizer();
 	private ArrayList<String> urlImages;
+	private String mot;
 	
 	public void queryImage(String mot,String lang){
+		this.mot=mot;
 		urlImages=new ArrayList<String>();
 		String etape1=dbprop + NL + rdfs + NL +
 				"SELECT ?img "+
@@ -34,8 +35,9 @@ public class DBpediaQueries {
 				"?res dbpprop:hasPhotoCollection ?img . "+
 				"?res rdfs:label ?label "+
 				"FILTER (regex(?label, \"^"+mot+".+\",\"i\") && lang(?label)=\""+lang+"\") " + 
-				"}" +
-				"LIMIT 2";
+				"} " +
+				"ORDER BY ASC(?label) " +
+				"LIMIT 2 ";
 		Query etape2 = QueryFactory.create(etape1);
 		query = QueryExecutionFactory.sparqlService(service, etape2.toString());
 		urlFromDBpedia();
@@ -43,17 +45,12 @@ public class DBpediaQueries {
 
 	private void urlFromDBpedia(){
 		urlListe=new ArrayList<String>();
-		urlTraversed=new ArrayList<String>();
 		try {
 			ResultSet results = query.execSelect();
 			while(results.hasNext()) {
 				QuerySolution sol = (QuerySolution) results.next();
 				String url=sol.get("?img").toString();
-				//if (!DM.hasBeenAlreadyTraversed(url)){
-					urlListe.add(url);
-				/*}else{
-					urlTraversed.add(url);
-				}*/
+				urlListe.add(url);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -61,11 +58,7 @@ public class DBpediaQueries {
 		finally {
 			query.close();
 		}
-		/*if (urlListe.isEmpty()){
-			DM.prepareImage(urlTraversed);
-		}else{*/
-			retreiveImages();
-		//}
+		retreiveImages();
 	}
 
 	private void retreiveImages(){
@@ -79,7 +72,6 @@ public class DBpediaQueries {
 
 				InputStream inputStream=entity.getContent();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"), 8);
-				//StringBuilder sb = new StringBuilder();
 				String line = null;
 				String recup = null;
 				String[] images =null;
@@ -91,8 +83,8 @@ public class DBpediaQueries {
 						images=recup.split("<img src=\"");
 						while(j<images.length){
 							urlImage=images[j].replaceAll("\"/>.+", "");
-							urlImages.add(urlImage);
-							//DM.getFile(urlListe.get(i),urlImage);
+							//urlImages.add(urlImage);
+							Opti.updateAlreadyTraversed( urlImage, this.mot);
 							j++;
 						}
 						j=1;

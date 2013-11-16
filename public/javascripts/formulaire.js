@@ -8,7 +8,8 @@ $(function(){
 	});
 	
 	$(document).on('click', '#choix_image img', function(){
-		$.post('/validation', {sentiment: $('#sentiment').val(), valeur: $('#slider-range-max').slider('value'), urlImage: $(this).attr('src')});
+	
+	$.post('/validation', {sentiment: $('#sentiment').val(), valeur: $('#slider-range-max').slider('value'), urlImage: $(this).attr('src')});
 		cleanForm();
 		$('#choix_image').dialog('close');
 	});
@@ -33,7 +34,7 @@ function sendTo()
 	      		
 	      		for(i in response)
 	  			{
-	      			content += '<img src="' + response[i] + '" alt="image" /> ';
+	      			content += '<img src="' + response[i] + '" alt="image" height="100" width="80" /> ';
 	      			if(i+1 % 3 == 0) content += '</p><p>';
 	  			}
 	      		content += '</p>';
