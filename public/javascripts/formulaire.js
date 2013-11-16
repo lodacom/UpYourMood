@@ -8,11 +8,36 @@ $(function(){
 	});
 	
 	$(document).on('click', '#choix_image img', function(){
-	
-	$.post('/validation', {sentiment: $('#sentiment').val(), valeur: $('#slider-range-max').slider('value'), urlImage: $(this).attr('src')});
+		
+		//alert($('#sentiment').val());
+		
+		/*var donnees= { 
+		'sentiment': $('#sentiment').val() ,
+		'valeur': $('#slider-range-max').slider('value'),
+		'urlImage': $(this).attr('src')
+		};*/
+		
+		/*$.ajax({
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify(donnees),
+            url: "@routes.Application.validationFormulaire()",
+            success: function(data){
+                console.log(data);
+            }
+        });*/
+		
+		$.post('/validation', 
+		{ 
+		'sentiment': $('#sentiment').val() ,
+		'valeur': $('#slider-range-max').slider('value'),
+		'urlImage': $(this).attr('src')
+		});
 		cleanForm();
 		$('#choix_image').dialog('close');
+        
 	});
+	
 });
 
 function sendTo()

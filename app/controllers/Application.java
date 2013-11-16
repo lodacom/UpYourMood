@@ -6,6 +6,9 @@ import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.Map;
 import org.apache.http.client.ClientProtocolException;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import models.*;
 import play.data.Form;
 import play.libs.Json;
@@ -133,7 +136,12 @@ public class Application extends Controller {
 	}
 	
 	public static Result validationFormulaire(){
-		System.out.println(request().body().asJson());
+		System.out.println("ici");
+		System.out.println(request().body().asText());
+		/*JsonNode sentiment=node.path("sentiment");
+		JsonNode valeur=node.path("valeur");
+		JsonNode url=node.path("urlImage");
+		System.out.println(sentiment.asText()+" "+valeur.asInt()+" "+url.asText());*/
 		return TODO;
 	}
 	

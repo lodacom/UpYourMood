@@ -13,7 +13,7 @@ public class ReadURL {
 
     public ReadURL(String _url){
         this._url = _url;
-        System.out.println(this._url);
+        //System.out.println(this._url);
     }
 
     public String getURLContent() {

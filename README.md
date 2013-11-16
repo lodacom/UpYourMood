@@ -38,14 +38,13 @@ WITH (
 
 	3.2. CREATE TABLE "Image"
 (
-  "urlFlickr" character varying(255),
   "urlImage" character varying(255) NOT NULL,
-  "nomImage" character varying(255),
+  "motAssoc" character varying(255),
   CONSTRAINT "urlImage" PRIMARY KEY ("urlImage")
 )
 WITH (
   OIDS=FALSE
-); 
+);
 
 	3.3. CREATE OR REPLACE VIEW "UserInfo" AS 
  SELECT "User".pseudo, 
@@ -54,14 +53,6 @@ WITH (
     "User".prenom, 
     "User".email
    FROM "User";
-   
-   3.4. CREATE OR REPLACE VIEW "UrlImage" AS 
- SELECT "Image"."urlImage"
-   FROM "Image";
-   
-   3.5. CREATE OR REPLACE VIEW "UrlFlickr" AS 
- SELECT "Image"."urlFlickr"
-   FROM "Image";
    
  4. Vous êtes sous Mac ou sur Linux? Félicitation, vous pouvez tester toute notre application.
  En effet, vous devez installer le logiciel [Graphviz](http://www.graphviz.org/Download..php), 
