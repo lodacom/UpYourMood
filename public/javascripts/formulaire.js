@@ -11,24 +11,13 @@ $(function(){
 		
 		//alert($('#sentiment').val());
 		
-		/*var donnees= { 
+		var donnees= { 
 		'sentiment': $('#sentiment').val() ,
 		'valeur': $('#slider-range-max').slider('value'),
 		'urlImage': $(this).attr('src')
-		};*/
+		};
 		
-		/*$.ajax({
-            type: "POST",
-            dataType: "json",
-            data: JSON.stringify(donnees),
-            url: "@routes.Application.validationFormulaire()",
-            success: function(data){
-                console.log(data);
-            }
-        });*/
-		
-		$.post('/validation', 
-		{ 
+		$.post('/validation', { 
 		'sentiment': $('#sentiment').val() ,
 		'valeur': $('#slider-range-max').slider('value'),
 		'urlImage': $(this).attr('src')

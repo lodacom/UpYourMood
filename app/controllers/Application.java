@@ -137,10 +137,10 @@ public class Application extends Controller {
 	
 	public static Result validationFormulaire(){
 		System.out.println("ici");
-		System.out.println(request().body().asText());
-		/*JsonNode sentiment=node.path("sentiment");
-		JsonNode valeur=node.path("valeur");
-		JsonNode url=node.path("urlImage");
+		Map<String,String[]> recup=request().body().asFormUrlEncoded();
+		System.out.println(recup);
+		System.out.println(recup.get("sentiment").toString());
+		/*
 		System.out.println(sentiment.asText()+" "+valeur.asInt()+" "+url.asText());*/
 		return TODO;
 	}
