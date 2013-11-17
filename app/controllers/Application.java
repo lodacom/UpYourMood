@@ -132,7 +132,7 @@ public class Application extends Controller {
 		RDFBuilding rdf=RDFBuilding.getInstance();
 		WordConnotation word=new WordConnotation(name, valeur);
 		UserInformation userInf= new UserInformation();
-		rdf.rdfUpYourMood(jam.currentInfo(),userInf,word);
+		rdf.rdfUpYourMood(jam.currentInfo(),userInf,word,urlImage);
 	}
 	
 	public static Result validationFormulaire(){
@@ -140,7 +140,7 @@ public class Application extends Controller {
 		String sentimentR=recup.get("TransSentiment")[0];
 		String valeurR=recup.get("TransValeur")[0];
 		String urlR=recup.get("TransUrlImage")[0];
-		addToRDF(sentimentR, Integer.parseInt(valeurR), urlR);
+		//addToRDF(sentimentR, Integer.parseInt(valeurR), urlR);
 		System.out.println(sentimentR+" "+valeurR+" "+urlR);
 		return TODO;
 	}

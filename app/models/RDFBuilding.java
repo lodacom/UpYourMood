@@ -75,9 +75,9 @@ public class RDFBuilding {
 	 * fonction principale qu'il faudra appeler dans la classe Application
 	 * @param List<String> infoMusic information de la musique courante
 	 */
-	public void rdfUpYourMood(List<String> infoMusic,UserInformation userInfo,WordConnotation word){
+	public void rdfUpYourMood(List<String> infoMusic,UserInformation userInfo,WordConnotation word,String urlImage){
 		ajouterMusique(infoMusic);
-		ajouterUtilisateur(userInfo, infoMusic, word);
+		ajouterUtilisateur(userInfo, infoMusic, word, urlImage);
 		//ajouterMot_Connotation(word);
 
 		//............................................................................................
@@ -126,7 +126,7 @@ public class RDFBuilding {
 	 * 	<li>le pseudo</li>
 	 * </ul>
 	 */
-	private void ajouterUtilisateur(UserInformation userInfo, List<String> infoMusic, WordConnotation word ){
+	private void ajouterUtilisateur(UserInformation userInfo, List<String> infoMusic, WordConnotation word, String urlImage){
 
 		try {
 			userInfo.retrieveInformation(Application.maSession.getPseudo());
@@ -140,7 +140,7 @@ public class RDFBuilding {
 				m.createResource()
 				.addProperty(OntologyUpYourMood.isAssociatedBy, word.getMot())
 				.addProperty(OntologyUpYourMood.isConnoted, String.valueOf(word.getConnotation()))
-				.addProperty(OntologyUpYourMood.makesMeThink, "test"));
+				.addProperty(OntologyUpYourMood.makesMeThink, urlImage));
 		OntologyUpYourMood.MusicalExperience.addProperty(OntologyUpYourMood.hasListen, infoMusic.get(0));
 		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
 		cpt++;

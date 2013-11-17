@@ -35,6 +35,7 @@ public class HyperGraph {
 	 */
 	public void ajouterPochetteMotRelation(String pochette,String mot){
 		getFile(pochette);
+		//addUrl(pochette);
 		gv.addln("struct"+nbreStruct+"->"+mot+";");//PS: ne pas oublier le ; dans la string
 	}
 
@@ -49,7 +50,7 @@ public class HyperGraph {
 		File out = new File("public/graph/hypergraph." + type);
 		gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type , representationType), out );
 	}
-
+	
 	private void getFile(String host)
 	{
 
