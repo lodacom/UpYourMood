@@ -111,7 +111,7 @@ public class GraphViz
 	/**
 	 * Define the index in the image size array.
 	 */
-	private int currentDpiPos = 7;//correspond en gros à la taille de l'image
+	private int currentDpiPos = 3;//correspond en gros à la taille de l'image
 
 	/**
 	 * Increase the image size (dpi).

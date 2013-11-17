@@ -47,11 +47,12 @@ public class UpQueries {
 	public void hyperGraph(){
 		ResultSet rs=null;
 		String req1=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
-				"SELECT ?mot ?pochette " +
+				"SELECT ?mot ?pochette ?image " +
 				"WHERE { " +
 				"?user user:hasMusicalExperience ?experi . " +
 				"?experi nicetag:makesMeFeel ?chose . " +
 				"?chose wordconnotation:isAssociatedBy ?mot . " +
+				"?chose wordconnotation:makesMeThink ?image . " +
 				"?experi user:hasListen ?idMusic . " +
 				"?idMusic2 foaf:depiction ?pochette ." +
 				"FILTER regex(str(?idMusic2) , ?idMusic) "+
@@ -66,8 +67,10 @@ public class UpQueries {
 				QuerySolution sol = (QuerySolution) rs.next();
 				String pochette=sol.get("?pochette").toString();
 				String mot=sol.get("?mot").toString();
+				String image=sol.get("?image").toString();
 				//System.out.println(pochette+"->"+mot);
 				hg.ajouterPochetteMotRelation(pochette, mot);
+				hg.ajouterMotImageRelation(mot, image);
 			}
 			hg.endGraph();
 		}finally{
@@ -88,6 +91,7 @@ public class UpQueries {
 				"?user user:hasMusicalExperience ?experi . " +
 				"?experi nicetag:makesMeFeel ?chose . " +
 				"?chose wordconnotation:isAssociatedBy ?mot . " +
+				"?chose wordconnotation:makesMeThink ?image . " +
 				"?experi user:hasListen ?idMusic . " +
 				"?idMusic2 foaf:depiction ?pochette ." +
 				"FILTER regex(str(?idMusic2) , ?idMusic) . "+

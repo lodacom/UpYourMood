@@ -8,23 +8,11 @@
     xmlns:user="http://www.upyourmood.com/user/"
     xmlns:music="http://www.upyourmood.com/music/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://ns.inria.fr/nicetag/2010/09/09/voc.html#makesMeFeel">
-    <rdfs:subPropertyOf rdf:resource="http://ns.inria.fr/nicetag/2010/09/09/voc.html#isRelatedTo"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/songTitle">
-    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/907961">
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/escape"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s107/107366/covers/1.200.jpg"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/Djmotekno"/>
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/escape"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/891755">
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/moi"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s104/104883/covers/1.200.jpg"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/Charlieatomix"/>
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/discomanuche"/>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/320431">
+    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Numbness"/>
+    <foaf:depiction rdf:resource="http://imgjam.com/albums/s43/43228/covers/1.200.jpg"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/Kostas Antonakoglou"/>
+    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Disrupt the light"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/hasListen">
     <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
@@ -32,76 +20,45 @@
   <rdf:Description rdf:about="http://www.upyourmood.com/music/albumTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/307925">
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Clubgirls and poofs"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/Red Emprez"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s41/41802/covers/1.200.jpg"/>
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Caress me"/>
+  <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/makesMeThink">
+    <rdfs:subPropertyOf>
+      <rdf:Description rdf:about="http://ns.inria.fr/nicetag/2010/09/09/voc.html#makesMeFeel">
+        <rdfs:subPropertyOf rdf:resource="http://ns.inria.fr/nicetag/2010/09/09/voc.html#isRelatedTo"/>
+      </rdf:Description>
+    </rdfs:subPropertyOf>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/user/loda">
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/loda/musicalExperience4">
-        <user:hasListen>907961</user:hasListen>
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>basse</wordconnotation:isAssociatedBy>
-        </nicetag:makesMeFeel>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/loda/musicalExperience3">
-        <user:hasListen>907961</user:hasListen>
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>électrique</wordconnotation:isAssociatedBy>
-        </nicetag:makesMeFeel>
-      </rdf:Description>
-    </user:hasMusicalExperience>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/songTitle">
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience6">
-        <user:hasListen>891755</user:hasListen>
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isConnoted>4.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>chocolat</wordconnotation:isAssociatedBy>
-        </nicetag:makesMeFeel>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
       <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience2">
-        <user:hasListen>907961</user:hasListen>
+        <user:hasListen>320431</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isConnoted>5.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>vibration</wordconnotation:isAssociatedBy>
-        </nicetag:makesMeFeel>
-      </rdf:Description>
-    </user:hasMusicalExperience>
-    <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
-        <user:hasListen>907961</user:hasListen>
-        <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isConnoted>2.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>vibes</wordconnotation:isAssociatedBy>
+          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3504/3280739161_3bba1c34f3_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
       <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience0">
-        <user:hasListen>907961</user:hasListen>
+        <user:hasListen>320431</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>techno</wordconnotation:isAssociatedBy>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6085/6123756782_6f471b7d7d_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>chocolat</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience5">
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>hard</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>chocolat</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm9.static.flickr.com/8500/8401371522_053d235569_m.jpg</wordconnotation:makesMeThink>
         </nicetag:makesMeFeel>
-        <user:hasListen>307925</user:hasListen>
+        <user:hasListen>320431</user:hasListen>
       </rdf:Description>
     </user:hasMusicalExperience>
   </rdf:Description>
