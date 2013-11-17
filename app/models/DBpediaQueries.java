@@ -36,7 +36,6 @@ public class DBpediaQueries {
 				"?res rdfs:label ?label "+
 				"FILTER (regex(?label, \"^"+mot+".+\",\"i\") && lang(?label)=\""+lang+"\") " + 
 				"} " +
-				"ORDER BY ASC(?label) " +
 				"LIMIT 2 ";
 		Query etape2 = QueryFactory.create(etape1);
 		query = QueryExecutionFactory.sparqlService(service, etape2.toString());
