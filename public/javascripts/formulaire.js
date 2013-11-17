@@ -17,10 +17,14 @@ $(function(){
 		'urlImage': $(this).attr('src')
 		};
 		
-		$.post('/validation', { 
-		'sentiment': $('#sentiment').val() ,
-		'valeur': $('#slider-range-max').slider('value'),
-		'urlImage': $(this).attr('src')
+		sentimentV=$('#sentiment').val();
+		valeurV=$('#slider-range-max').slider('value');
+		urlImageV=$(this).attr('src');
+		
+		$.post('/validation', {
+		'TransSentiment':sentimentV ,
+		'TransValeur':valeurV ,
+		'TransUrlImage':urlImageV
 		});
 		cleanForm();
 		$('#choix_image').dialog('close');

@@ -136,12 +136,12 @@ public class Application extends Controller {
 	}
 	
 	public static Result validationFormulaire(){
-		System.out.println("ici");
 		Map<String,String[]> recup=request().body().asFormUrlEncoded();
-		System.out.println(recup);
-		System.out.println(recup.get("sentiment").toString());
-		/*
-		System.out.println(sentiment.asText()+" "+valeur.asInt()+" "+url.asText());*/
+		String sentimentR=recup.get("TransSentiment")[0];
+		String valeurR=recup.get("TransValeur")[0];
+		String urlR=recup.get("TransUrlImage")[0];
+		addToRDF(sentimentR, Integer.parseInt(valeurR), urlR);
+		System.out.println(sentimentR+" "+valeurR+" "+urlR);
 		return TODO;
 	}
 	
