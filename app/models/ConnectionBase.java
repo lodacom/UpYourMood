@@ -8,8 +8,8 @@ public class ConnectionBase {
 	public static void open(){
 		try {
 			Class.forName("org.postgresql.Driver");
-			//conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/UpYourMood_DB", "postgres", "loda");
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5433/UpYourMood_DB", "postgres", "loda");
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/UpYourMood_DB", "postgres", "loda");
+			//conn = DriverManager.getConnection("jdbc:postgresql://localhost:5433/UpYourMood_DB", "postgres", "loda");
 		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

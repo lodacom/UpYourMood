@@ -23,6 +23,7 @@ public class Application extends Controller {
 	public static DBpediaQueries DBq=new DBpediaQueries();
 	
 	public static Result index() throws ClientProtocolException, IOException {
+		session("compteur","0");
 		String user = session("connected");
 		if(user != null) {
 			return ok(index.render(maSession, jam.current()));
@@ -87,10 +88,6 @@ public class Application extends Controller {
 			ReadURL ru = new ReadURL(_url);
 			Integer size = ru.getURLSize();
 			
-			String _url2 = "http://api.wordreference.com/78289/json/enfr/" + utf_encoded;
-			ReadURL ru2 = new ReadURL(_url2);
-			Integer size2 = ru2.getURLSize();
-			
 			Optimizer opti=new Optimizer();
 			if (size>150){
 				//ok bon mot: on peut travailler avec
@@ -102,8 +99,11 @@ public class Application extends Controller {
 				opti.prepareImage(name);
 				return ok(Json.toJson(opti.urlImageToPrint()));
 				
-				//addToRDF(name, valeur);
 			}else{
+				String _url2 = "http://api.wordreference.com/78289/json/enfr/" + utf_encoded;
+				ReadURL ru2 = new ReadURL(_url2);
+				Integer size2 = ru2.getURLSize();
+				
 				if (size2>150){
 					if (!opti.wordHasBeenAlreadyViewed(name)){
 						DBq.queryImage(name,"en");
@@ -114,10 +114,6 @@ public class Application extends Controller {
 				}
 				return ok("Mot incorrect");
 			}
-			/*Le téléchargement fonctionne et le gestionnaire aussi 
-			 * merci de ne pas décommenter ces lignes
-			 * tant qu'une interface de choix des images pour l'utilisateur n'a pas été mise en
-			 * place. Merci de votre compréhension :)*/
 		}
 	}
 	

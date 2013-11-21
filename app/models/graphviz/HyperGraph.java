@@ -92,7 +92,7 @@ public class HyperGraph {
 	 */
 	public void endGraph(){
 		gv.addln(gv.end_graph());
-		System.out.println(gv.getDotSource());
+		//System.out.println(gv.getDotSource());
 		String type = "jpg";
 		String representationType="circo";
 		File out = new File("public/graph/hypergraph." + type);

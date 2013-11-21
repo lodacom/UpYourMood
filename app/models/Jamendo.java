@@ -2,10 +2,10 @@ package models;
 
 import java.io.IOException;
 import java.util.*;
-
 import org.apache.http.client.ClientProtocolException;
 import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
+import play.mvc.Controller;
 
 public class Jamendo {
 	static final String TRACKS_URL = "http://api.jamendo.com/v3.0/tracks/?format=json&groupby=artist_id&limit=all";
@@ -16,7 +16,7 @@ public class Jamendo {
 	private List<String> albums;
 	private List<String> titres;
 	private List<String> pochetteAlbums;
-	public int compteur=0;
+	
 	/*
 	 * artist_name
 	 * album_name
@@ -52,8 +52,11 @@ public class Jamendo {
 	}
 	
 	public String next(){
+		String recupCompteur=Controller.session("compteur");
+		int compteur=Integer.parseInt(recupCompteur);
 		if (compteur<idMusiques.size()-1){
 			compteur++;
+			Controller.session("compteur",String.valueOf(compteur));
 			return idMusiques.get(compteur);
 		}else{
 			try {
@@ -66,13 +69,17 @@ public class Jamendo {
 				e.printStackTrace();
 			}
 			compteur=0;
+			Controller.session("compteur",String.valueOf(compteur));
 			return idMusiques.get(0);
 		}
 	}
 	
 	public String previous(){
+		String recupCompteur=Controller.session("compteur");
+		int compteur=Integer.parseInt(recupCompteur);
 		if (compteur>0){
 			compteur--;
+			Controller.session("compteur",String.valueOf(compteur));
 			return idMusiques.get(compteur);
 		}else{
 			try {
@@ -85,15 +92,20 @@ public class Jamendo {
 				e.printStackTrace();
 			}
 			compteur=0;
+			Controller.session("compteur",String.valueOf(compteur));
 			return idMusiques.get(0);
 		}
 	}
 	
 	public String current(){
+		String recupCompteur=Controller.session("compteur");
+		int compteur=Integer.parseInt(recupCompteur);
 		return idMusiques.get(compteur);
 	}
 	
 	public List<String> currentInfo(){
+		String recupCompteur=Controller.session("compteur");
+		int compteur=Integer.parseInt(recupCompteur);
 		List<String> info=new ArrayList<String>();
 		info.add(idMusiques.get(compteur));
 		info.add(albums.get(compteur));
