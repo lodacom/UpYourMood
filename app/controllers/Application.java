@@ -120,6 +120,13 @@ public class Application extends Controller {
 	public static Result addColor(){
 		final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		final String color = values.get("color")[0];
+		String pseudo = maSession.getPseudo();
+		if(pseudo==null){
+			pseudo = "guest";
+		}
+		RDFBuildingColors.getInstance().rdfUYMAddColor(jam.current(), pseudo, color);
+		//System.out.println(RDFBuildingColors.getInstance().getMaxColorMusic(jam.current()));
+		//System.out.println(RDFBuildingColors.getInstance().getMaxColorMusicByUser(jam.current(), pseudo));
 		return ok("");
 	}
 	
