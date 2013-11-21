@@ -8,30 +8,36 @@ $(function(){
 	});
 	
 	$(document).on('click', '#choix_image img', function(){
-		
-		//alert($('#sentiment').val());
-		
-		var donnees= { 
-		'sentiment': $('#sentiment').val() ,
-		'valeur': $('#slider-range-max').slider('value'),
-		'urlImage': $(this).attr('src')
-		};
-		
-		sentimentV=$('#sentiment').val();
-		valeurV=$('#slider-range-max').slider('value');
-		urlImageV=$(this).attr('src');
+		var sentiment = $('#sentiment').val();
 		
 		$.post('/validation', {
-		'TransSentiment':sentimentV ,
-		'TransValeur':valeurV ,
-		'TransUrlImage':urlImageV
+			'TransSentiment': sentiment,
+			'TransValeur': $('#slider-range-max').slider('value'),
+			'TransUrlImage': $(this).attr('src')
+		}, function(){
+			listWord.push(sentiment);
+			$('#words').append('<span>'+ sentiment + '</span>');
+			cleanForm();
+		}).fail(function() {
+			alert('Une erreur c\'est produite pendant la validation');
 		});
-		cleanForm();
-		$('#choix_image').dialog('close');
-        
+		
+		$('#choix_image').dialog('close');   
+	});
+	
+	
+	$(document).on('click', '#previous_sing', function(){
+		$.get('player/previous', function(dom){ $('#player_music').html(dom); });
+	});
+	
+	$(document).on('click', '#next_sing', function(){
+		$.get('player/next', function(dom){ $('#player_music').html(dom); });
 	});
 	
 });
+
+//widgets.jamendo.com/v3/track/1080651?autoplay=0&layout=standard&manualWidth=242& 	width=220&theme=light&highlight=0&tracklist=false&tracklist_n=3&embedCode=
+//widgets.jamendo.com/v3/track/1080792?autoplay=0&layout=standard&manualWidth=242& 	width=220&theme=light&highlight=0&tracklist=false&tracklist_n=3&embedCode=
 
 function sendTo()
 {
@@ -45,9 +51,7 @@ function sendTo()
       		if(typeof response == 'string') alert(response);
       		//CAS NORMAL
       		else
-      		{
-      			listWord.push(sentiment);
-      			
+      		{      			
 	      		var content = '<p>Cliquez sur l\'image correspondant à ce que le mot que vous venez de saisir vous fait penser:</p><p>';
 	      		
 	      		for(i in response)
@@ -57,7 +61,7 @@ function sendTo()
 	  			}
 	      		content += '</p>';
 	      				
-	      		$('<div id="choix_image" />').appendTo('body').html(content).dialog({ width: 800, title: "Choississez une image:" });
+	      		getPopUpChoixImage().html(content).dialog({ width: 800, title: "Choississez une image:" });
       		}
         });
 	}
@@ -75,4 +79,10 @@ function cleanForm()
 	$("#sentiment").val("");
 	$("#slider-range-max").slider("value", 0);
 	$("#amount").val(0);
+}
+
+function getPopUpChoixImage()
+{
+ 	if($('#choix_image').length == 0) return $('<div id="choix_image" />').appendTo('body');
+ 	else return $('#choix_image');
 }

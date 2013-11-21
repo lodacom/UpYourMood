@@ -1,13 +1,11 @@
 @(json: String)
 
-<iframe id="widget" 
-	scrolling="no" frameborder="0" width="220" height="341" style="width: 220px; height: 341px;" 
-	src="//widgets.jamendo.com/v3/track/@json?autoplay=0&layout=standard&manualWidth=242&
-	width=220&theme=light&highlight=0&tracklist=false&tracklist_n=3&embedCode=">
-</iframe>
-<a href="@routes.ControlJamendo.nextPrevious(0)">
-	<img src="@routes.Assets.at("images/previous.jpeg")" alt="precedent" title="Precedent" /> 
-</a>
-<a href="@routes.ControlJamendo.nextPrevious(1)">
-	<img src="@routes.Assets.at("images/next.jpeg")" alt="suivant" title="Suivant" />
-</a>
+<div id="player_music">
+	<iframe id="widget" 
+		scrolling="no" frameborder="0" width="220" height="341" style="width: 220px; height: 341px;" 
+		src="//widgets.jamendo.com/v3/track/@json?autoplay=0&layout=standard&manualWidth=242&
+		width=220&theme=light&highlight=0&tracklist=false&tracklist_n=3&embedCode=">
+	</iframe>
+	<img id="previous_sing" src="@routes.Assets.at("images/previous.jpeg")" alt="precedent" title="Precedent" /> 
+	<img id="next_sing" src="@routes.Assets.at("images/next.jpeg")" alt="suivant" title="Suivant" />
+</div>

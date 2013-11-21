@@ -10,11 +10,11 @@ public class ControlJamendo extends Controller{
         return ok(index.render(Application.maSession,Application.jam.next()));
     }
 	
-	public static Result nextPrevious(Long decision){
-		if (decision==0){
-			return ok(index.render(Application.maSession,Application.jam.previous()));
-		}else{
-			return ok(index.render(Application.maSession,Application.jam.next()));
-		}
+	public static Result previous(){
+		return ok(player.render(Application.jam.previous()));
+	}
+	
+	public static Result next(){
+		return ok(player.render(Application.jam.next()));
 	}
 }

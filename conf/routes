@@ -14,20 +14,20 @@ GET		/menu						controllers.ControlMenu.showPage()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-GET		/inscription.html			controllers.ControlUser.index()
 POST 	/inscription				controllers.ControlUser.newUser()
 GET		/inscription				controllers.ControlMenu.getInscriptForm()
 
-GET		/player.html				controllers.ControlJamendo.index()
-GET		/player.html/next			controllers.ControlJamendo.nextPrevious(decision: Long)
+GET		/player						controllers.ControlJamendo.index()
+GET		/player/next				controllers.ControlJamendo.next()
+GET		/player/previous			controllers.ControlJamendo.previous()
 
-GET		/profil.html				controllers.ControlProfil.index()
-POST	/profil.html				controllers.Application.connection()
-POST	/profil.html/update			controllers.ControlProfil.update()
+GET		/profil						controllers.ControlProfil.index()
+POST	/profil						controllers.Application.connection()
+POST	/profil/update				controllers.ControlProfil.update()
 
-GET 	/ontology.html				controllers.ControlOntology.index()
+GET 	/ontology					controllers.ControlOntology.index()
 
-GET		/hypergraph.html			controllers.ControlHyperGraph.index()
+GET		/hypergraph					controllers.ControlHyperGraph.index()
 
 GET 	/sparql						controllers.ControlEndPointSparql.index()
 GET 	/sparql/response			controllers.ControlEndPointSparql.query(query: String,format: String)

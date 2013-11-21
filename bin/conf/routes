@@ -16,8 +16,8 @@ GET		/inscription.html			controllers.ControlUser.index()
 POST 	/inscription				controllers.ControlUser.newUser()
 GET		/inscription				controllers.ControlMenu.getInscriptForm()
 
-GET		/player.html				controllers.ControlJamendo.index()
-GET		/player.html/next			controllers.ControlJamendo.nextPrevious(decision: Long)
+GET		/player						controllers.ControlJamendo.index()
+GET		/player/next				controllers.ControlJamendo.nextPrevious(decision: Long)
 
 GET		/profil.html				controllers.ControlProfil.index()
 POST	/profil.html				controllers.Application.connection()

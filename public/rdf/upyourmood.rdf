@@ -15,9 +15,6 @@
       </rdf:Description>
     </rdfs:subPropertyOf>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/songTitle">
-    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/music/885803">
     <music:albumTitle rdf:resource="http://www.upyourmood.com/music/XIII"/>
     <dc:creator rdf:resource="http://www.upyourmood.com/music/PeerGynt Lobogris"/>
@@ -30,27 +27,47 @@
     <foaf:depiction rdf:resource="http://imgjam.com/albums/s111/111936/covers/1.200.jpg"/>
     <music:songTitle rdf:resource="http://www.upyourmood.com/music/1998 (Jamendo Radio Edit)"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/952121">
+    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/One"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/Salvatore Abbate"/>
+    <foaf:depiction rdf:resource="http://imgjam.com/albums/s111/111944/covers/1.200.jpg"/>
+    <music:songTitle rdf:resource="http://www.upyourmood.com/music/One"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/hasListen">
     <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/320431">
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Numbness"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s43/43228/covers/1.200.jpg"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/Kostas Antonakoglou"/>
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Disrupt the light"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/music/albumTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience8">
-        <user:hasListen>885803</user:hasListen>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience12">
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3177/2927275820_4f3cf58dd4_m.jpg</wordconnotation:makesMeThink>
-          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+          <wordconnotation:isAssociatedBy></wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>0.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6027/5918857507_ee78333c9c_m.jpg</wordconnotation:makesMeThink>
         </nicetag:makesMeFeel>
+        <user:hasListen>885803</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>chocolat</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm9.static.flickr.com/8500/8401371522_053d235569_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>320431</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience17">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>2.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm8.static.flickr.com/7175/6593196551_773ce9a518_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>885803</user:hasListen>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
@@ -59,6 +76,16 @@
         <nicetag:makesMeFeel rdf:parseType="Resource">
           <wordconnotation:makesMeThink>http://farm3.static.flickr.com/2740/4106256626_db8caec673_m.jpg</wordconnotation:makesMeThink>
           <wordconnotation:isConnoted>8.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience22">
+        <user:hasListen>885803</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3177/2927275820_4f3cf58dd4_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>4.0</wordconnotation:isConnoted>
           <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
       </rdf:Description>
@@ -74,13 +101,23 @@
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience2">
-        <user:hasListen>320431</user:hasListen>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience8">
+        <user:hasListen>885803</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3504/3280739161_3bba1c34f3_m.jpg</wordconnotation:makesMeThink>
-          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3177/2927275820_4f3cf58dd4_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
           <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience11">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy></wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>0.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6027/5918857507_ee78333c9c_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>885803</user:hasListen>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
@@ -94,13 +131,23 @@
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience19">
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>chocolat</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
-          <wordconnotation:makesMeThink>http://farm9.static.flickr.com/8500/8401371522_053d235569_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>2.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm8.static.flickr.com/7106/7000428006_dd71c3eb0d_m.jpg</wordconnotation:makesMeThink>
         </nicetag:makesMeFeel>
-        <user:hasListen>320431</user:hasListen>
+        <user:hasListen>885803</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience16">
+        <user:hasListen>885803</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6142/5919154397_b67b09e8a3_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>4.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
@@ -114,13 +161,53 @@
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience5">
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience10">
+        <user:hasListen>885803</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
-          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
-          <wordconnotation:makesMeThink>http://farm8.static.flickr.com/7268/7000428428_9a909b5d59_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6026/5919860206_1ca5b1426b_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>5.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience13">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy></wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>0.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6027/5918857507_ee78333c9c_m.jpg</wordconnotation:makesMeThink>
         </nicetag:makesMeFeel>
         <user:hasListen>885803</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience14">
+        <user:hasListen>885803</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6004/5919078573_5f087ddae6_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>1.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience18">
+        <user:hasListen>885803</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3511/3698604721_5d5a179189_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>3.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience20">
+        <user:hasListen>885803</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:makesMeThink>http://farm3.static.flickr.com/2816/9418272406_d8ce14ccb2_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>3.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
@@ -133,5 +220,66 @@
         <user:hasListen>885803</user:hasListen>
       </rdf:Description>
     </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience5">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>6.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm8.static.flickr.com/7268/7000428428_9a909b5d59_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>885803</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience9">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>2.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6004/5919078573_5f087ddae6_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>885803</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience2">
+        <user:hasListen>320431</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3504/3280739161_3bba1c34f3_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience15">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>1.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6122/5919276597_4b8f39c976_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>885803</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/songTitle">
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/user/test">
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/test/musicalExperience21">
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted>1.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6004/5919078573_5f087ddae6_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>952121</user:hasListen>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/320431">
+    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Numbness"/>
+    <foaf:depiction rdf:resource="http://imgjam.com/albums/s43/43228/covers/1.200.jpg"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/Kostas Antonakoglou"/>
+    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Disrupt the light"/>
   </rdf:Description>
 </rdf:RDF>
