@@ -19,8 +19,9 @@ public class RDFBuilding {
 	private static volatile RDFBuilding instance = null;
 	private static final String rdf_file = "public/rdf/upyourmood.rdf";
 	private static Model m=null;
-	public static int cpt = 0;
-	private final static String cfgProp = "app/models/compteur.txt";
+	public static long cpt = 0;
+	public CompteurRDF cRDF;
+	//private final static String cfgProp = "app/models/compteur.txt";
 
 	private RDFBuilding(){
 		try{
@@ -28,7 +29,7 @@ public class RDFBuilding {
 		}catch(RiotException e){
 			m = ModelFactory.createDefaultModel();
 		}
-		String chaine="";
+		/*String chaine="";
 		try{
 			InputStream ips=new FileInputStream(cfgProp); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
@@ -41,7 +42,9 @@ public class RDFBuilding {
 		}catch(IOException ex){
 			
 		}
-		cpt=Integer.parseInt(chaine.split("\\s")[1]);
+		cpt=Integer.parseInt(chaine.split("\\s")[1]);*/
+		cRDF=new CompteurRDF();
+		cpt=cRDF.select();
 	}
 
 	public final static RDFBuilding getInstance() {
@@ -144,7 +147,8 @@ public class RDFBuilding {
 		OntologyUpYourMood.MusicalExperience.addProperty(OntologyUpYourMood.hasListen, infoMusic.get(0));
 		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
 		cpt++;
-		try {
+		cRDF.update();
+		/*try {
 			FileOutputStream fichier=new FileOutputStream(cfgProp);
 			String compteur="compteur "+cpt;
 			fichier.write(compteur.getBytes());
@@ -153,7 +157,7 @@ public class RDFBuilding {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	/*private void ajouterMot_Connotation(WordConnotation word){

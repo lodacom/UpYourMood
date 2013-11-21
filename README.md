@@ -54,6 +54,20 @@ WITH (
     "User".email
    FROM "User";
    
+   3.4 CREATE TABLE "Compteur"
+(
+  compteur bigint NOT NULL,
+  CONSTRAINT compteur PRIMARY KEY (compteur)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Compteur"
+  OWNER TO loda;
+  
+  puis faire update "Compteur"
+set compteur=0; dans un terminal SQL
+   
  4. Vous êtes sous Mac ou sur Linux? Félicitation, vous pouvez tester toute notre application.
  En effet, vous devez installer le logiciel [Graphviz](http://www.graphviz.org/Download..php), 
  la "current stable release" (correspondant au GUI). Pour l'instant nous n'avons pas encore
