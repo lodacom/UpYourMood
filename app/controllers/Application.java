@@ -24,7 +24,6 @@ public class Application extends Controller {
 	
 	public static Result index() throws ClientProtocolException, IOException {
 		String user = session("connected");
-		jam.play();
 		if(user != null) {
 			return ok(index.render(maSession, jam.current()));
 		} else {

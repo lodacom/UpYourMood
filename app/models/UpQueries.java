@@ -32,12 +32,16 @@ public class UpQueries {
 	public final String prolog7 = "PREFIX nicetag: <http://ns.inria.fr/nicetag/2010/09/09/voc.html#>";
 	private Model m;
 	private HyperGraph hg;
+	public static ArrayList<ArrayList<String>> pochetteMotImage;
+	public ArrayList<String> construction;
 	
 	public UpQueries(){
 		m = ModelFactory.createOntologyModel();
 		String fil_URL = "file:public/rdf/upyourmood.rdf";
 		m.read(fil_URL);
 		hg=new HyperGraph();
+		pochetteMotImage=new ArrayList<ArrayList<String>>();
+		construction=new ArrayList<String>();
 	}
 
 	/**
@@ -45,6 +49,7 @@ public class UpQueries {
 	 * expériences musicales de tous les utilisateurs
 	 */
 	public void hyperGraph(){
+		
 		ResultSet rs=null;
 		String req1=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
 				"SELECT ?mot ?pochette ?image " +
@@ -56,7 +61,8 @@ public class UpQueries {
 				"?experi user:hasListen ?idMusic . " +
 				"?idMusic2 foaf:depiction ?pochette ." +
 				"FILTER regex(str(?idMusic2) , ?idMusic) "+
-				"}";
+				"} " +
+				"ORDER BY (?mot)";
 		Query query = QueryFactory.create(req1);
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);
 		try{
@@ -68,9 +74,12 @@ public class UpQueries {
 				String pochette=sol.get("?pochette").toString();
 				String mot=sol.get("?mot").toString();
 				String image=sol.get("?image").toString();
-				//System.out.println(pochette+"->"+mot);
-				hg.ajouterPochetteMotRelation(pochette, mot);
-				hg.ajouterMotImageRelation(mot, image);
+				construction.add(pochette);
+				construction.add(mot);
+				construction.add(image);
+				pochetteMotImage.add(construction);
+				construction=new ArrayList<String>();
+				hg.ajouterPochetteMotRelationImage();
 			}
 			hg.endGraph();
 		}finally{
@@ -86,7 +95,7 @@ public class UpQueries {
 	public void hyperGraphOfAUser(String pseudo){
 		ResultSet rs=null;
 		String req2=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
-				"SELECT ?mot ?pochette " +
+				"SELECT ?mot ?pochette ?image " +
 				"WHERE { " +
 				"?user user:hasMusicalExperience ?experi . " +
 				"?experi nicetag:makesMeFeel ?chose . " +
@@ -107,7 +116,7 @@ public class UpQueries {
 				QuerySolution sol = (QuerySolution) rs.next();
 				String pochette=sol.get("?pochette").toString();
 				String mot=sol.get("?mot").toString();
-				hg.ajouterPochetteMotRelation(pochette, mot);
+				//hg.ajouterPochetteMotRelation(pochette, mot);
 			}
 			hg.endGraph();
 		}finally{

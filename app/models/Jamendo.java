@@ -24,6 +24,22 @@ public class Jamendo {
 	 * album_image
 	 * audio
 	 */
+	public Jamendo(){
+		 idMusiques=new ArrayList<String>();
+		 artistes=new ArrayList<String>();
+		 albums=new ArrayList<String>();
+		 titres=new ArrayList<String>();
+		 pochetteAlbums=new ArrayList<String>();
+		 try {
+			play();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public void play() throws ClientProtocolException, IOException{
 		String result=JSONLoader.loadTracksJSON( TRACKS_URL +"&client_id="+CLIENT_ID);
@@ -89,7 +105,6 @@ public class Jamendo {
 	
 	private void listArtistes(){
 		List<JsonNode> liste=node.findValues("artist_name");
-		artistes=new ArrayList<String>();
 		for (JsonNode element :liste){
 			artistes.add(element.asText());
 		}
@@ -97,7 +112,6 @@ public class Jamendo {
 	
 	private void listAlbums(){
 		List<JsonNode> liste=node.findValues("album_name");
-		albums=new ArrayList<String>();
 		for (JsonNode element :liste){
 			albums.add(element.asText());
 		}
@@ -105,7 +119,6 @@ public class Jamendo {
 	
 	private void listTitre(){
 		List<JsonNode> liste=node.findValues("name");
-		titres=new ArrayList<String>();
 		for (JsonNode element :liste){
 			titres.add(element.asText());
 		}
@@ -113,7 +126,6 @@ public class Jamendo {
 	
 	private void listPochetteAlbum(){
 		List<JsonNode> liste=node.findValues("album_image");
-		pochetteAlbums=new ArrayList<String>();
 		for (JsonNode element :liste){
 			pochetteAlbums.add(element.asText());
 		}
@@ -129,7 +141,6 @@ public class Jamendo {
 	}*/
 	
 	private void listIdMusique(){
-		idMusiques=new ArrayList<String>();
 		List<JsonNode> liste=node.findValues("id");
 		for (JsonNode element :liste){
 			idMusiques.add(element.asText());

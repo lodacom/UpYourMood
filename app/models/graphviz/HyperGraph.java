@@ -9,6 +9,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
 
+import models.UpQueries;
+
 
 public class HyperGraph {
 
@@ -16,6 +18,7 @@ public class HyperGraph {
 	private ArrayList<String> hosts;
 	private ArrayList<String> hostsImages;
 	private HashMap<String,String> pochetteMot;
+	private HashMap<String,String> motImage;
 	private long nbreStruct=0;
 	private long nbreStructImage=0;
 	
@@ -24,6 +27,7 @@ public class HyperGraph {
 		hosts=new ArrayList<String>();
 		hostsImages=new ArrayList<String>();
 		pochetteMot=new HashMap<String,String>();
+		motImage=new HashMap<String, String>();
 	}
 
 	/**
@@ -38,23 +42,49 @@ public class HyperGraph {
 	 * @param pochette la pochette en question
 	 * @param mot le mot en question
 	 */
-	public void ajouterPochetteMotRelation(String pochette,String mot){
-		if (pochetteMot.get(pochette)==null){
-			pochetteMot.put(pochette, mot);
-			getFile(pochette);
-			gv.addln("struct"+nbreStruct+"->"+mot+";");//PS: ne pas oublier le ; dans la string
-		}else{
-			if (!pochetteMot.get(pochette).equals(mot)){
-				pochetteMot.put(pochette, mot);
-				getFile(pochette);
-				gv.addln("struct"+nbreStruct+"->"+mot+";");//PS: ne pas oublier le ; dans la string
+	public void ajouterPochetteMotRelationImage(){
+		ArrayList<ArrayList<String>> recup=UpQueries.pochetteMotImage;
+		int i=0;
+		String mot="",pochette="",image;
+		for (ArrayList<String> tab: recup){
+			for (String rec: tab){
+				switch (i) {
+				case 0:
+					pochette=rec;
+					getFile(pochette);
+					i++;
+					continue;
+				case 1:
+					mot=rec;
+					if (pochetteMot.get(pochette)==null){
+						gv.addln("struct"+nbreStruct+"->"+mot);
+						pochetteMot.put(pochette, mot);
+					}else{
+						if (!pochetteMot.get(pochette).equals(mot)){
+							gv.addln("struct"+nbreStruct+"->"+mot);
+							pochetteMot.put(pochette, mot);
+						}
+					}
+					i++;
+					continue;
+				case 2:
+					image=rec;
+					if (motImage.get(mot)==null){
+						getFileImage(image);
+						gv.addln(mot+"->imag"+nbreStructImage);
+						motImage.put(mot, image);
+					}else{
+						if (!motImage.get(mot).equals(image)){
+							getFileImage(image);
+							gv.addln(mot+"->imag"+nbreStructImage);
+							motImage.put(mot, image);
+						}
+					}
+					i=0;
+					continue;
+				}
 			}
 		}
-	}
-
-	public void ajouterMotImageRelation(String mot,String image){
-		getFileImage(image);
-		gv.addln(mot+"->imag"+nbreStructImage+";");
 	}
 	
 	/**
@@ -62,7 +92,7 @@ public class HyperGraph {
 	 */
 	public void endGraph(){
 		gv.addln(gv.end_graph());
-		//System.out.println(gv.getDotSource());
+		System.out.println(gv.getDotSource());
 		String type = "jpg";
 		String representationType="circo";
 		File out = new File("public/graph/hypergraph." + type);
