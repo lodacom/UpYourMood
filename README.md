@@ -74,3 +74,7 @@ set compteur=0; dans un terminal SQL
  réussi à trouver la bonne configuration (dans le fichier config.properties dans le package 
  app/models/graphviz) pour Windows. Si de votre côté vous arrivez à faire fonctionner et à 
  obtenir un graphe "propre" merci de nous communiquez le configuration requise.   
+ 
+ 5. Pour pouvoir obtenir un graphe contenant les images des pochettes d'album et les images
+ choisies par le ou les utilisateurs, veuillez créer dans le dossier un public deux sous-dossiers.
+ Le premier s'appelant downloadImages le deuxième pochette (merci de respecter la casse).
