@@ -15,7 +15,7 @@ public class ControlEndPointSparql extends Controller{
 	static Form<EndPointQueries> edqForm= Form.form(EndPointQueries.class);
 	
 	public static Result index(){
-		return ok(endpoint_sparql.render());
+		return ok(endpoint_sparql.render(Application.maSession));
 	}
 	
 	public static Result query(String query,String format){
@@ -41,7 +41,7 @@ public class ControlEndPointSparql extends Controller{
 			if(format.contains("rdf+xml")){
 				
 			}
-			return ok(endpoint_sparql.render());
+			return ok(endpoint_sparql.render(Application.maSession));
 		//}
 	}
 }

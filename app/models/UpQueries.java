@@ -1,8 +1,7 @@
 package models;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import models.graphviz.HyperGraph;
 
@@ -32,16 +31,17 @@ public class UpQueries {
 	public final String prolog7 = "PREFIX nicetag: <http://ns.inria.fr/nicetag/2010/09/09/voc.html#>";
 	private Model m;
 	private HyperGraph hg;
-	public static ArrayList<ArrayList<String>> pochetteMotImage;
-	public ArrayList<String> construction;
+	public RDFBuildingColors rdfBC=RDFBuildingColors.getInstance();
+	public HashMap<Emotion,Integer> emotion;
+	public HashMap<Think,Integer> think;
 	
 	public UpQueries(){
 		m = ModelFactory.createOntologyModel();
 		String fil_URL = "file:public/rdf/upyourmood.rdf";
 		m.read(fil_URL);
 		hg=new HyperGraph();
-		pochetteMotImage=new ArrayList<ArrayList<String>>();
-		construction=new ArrayList<String>();
+		emotion=new HashMap<Emotion,Integer>();
+		think=new HashMap<Think,Integer>();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class UpQueries {
 		
 		ResultSet rs=null;
 		String req1=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
-				"SELECT ?mot ?pochette ?image " +
+				"SELECT ?mot ?pochette ?image ?idMusic " +
 				"WHERE { " +
 				"?user user:hasMusicalExperience ?experi . " +
 				"?experi nicetag:makesMeFeel ?chose . " +
@@ -61,26 +61,26 @@ public class UpQueries {
 				"?experi user:hasListen ?idMusic . " +
 				"?idMusic2 foaf:depiction ?pochette ." +
 				"FILTER regex(str(?idMusic2) , ?idMusic) "+
-				"} " +
-				"ORDER BY (?mot)";
+				"} ";
 		Query query = QueryFactory.create(req1);
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);
 		try{
 			rs = qexec.execSelect() ;
 			
 			hg.startGraph();
+			int i=0;
 			while(rs.hasNext()) {
 				QuerySolution sol = (QuerySolution) rs.next();
 				String pochette=sol.get("?pochette").toString();
 				String mot=sol.get("?mot").toString();
 				String image=sol.get("?image").toString();
-				construction.add(pochette);
-				construction.add(mot);
-				construction.add(image);
-				pochetteMotImage.add(construction);
-				construction=new ArrayList<String>();
-				hg.ajouterPochetteMotRelationImage();
+				String idMusic=sol.get("?idMusic").toString();
+				String couleur=rdfBC.getMaxColorMusic(idMusic);
+				emotion.put(new Emotion(pochette,mot,couleur), i);
+				think.put(new Think(mot,image),i);
+				i++;
 			}
+			hg.ajouterPochetteMotRelationImage(emotion,think);
 			hg.endGraph();
 		}finally{
 			qexec.close();
@@ -95,7 +95,7 @@ public class UpQueries {
 	public void hyperGraphOfAUser(String pseudo){
 		ResultSet rs=null;
 		String req2=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
-				"SELECT ?mot ?pochette ?image " +
+				"SELECT ?mot ?pochette ?image ?idMusic ?user " +
 				"WHERE { " +
 				"?user user:hasMusicalExperience ?experi . " +
 				"?experi nicetag:makesMeFeel ?chose . " +
@@ -112,12 +112,21 @@ public class UpQueries {
 			rs = qexec.execSelect() ;
 			
 			hg.startGraph();
+			int i=0;
 			while(rs.hasNext()) {
 				QuerySolution sol = (QuerySolution) rs.next();
 				String pochette=sol.get("?pochette").toString();
 				String mot=sol.get("?mot").toString();
-				//hg.ajouterPochetteMotRelation(pochette, mot);
+				String image=sol.get("?image").toString();
+				String idMusic=sol.get("?idMusic").toString();
+				String user=sol.get("?user").toString();
+				String couleur=rdfBC.getMaxColorMusicByUser(idMusic,user);
+				emotion.put(new Emotion(pochette,mot,couleur), i);
+				think.put(new Think(mot,image),i);
+				i++;
+				
 			}
+			hg.ajouterPochetteMotRelationImage(emotion,think);
 			hg.endGraph();
 		}finally{
 			qexec.close();

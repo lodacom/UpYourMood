@@ -14,6 +14,6 @@ public class ControlHyperGraph extends Controller{
 		//hg.buildHyperGraph();
 		uq=new UpQueries();
 		uq.hyperGraph();
-		return ok(hypergraph.render());
+		return ok(hypergraph.render(Application.maSession));
 	}
 }
