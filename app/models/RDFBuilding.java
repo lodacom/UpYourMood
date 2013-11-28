@@ -146,7 +146,7 @@ public class RDFBuilding {
 		OntologyUpYourMood.MusicalExperience.addProperty(NiceTag.makesMeFeel,
 				m.createResource()
 				.addProperty(OntologyUpYourMood.isAssociatedBy, word.getMot())
-				.addProperty(OntologyUpYourMood.isConnoted, String.valueOf(word.getConnotation()))
+				.addProperty(OntologyUpYourMood.isConnoted, OntologyUpYourMood.connotation)
 				.addProperty(OntologyUpYourMood.makesMeThink, urlImage));
 		OntologyUpYourMood.MusicalExperience.addProperty(OntologyUpYourMood.hasListen, infoMusic.get(0));
 		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
