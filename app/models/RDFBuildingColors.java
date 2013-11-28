@@ -3,6 +3,8 @@ package models;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.management.ObjectName;
+
 import org.apache.jena.riot.RiotException;
 
 import com.hp.hpl.jena.query.Query;
@@ -26,18 +28,8 @@ public class RDFBuildingColors {
 	private static RDFBuildingColors instance;
 	private static Model m = null;
 	private static final String rdf_filecolors = "public/rdf/uymcolors.rdf";
-	private static final String color=OntologyUpYourMood.getUym()+"color/";
-	
-	private static Property isColoredBy =null;
-	private static Property givenBy =null;
-	private static Property isSelected =null;
-	private static Property hasValue =null;
 	
 	private static String prefixs = null;
-	
-	private Resource Music=null;
-	private Resource User =null;
-	private Resource Color =null;
 	
 	private RDFBuildingColors(){
 		try{
@@ -56,13 +48,13 @@ public class RDFBuildingColors {
 					m.setNsPrefix("music", OntologyUpYourMood.getUymMusic());
 					m.setNsPrefix("user", OntologyUpYourMood.getUymUser());
 					m.setNsPrefix("rdf", RDF.getURI());
-					m.setNsPrefix("color", color);
-					isColoredBy =m.createProperty(OntologyUpYourMood.getUymMusic()+"isColoredBy");
-					givenBy =m.createProperty(OntologyUpYourMood.getUymUser()+"givenBy");
-					isSelected =m.createProperty(color+"isSelected");
-					hasValue =m.createProperty(color+"hasValue");
+					m.setNsPrefix("color", OntologyUpYourMood.getUymColor());
+					OntologyUpYourMood.isColoredBy =m.createProperty(OntologyUpYourMood.getUymMusic()+"isColoredBy");
+					OntologyUpYourMood.givenBy =m.createProperty(OntologyUpYourMood.getUymUser()+"givenBy");
+					OntologyUpYourMood.isSelected =m.createProperty(OntologyUpYourMood.getUymColor()+"isSelected");
+					OntologyUpYourMood.hasValue =m.createProperty(OntologyUpYourMood.getUymColor()+"hasValue");
 					String NL = System.getProperty("line.separator");
-					prefixs = "PREFIX uym: <"+OntologyUpYourMood.getUym()+">"+NL+"PREFIX music: <"+OntologyUpYourMood.getUymMusic()+">"+NL+"PREFIX user: <"+OntologyUpYourMood.getUymUser()+">"+NL+"PREFIX color: <"+color+">"+NL;
+					prefixs = "PREFIX uym: <"+OntologyUpYourMood.getUym()+">"+NL+"PREFIX music: <"+OntologyUpYourMood.getUymMusic()+">"+NL+"PREFIX user: <"+OntologyUpYourMood.getUymUser()+">"+NL+"PREFIX color: <"+OntologyUpYourMood.getUymColor()+">"+NL;
 					
 				}
 			}
@@ -86,8 +78,8 @@ public class RDFBuildingColors {
 	}
 	
 	private Boolean incrExistColor(String music_number, String pseudo, String color_value){
-		Resource Color = m.getResource(color+music_number+"/"+pseudo+"/"+color_value);
-		Property prop = m.getProperty(color+"isSelected");
+		Resource Color = m.getResource(OntologyUpYourMood.getUymColor()+music_number+"/"+pseudo+"/"+color_value);
+		Property prop = m.getProperty(OntologyUpYourMood.getUymColor()+"isSelected");
 		Statement stmt = m.getProperty(Color, prop);
 		
 		if (stmt!=null){
@@ -100,13 +92,13 @@ public class RDFBuildingColors {
 	}
 	
 	private void addColor(String music_number, String pseudo, String color_value){
-		Music = m.createResource(OntologyUpYourMood.getUymMusic()+music_number);
-		User = m.createResource(OntologyUpYourMood.getUymUser()+pseudo);
-		Color = m.createResource(color+music_number+"/"+pseudo+"/"+color_value);
-		m.add(Music, isColoredBy, Color);
-		m.add(Color, givenBy, User);
-		m.add(m.createLiteralStatement(Color,  isSelected, 1));
-		m.add(m.createLiteralStatement(Color,  hasValue, color_value));
+		OntologyUpYourMood.Music = m.createResource(OntologyUpYourMood.getUymMusic()+music_number);
+		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+pseudo);
+		OntologyUpYourMood.Color = m.createResource(OntologyUpYourMood.getUymColor()+music_number+"/"+pseudo+"/"+color_value);
+		m.add(OntologyUpYourMood.Music, OntologyUpYourMood.isColoredBy, OntologyUpYourMood.Color);
+		m.add(OntologyUpYourMood.Color, OntologyUpYourMood.givenBy, OntologyUpYourMood.User);
+		m.add(m.createLiteralStatement(OntologyUpYourMood.Color,  OntologyUpYourMood.isSelected, 1));
+		m.add(m.createLiteralStatement(OntologyUpYourMood.Color,  OntologyUpYourMood.hasValue, color_value));
 	}
 	
 	public String getMaxColorMusic(String music_number){
