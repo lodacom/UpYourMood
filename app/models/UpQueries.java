@@ -191,5 +191,49 @@ public class UpQueries {
 				"WHERE { " +
 				"?user music:hasMusicalExperience ?music "+
 				"}";*/
+		
+		// Requête permettant de récupérer les musiques les mieux notées pour un utilisateur donné.
+		String queryAverageTop10 = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
+				"SELECT ?idmusique (AVG(?connotation) AS ?moyenne_connotation ) "+
+				"WHERE { " +
+				"?user user:hasMusicalExperience ?experi . " +
+				"?experi nicetag:makesMeFeel ?chose . " +
+				"?chose wordconnotation:isConnoted ?connotation . " +
+				"?experi user:hasListen ?idmusique ."+
+				"?chose wordconnotation:makesMeThink ?url_image ."+
+				//"FILTER regex(?user, \"^user\")"+
+				"}"+
+				"GROUP BY ?idmusique ?user "+
+				"ORDER BY DESC (?moyenne_connotation) "+
+				"LIMIT 10";
+		
+		// Requête permettant de récupérer l'ensemble des urls liées aux musiques
+		String queryMusicLinksToImage = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
+				"SELECT ?idmusique ?url_image "+
+				"WHERE { " +
+				"?user user:hasMusicalExperience ?experi . " +
+				"?experi nicetag:makesMeFeel ?chose . " +
+				"?experi user:hasListen ?idmusique ."+
+				"?chose wordconnotation:makesMeThink ?url_image " +
+				"}";
+		
+		// Tentative de fusion des 2 requêtes précédentes.
+		String test = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
+				"SELECT ?idmusique (AVG(?connotation) AS ?moyenne_connotation ) (SAMPLE(?url_image) AS ?url_image2) "+
+				"WHERE { "+
+				"?user user:hasMusicalExperience ?experi . " +
+				"?experi nicetag:makesMeFeel ?chose . " +
+				"?experi user:hasListen ?idmusique ."+
+				"?chose wordconnotation:isConnoted ?connotation . " +
+				" { "+
+				"SELECT ?url_image WHERE {"+
+				"?user user:hasMusicalExperience ?experi . " +
+				"?experi nicetag:makesMeFeel ?chose . " +
+				"?experi user:hasListen ?idmusique ."+
+				"?chose wordconnotation:makesMeThink ?url_image " +
+				"} "+
+				"} "+
+				"} GROUP BY ?idmusique "+
+				"ORDER BY DESC (?moyenne_connotation) ";
 	}
 }
