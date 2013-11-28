@@ -172,53 +172,67 @@ public class UpQueries {
 		return epq;
 	}
 	
-	public void truc(){
-		/*
-		 * les mots rentrés par tous les utilisateurs 
-		 * pour telle musique
-		 */
-		String req1=prolog5 + NL + prolog7 + NL + prolog6 + NL +
-				"SELECT ?user ?mot ?truc " +
-				"WHERE { " +
-				"?user user:hasMusicalExperience ?experi . " +
-				"?experi nicetag:makesMeFeel ?chose . " +
-				"?chose wordconnotation:isAssociatedBy ?mot . " +
-				"?experi user:hasListen ?truc" +
-				"}";
-
-		/*String req3=prolog7 + NL + prolog4 + NL + prolog3 + NL +
-				"SELECT ?user " +
-				"WHERE { " +
-				"?user music:hasMusicalExperience ?music "+
-				"}";*/
+	public void listenAgainJamendo(String pseudo){
+		ResultSet rs=null;
+		ResultSet rs2=null;
+		String user = "<"+OntologyUpYourMood.getUymUser()+pseudo+">";
 		
 		// Requête permettant de récupérer les musiques les mieux notées pour un utilisateur donné.
 		String queryAverageTop10 = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
 				"SELECT ?idmusique (AVG(?connotation) AS ?moyenne_connotation ) "+
 				"WHERE { " +
-				"?user user:hasMusicalExperience ?experi . " +
+				user+" user:hasMusicalExperience ?experi . " +
 				"?experi nicetag:makesMeFeel ?chose . " +
 				"?chose wordconnotation:isConnoted ?connotation . " +
 				"?experi user:hasListen ?idmusique ."+
 				"?chose wordconnotation:makesMeThink ?url_image ."+
-				//"FILTER regex(?user, \"^user\")"+
 				"}"+
 				"GROUP BY ?idmusique ?user "+
 				"ORDER BY DESC (?moyenne_connotation) "+
 				"LIMIT 10";
 		
-		// Requête permettant de récupérer l'ensemble des urls liées aux musiques
-		String queryMusicLinksToImage = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
-				"SELECT ?idmusique ?url_image "+
-				"WHERE { " +
-				"?user user:hasMusicalExperience ?experi . " +
-				"?experi nicetag:makesMeFeel ?chose . " +
-				"?experi user:hasListen ?idmusique ."+
-				"?chose wordconnotation:makesMeThink ?url_image " +
-				"}";
+		Query query = QueryFactory.create(queryAverageTop10);
+		QueryExecution qexec = QueryExecutionFactory.create(query, m);
+		
+		try{
+			rs = qexec.execSelect() ;
+			while(rs.hasNext()){
+				QuerySolution sol = (QuerySolution) rs.next();
+				String idmusique=sol.get("?idmusique").toString();
+				
+				// Requête permettant de récupérer l'ensemble des urls liées aux musiques
+				String queryMusicLinksToImage = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
+						"SELECT ?idmusique ?url_image "+
+						"WHERE { " +
+						user+" user:hasMusicalExperience ?experi . " +
+						"?experi nicetag:makesMeFeel ?chose . " +
+						"?experi user:hasListen ?idmusique ."+
+						"?chose wordconnotation:makesMeThink ?url_image " +
+						"FILTER (str(?idmusique)="+idmusique+") "+
+						"}";
+				
+				Query query2 = QueryFactory.create(queryMusicLinksToImage);
+				QueryExecution qexec2 = QueryExecutionFactory.create(query2, m);
+				
+				try{
+					rs2=qexec2.execSelect();
+					while(rs2.hasNext()){
+						QuerySolution sol2 = (QuerySolution) rs2.next();
+						String idmusique2=sol2.get("?idmusique").toString();
+						String image=sol2.get("?url_image").toString();
+						
+					}
+				}finally{
+					qexec2.close();
+				}
+			}
+		}finally{
+			qexec.close();
+		}
+		
 		
 		// Tentative de fusion des 2 requêtes précédentes.
-		String test = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
+		/*String test = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
 				"SELECT ?idmusique (AVG(?connotation) AS ?moyenne_connotation ) (SAMPLE(?url_image) AS ?url_image2) "+
 				"WHERE { "+
 				"?user user:hasMusicalExperience ?experi . " +
@@ -234,6 +248,6 @@ public class UpQueries {
 				"} "+
 				"} "+
 				"} GROUP BY ?idmusique "+
-				"ORDER BY DESC (?moyenne_connotation) ";
+				"ORDER BY DESC (?moyenne_connotation) ";*/
 	}
 }

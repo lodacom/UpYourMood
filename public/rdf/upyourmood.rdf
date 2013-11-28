@@ -8,6 +8,12 @@
     xmlns:user="http://www.upyourmood.com/user/"
     xmlns:music="http://www.upyourmood.com/music/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/23962">
+    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Attento"/>
+    <foaf:depiction rdf:resource="http://imgjam.com/albums/s3/3310/covers/1.200.jpg"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/non giovanni"/>
+    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/&quot;estratti&quot; da ballate di fine inverno"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/hasListen">
     <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
   </rdf:Description>
@@ -24,32 +30,45 @@
   <rdf:Description rdf:about="http://www.upyourmood.com/music/songTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/1082484">
+    <music:songTitle rdf:resource="http://www.upyourmood.com/music/JUMP IN MY SOUL"/>
+    <foaf:depiction rdf:resource="http://imgjam.com/albums/s128/128962/covers/1.200.jpg"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/marco sammartino"/>
+    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Ce n&apos;est pas du Rock"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
-        <user:hasListen>885803</user:hasListen>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience2">
+        <user:hasListen>1082484</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:makesMeThink>http://farm1.static.flickr.com/49/110387354_2f9f915718_m.jpg</wordconnotation:makesMeThink>
-          <wordconnotation:isConnoted>5.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm2.static.flickr.com/1226/4729420309_2dc48e63b8_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+          >7.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>soul</wordconnotation:isAssociatedBy>
+        </nicetag:makesMeFeel>
+      </rdf:Description>
+    </user:hasMusicalExperience>
+    <user:hasMusicalExperience>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
+        <user:hasListen>23962</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3334/3245157256_4187d7bec7_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+          >7.0</wordconnotation:isConnoted>
           <wordconnotation:isAssociatedBy>koala</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
       <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience0">
-        <user:hasListen>885803</user:hasListen>
+        <user:hasListen>23962</user:hasListen>
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:makesMeThink>http://farm4.static.flickr.com/3626/3280730785_211a7b9eac_m.jpg</wordconnotation:makesMeThink>
-          <wordconnotation:isConnoted>7.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>guitare</wordconnotation:isAssociatedBy>
+          <wordconnotation:makesMeThink>http://farm8.static.flickr.com/7002/6534377289_4f1d96eef5_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:isConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+          >6.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>peinture</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
       </rdf:Description>
     </user:hasMusicalExperience>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/885803">
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Seeker"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s104/104158/covers/1.200.jpg"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/PeerGynt Lobogris"/>
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/XIII"/>
   </rdf:Description>
 </rdf:RDF>
