@@ -34,6 +34,7 @@ public class UpQueries {
 	public RDFBuildingColors rdfBC=RDFBuildingColors.getInstance();
 	public HashMap<Emotion,Integer> emotion;
 	public HashMap<Think,Integer> think;
+	private static String quoteCharacter="'";
 	
 	public UpQueries(){
 		m = ModelFactory.createOntologyModel();
@@ -177,6 +178,11 @@ public class UpQueries {
 		ResultSet rs2=null;
 		String user = "<"+OntologyUpYourMood.getUymUser()+pseudo+">";
 		
+		ConnectionBase.open();
+		ConnectionBase.requete("CREATE TABLE "+pseudo+" (idmusique character varying(255),"
+				+ "image character varying(255))");
+		
+	
 		// Requête permettant de récupérer les musiques les mieux notées pour un utilisateur donné.
 		String queryAverageTop10 = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
 				"SELECT ?idmusique (AVG(?connotation) AS ?moyenne_connotation ) "+
@@ -208,7 +214,7 @@ public class UpQueries {
 						"?experi nicetag:makesMeFeel ?chose . " +
 						"?experi user:hasListen ?idmusique ."+
 						"?chose wordconnotation:makesMeThink ?url_image " +
-						"FILTER (str(?idmusique)="+idmusique+") "+
+						"FILTER (str(?idmusique)=\""+idmusique+"\") "+
 						"}";
 				
 				Query query2 = QueryFactory.create(queryMusicLinksToImage);
@@ -220,7 +226,10 @@ public class UpQueries {
 						QuerySolution sol2 = (QuerySolution) rs2.next();
 						String idmusique2=sol2.get("?idmusique").toString();
 						String image=sol2.get("?url_image").toString();
-						
+						//System.out.println(idmusique2+" "+image);
+						ConnectionBase.requete("INSERT INTO "+pseudo+" (idmusique,image) "
+								+ "VALUES ("+quoteCharacter+idmusique2+quoteCharacter+","+
+								quoteCharacter+image+quoteCharacter+")");
 					}
 				}finally{
 					qexec2.close();
@@ -230,7 +239,7 @@ public class UpQueries {
 			qexec.close();
 		}
 		
-		
+		ConnectionBase.close();
 		// Tentative de fusion des 2 requêtes précédentes.
 		/*String test = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
 				"SELECT ?idmusique (AVG(?connotation) AS ?moyenne_connotation ) (SAMPLE(?url_image) AS ?url_image2) "+
