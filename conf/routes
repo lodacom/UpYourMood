@@ -32,3 +32,4 @@ GET		/hypergraph					controllers.ControlHyperGraph.index()
 GET 	/sparql						controllers.ControlEndPointSparql.index()
 GET 	/sparql/response			controllers.ControlEndPointSparql.query(query: String,format: String)
 
+GET		/listenagain				controllers.ControlListenAgain.index()
