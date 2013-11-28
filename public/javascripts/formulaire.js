@@ -19,7 +19,7 @@ $(function(){
 			$('#words').append('<span>'+ sentiment + '</span>');
 			cleanForm();
 		}).fail(function() {
-			alert('Une erreur c\'est produite pendant la validation');
+			alert('Une erreur s\'est produite pendant la validation');
 		});
 		
 		$('#choix_image').dialog('close');   
@@ -52,7 +52,7 @@ function sendTo()
       		//CAS NORMAL
       		else
       		{      			
-	      		var content = '<p>Cliquez sur l\'image correspondant à ce que le mot que vous venez de saisir vous fait penser:</p><p>';
+	      		var content = '<p>Cliquez sur l\'image qui pour vous correspond au mieux au mot que vous venez de saisir :</p><p>';
 	      		
 	      		for(i in response)
 	  			{
@@ -61,7 +61,7 @@ function sendTo()
 	  			}
 	      		content += '</p>';
 	      				
-	      		getPopUpChoixImage().html(content).dialog({ width: 800, title: "Choississez une image:" });
+	      		getPopUpChoixImage().html(content).dialog({ width: 800, title: "Choisissez une image:" });
       		}
         });
 	}
