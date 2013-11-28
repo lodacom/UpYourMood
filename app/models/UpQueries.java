@@ -179,6 +179,7 @@ public class UpQueries {
 		String user = "<"+OntologyUpYourMood.getUymUser()+pseudo+">";
 		
 		ConnectionBase.open();
+		ConnectionBase.requete("DROP TABLE IF EXISTS "+pseudo);
 		ConnectionBase.requete("CREATE TABLE "+pseudo+" (idmusique character varying(255),"
 				+ "image character varying(255))");
 		

@@ -142,6 +142,7 @@ public class Application extends Controller {
 		String sentimentR=recup.get("TransSentiment")[0];
 		String valeurR=recup.get("TransValeur")[0];
 		String urlR=recup.get("TransUrlImage")[0];
+		
 		addToRDF(sentimentR, Integer.parseInt(valeurR), urlR);
 		//System.out.println(sentimentR+" "+valeurR+" "+urlR);
 		return ok("");
