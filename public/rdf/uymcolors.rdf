@@ -4,33 +4,13 @@
     xmlns:color="http://www.upyourmood.com/color/"
     xmlns:user="http://www.upyourmood.com/user/"
     xmlns:music="http://www.upyourmood.com/music/">
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/952121">
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/23962">
     <music:isColoredBy>
-      <rdf:Description rdf:about="http://www.upyourmood.com/color/952121/guest/#00FF7F">
+      <rdf:Description rdf:about="http://www.upyourmood.com/color/23962/guest/#FF8C00">
         <color:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >#00FF7F</color:hasValue>
+        >#FF8C00</color:hasValue>
         <color:isSelected rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</color:isSelected>
-        <user:givenBy rdf:resource="http://www.upyourmood.com/user/guest"/>
-      </rdf:Description>
-    </music:isColoredBy>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/885803">
-    <music:isColoredBy>
-      <rdf:Description rdf:about="http://www.upyourmood.com/color/885803/guest/#BA55D3">
-        <color:isSelected rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >2</color:isSelected>
-        <color:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >#BA55D3</color:hasValue>
-        <user:givenBy rdf:resource="http://www.upyourmood.com/user/guest"/>
-      </rdf:Description>
-    </music:isColoredBy>
-    <music:isColoredBy>
-      <rdf:Description rdf:about="http://www.upyourmood.com/color/885803/guest/#00008B">
-        <color:isSelected rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
-        >3</color:isSelected>
-        <color:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >#00008B</color:hasValue>
         <user:givenBy rdf:resource="http://www.upyourmood.com/user/guest"/>
       </rdf:Description>
     </music:isColoredBy>

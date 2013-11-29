@@ -31,7 +31,7 @@ public class UpQueries {
 	public final String prolog7 = "PREFIX nicetag: <http://ns.inria.fr/nicetag/2010/09/09/voc.html#>";
 	private Model m;
 	private HyperGraph hg;
-	public RDFBuildingColors rdfBC=RDFBuildingColors.getInstance();
+	public RDFBuildingColors rdfBC;
 	public HashMap<Emotion,Integer> emotion;
 	public HashMap<Think,Integer> think;
 	private static String quoteCharacter="'";
@@ -43,6 +43,7 @@ public class UpQueries {
 		hg=new HyperGraph();
 		emotion=new HashMap<Emotion,Integer>();
 		think=new HashMap<Think,Integer>();
+		rdfBC=RDFBuildingColors.getInstance();
 	}
 
 	/**
@@ -77,6 +78,7 @@ public class UpQueries {
 				String image=sol.get("?image").toString();
 				String idMusic=sol.get("?idMusic").toString();
 				String couleur=rdfBC.getMaxColorMusic(idMusic);
+				//System.out.println(couleur);
 				emotion.put(new Emotion(pochette,mot,couleur), i);
 				think.put(new Think(mot,image),i);
 				i++;

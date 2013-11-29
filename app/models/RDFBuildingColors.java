@@ -24,13 +24,13 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 
 public class RDFBuildingColors {
-	
+
 	private static RDFBuildingColors instance;
 	private static Model m = null;
 	private static final String rdf_filecolors = "public/rdf/uymcolors.rdf";
-	
+
 	private static String prefixs = null;
-	
+
 	private RDFBuildingColors(){
 		try{
 			m=FileManager.get().loadModel(rdf_filecolors);
@@ -38,7 +38,7 @@ public class RDFBuildingColors {
 			m = ModelFactory.createDefaultModel();
 		}		
 	}
-	
+
 	public final static RDFBuildingColors getInstance() {
 		if (RDFBuildingColors.instance == null) {
 			synchronized(RDFBuildingColors.class) {
@@ -55,13 +55,13 @@ public class RDFBuildingColors {
 					OntologyUpYourMood.hasValue =m.createProperty(OntologyUpYourMood.getUymColor()+"hasValue");
 					String NL = System.getProperty("line.separator");
 					prefixs = "PREFIX uym: <"+OntologyUpYourMood.getUym()+">"+NL+"PREFIX music: <"+OntologyUpYourMood.getUymMusic()+">"+NL+"PREFIX user: <"+OntologyUpYourMood.getUymUser()+">"+NL+"PREFIX color: <"+OntologyUpYourMood.getUymColor()+">"+NL;
-					
+
 				}
 			}
 		}
 		return RDFBuildingColors.instance;
 	}
-	
+
 	public void rdfUYMAddColor(String music_number, String pseudo, String color_value){
 		if (!this.incrExistColor(music_number, pseudo, color_value)){
 			this.addColor(music_number, pseudo, color_value);
@@ -76,21 +76,21 @@ public class RDFBuildingColors {
 		}
 
 	}
-	
+
 	private Boolean incrExistColor(String music_number, String pseudo, String color_value){
 		Resource Color = m.getResource(OntologyUpYourMood.getUymColor()+music_number+"/"+pseudo+"/"+color_value);
 		Property prop = m.getProperty(OntologyUpYourMood.getUymColor()+"isSelected");
 		Statement stmt = m.getProperty(Color, prop);
-		
+
 		if (stmt!=null){
 			RDFNode object = stmt.getObject();
 			stmt.changeLiteralObject(object.asLiteral().getInt()+1);
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	private void addColor(String music_number, String pseudo, String color_value){
 		OntologyUpYourMood.Music = m.createResource(OntologyUpYourMood.getUymMusic()+music_number);
 		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+pseudo);
@@ -100,12 +100,12 @@ public class RDFBuildingColors {
 		m.add(m.createLiteralStatement(OntologyUpYourMood.Color,  OntologyUpYourMood.isSelected, 1));
 		m.add(m.createLiteralStatement(OntologyUpYourMood.Color,  OntologyUpYourMood.hasValue, color_value));
 	}
-	
+
 	public String getMaxColorMusic(String music_number){
 		String maxcolor = "#FFFFFF";
 		Integer value = 0;
 		String music = "<"+OntologyUpYourMood.getUymMusic()+music_number+">";
-		
+
 		String str = prefixs + 
 				"SELECT ?value (SUM(?times) AS ?t) WHERE {"+
 				music+" music:isColoredBy ?c ."+
@@ -115,25 +115,30 @@ public class RDFBuildingColors {
 		Query query = QueryFactory.create(str);
 		QueryExecution execquery = QueryExecutionFactory.create(query, m);
 		ResultSet rs = execquery.execSelect() ;
-        while (rs.hasNext())
-        { 
-            	QuerySolution s = rs.nextSolution();
-            	Integer v = s.get("?t").asLiteral().getInt();
-            	if (v > value){
-            		value = v;
-            		maxcolor = s.get("?value").asLiteral().getString();
-            	}
-        }
+		while (rs.hasNext())
+		{ 
+			QuerySolution s = rs.nextSolution();
+			RDFNode r=s.get("?t");
+			if (r!=null){
+				Integer v = s.get("?t").asLiteral().getInt();
+				
+				if (v > value){
+					value = v;
+					maxcolor = s.get("?value").asLiteral().getString();
+				}
+
+			}
+		}
 		execquery.close();
 		return maxcolor;
 	}
-	
+
 	public String getMaxColorMusicByUser(String music_number, String pseudo){
 		String maxcolor = "#FFFFFF";
 		Integer value = 0;
 		String music = "<"+OntologyUpYourMood.getUymMusic()+music_number+">";
 		String user = "<"+OntologyUpYourMood.getUymUser()+pseudo+">";
-		
+
 		String str = prefixs + 
 				"SELECT ?value ?times WHERE {"+
 				music+" music:isColoredBy ?c ."+
@@ -144,15 +149,19 @@ public class RDFBuildingColors {
 		Query query = QueryFactory.create(str);
 		QueryExecution execquery = QueryExecutionFactory.create(query, m);
 		ResultSet rs = execquery.execSelect() ;
-        while (rs.hasNext())
-        { 
-            	QuerySolution s = rs.nextSolution();
-            	Integer v = s.get("?times").asLiteral().getInt();
-            	if (v > value){
-            		value = v;
-            		maxcolor = s.get("?value").asLiteral().getString();
-            	}
-        }
+		while (rs.hasNext())
+		{ 
+			QuerySolution s = rs.nextSolution();
+			RDFNode r=s.get("?t");
+			if (r!=null){
+				Integer v = s.get("?times").asLiteral().getInt();
+			
+				if (v > value){
+					value = v;
+					maxcolor = s.get("?value").asLiteral().getString();
+				}
+			}
+		}
 		execquery.close();
 		return maxcolor;
 	}
