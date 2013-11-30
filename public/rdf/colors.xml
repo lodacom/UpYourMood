@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<colors>
+	<color hexadecimal="#FFDEAD" string="navajowhite" />
+	<color hexadecimal="#FFFF00" string="yellow" />
+	<color hexadecimal="#FFD700" string="gold" />
+	<color hexadecimal="#FFA500" string="orange" />
+	<color hexadecimal="#DAA520" string="goldenrod" />
+	<color hexadecimal="#FF8C00" string="darkorange" />
+	<color hexadecimal="#FF7F50" string="coral" />
+
+	<color hexadecimal="#FFFFFF" string="gray100" />
+	<color hexadecimal="#C0C0C" string="gray" />
+	<color hexadecimal="#D3D3D3" string="lightgray" />
+	<color hexadecimal="#708090" string="slategray" />
+	<color hexadecimal="#808080" string="grey" />
+	<color hexadecimal="#696969" string="dimgray" />
+	<color hexadecimal="#000000" string="black" />
+
+	<color hexadecimal="#FFE4E1" string="mistyrose" />
+	<color hexadecimal="#FFC0CB" string="pink" />
+	<color hexadecimal="#FFB6C1" string="lightpink" />
+	<color hexadecimal="#FF00FF" string="magenta" />
+	<color hexadecimal="#FF69B4" string="hotpink" />
+	<color hexadecimal="#FF0000" string="red" />
+	<color hexadecimal="#DC143C" string="crimson" />
+
+	<color hexadecimal="#DA70D6" string="orchid" />
+	<color hexadecimal="#BA55D3" string="mediumorchid" />
+	<color hexadecimal="#800080" string="purple" />
+	<color hexadecimal="#8A2BE2" string="blueviolet" />
+	<color hexadecimal="#00BFFF" string="deepskyblue" />
+	<color hexadecimal="#1E90FF" string="dodgerblue" />
+	<color hexadecimal="#0000FF" string="blue" />
+
+	<color hexadecimal="#00008B" string="blue4" />
+	<color hexadecimal="#5F9EA0" string="cadetblue" />
+	<color hexadecimal="#40E0D0" string="turquoise" />
+	<color hexadecimal="#00FF7F" string="springgreen" />
+	<color hexadecimal="#7CFC00" string="lawngreen" />
+	<color hexadecimal="#9ACD32" string="olivedrab3" />
+	<color hexadecimal="#008000" string="green" />
+
+	<color hexadecimal="#6B8E23" string="olivedrab" />
+	<color hexadecimal="#556B2F" string="darkolivegreen" />
+	<color hexadecimal="#808000" string="olive" />
+	<color hexadecimal="#D2B48C" string="tan" />
+	<color hexadecimal="#CD853F" string="peru" />
+	<color hexadecimal="#D2691E" string="chocolate" />
+	<color hexadecimal="#800000" string="maroon" />
+	<color hexadecimal="#8B0000" string="red4" />
+	<color hexadecimal="#5C4033" string="chocolate4" />
+</colors>

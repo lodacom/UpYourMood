@@ -78,7 +78,6 @@ public class UpQueries {
 				String image=sol.get("?image").toString();
 				String idMusic=sol.get("?idMusic").toString();
 				String couleur=rdfBC.getMaxColorMusic(idMusic);
-				//System.out.println(couleur);
 				emotion.put(new Emotion(pochette,mot,couleur), i);
 				think.put(new Think(mot,image),i);
 				i++;
@@ -97,17 +96,18 @@ public class UpQueries {
 	 */
 	public void hyperGraphOfAUser(String pseudo){
 		ResultSet rs=null;
+		String userR = "<"+OntologyUpYourMood.getUymUser()+pseudo+">";
+		
 		String req2=prolog5 + NL + prolog7 + NL + prolog6 + NL + prolog1 + NL +
 				"SELECT ?mot ?pochette ?image ?idMusic ?user " +
 				"WHERE { " +
-				"?user user:hasMusicalExperience ?experi . " +
+				userR+" user:hasMusicalExperience ?experi . " +
 				"?experi nicetag:makesMeFeel ?chose . " +
 				"?chose wordconnotation:isAssociatedBy ?mot . " +
 				"?chose wordconnotation:makesMeThink ?image . " +
 				"?experi user:hasListen ?idMusic . " +
 				"?idMusic2 foaf:depiction ?pochette ." +
 				"FILTER regex(str(?idMusic2) , ?idMusic) . "+
-				"FILTER regex(str(?user),"+pseudo+") "+
 				"}";
 		Query query = QueryFactory.create(req2);
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);

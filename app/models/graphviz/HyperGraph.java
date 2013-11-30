@@ -7,8 +7,11 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
+import models.ConnectionBase;
 import models.Emotion;
 import models.Think;
 
@@ -18,7 +21,7 @@ public class HyperGraph {
 	private GraphViz gv;
 	private HashMap<String,Integer> hosts;
 	private HashMap<String,Integer> hostsImages;
-	
+	private String quoteCharacter="'";
 	private int nbreStruct=0;
 	private int nbreStructImage=0;
 	
@@ -69,6 +72,23 @@ public class HyperGraph {
 		gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type , representationType), out );
 	}
 	
+	private String getColor(String hexadecimal){
+		ConnectionBase.open();
+		String retour="";
+		ResultSet res=ConnectionBase.requete("SELECT color FROM colors WHERE hexadecimal="+quoteCharacter+hexadecimal+quoteCharacter);
+		try {
+			while (res.next()){
+				retour=res.getString("color");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ConnectionBase.close();
+		return retour;
+	}
+	
 	private int getFile(String host,String couleur)
 	{
 
@@ -97,8 +117,9 @@ public class HyperGraph {
 				while ((read = input.read(buffer)) > 0)
 					writeFile.write(buffer, 0, read);
 				writeFile.flush();
-
-				gv.addln("struct"+nbreStruct+" [margin=0 shape=box, style=filled, fillcolor=white, color=red, label=" +
+				
+				String recup=getColor(couleur);
+				gv.addln("struct"+nbreStruct+" [margin=0 shape=box, style=filled, fillcolor=white, color="+recup+", label=" +
 						"<<table border=\"0\" cellborder=\"0\">"+
 						"<tr><td fixedsize=\"true\" width=\"50\" height=\"80\"><img scale=\"true\" src=\"public/pochette/"+nbreStruct+fileName+"\"/>" +
 						"</td></tr>"+

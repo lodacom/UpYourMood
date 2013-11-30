@@ -78,3 +78,7 @@ set compteur=0; dans un terminal SQL
  5. Pour pouvoir obtenir un graphe contenant les images des pochettes d'album et les images
  choisies par le ou les utilisateurs, veuillez créer dans le dossier un public deux sous-dossiers.
  Le premier s'appelant downloadImages le deuxième pochette (merci de respecter la casse).
+ 
+ 6. Pour pouvoir générer les différents hyper-graphes, veuillez copier les fichiers colors.xml et 
+ ConnectionBase.java dans /public/rdf dans un projet à part puis exécuter la classe java
+ qui vous est donnée.
