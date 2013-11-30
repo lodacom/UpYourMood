@@ -83,7 +83,7 @@ public class ControlListenAgain extends Controller {
 		return ok(views.html.listen_again_jamendo.render(Application.maSession, idMusique,urlImages));
 	}
 	
-	private static void images(int compteur){
+	protected static void images(int compteur){
 		urlImages=new ArrayList<String>();
 		
 		Set<Entry<Think,Integer>> recup=bdLA.again.entrySet();
