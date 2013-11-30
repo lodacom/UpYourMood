@@ -49,10 +49,6 @@ public class RDFBuildingColors {
 					m.setNsPrefix("user", OntologyUpYourMood.getUymUser());
 					m.setNsPrefix("rdf", RDF.getURI());
 					m.setNsPrefix("color", OntologyUpYourMood.getUymColor());
-					OntologyUpYourMood.isColoredBy =m.createProperty(OntologyUpYourMood.getUymMusic()+"isColoredBy");
-					OntologyUpYourMood.givenBy =m.createProperty(OntologyUpYourMood.getUymUser()+"givenBy");
-					OntologyUpYourMood.isSelected =m.createProperty(OntologyUpYourMood.getUymColor()+"isSelected");
-					OntologyUpYourMood.hasValue =m.createProperty(OntologyUpYourMood.getUymColor()+"hasValue");
 					String NL = System.getProperty("line.separator");
 					prefixs = "PREFIX uym: <"+OntologyUpYourMood.getUym()+">"+NL+"PREFIX music: <"+OntologyUpYourMood.getUymMusic()+">"+NL+"PREFIX user: <"+OntologyUpYourMood.getUymUser()+">"+NL+"PREFIX color: <"+OntologyUpYourMood.getUymColor()+">"+NL;
 
