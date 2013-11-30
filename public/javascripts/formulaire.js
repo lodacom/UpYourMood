@@ -34,6 +34,13 @@ $(function(){
 		$.get('player/next', function(dom){ $('#player_music').html(dom); });
 	});
 	
+	$(document).on('click', '#next_sing_again', function(){
+		$.get('/listenagain/next', function(dom){ $('#player_music').html(dom); });
+	});
+	
+	$(document).on('click', '#previous_sing_again', function(){
+		$.get('/listenagain/previous', function(dom){ $('#player_music').html(dom); });
+	});
 });
 
 //widgets.jamendo.com/v3/track/1080651?autoplay=0&layout=standard&manualWidth=242& 	width=220&theme=light&highlight=0&tracklist=false&tracklist_n=3&embedCode=

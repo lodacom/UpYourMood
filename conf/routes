@@ -33,3 +33,5 @@ GET 	/sparql						controllers.ControlEndPointSparql.index()
 GET 	/sparql/response			controllers.ControlEndPointSparql.query(query: String,format: String)
 
 GET		/listenagain				controllers.ControlListenAgain.index()
+GET		/listenagain/next			controllers.ControlListenAgain.next()
+GET		/listenagain/previous		controllers.ControlListenAgain.previous()
