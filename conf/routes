@@ -29,6 +29,8 @@ GET 	/ontology					controllers.ControlOntology.index()
 
 GET		/hypergraph					controllers.ControlHyperGraph.index()
 
+GET		/hypergraphPerso			controllers.ControlHyperGraphPerso.index()
+
 GET 	/sparql						controllers.ControlEndPointSparql.index()
 GET 	/sparql/response			controllers.ControlEndPointSparql.query(query: String,format: String)
 

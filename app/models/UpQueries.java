@@ -83,7 +83,7 @@ public class UpQueries {
 				i++;
 			}
 			hg.ajouterPochetteMotRelationImage(emotion,think);
-			hg.endGraph();
+			hg.endGraph("global");
 		}finally{
 			qexec.close();
 		}
@@ -122,15 +122,14 @@ public class UpQueries {
 				String mot=sol.get("?mot").toString();
 				String image=sol.get("?image").toString();
 				String idMusic=sol.get("?idMusic").toString();
-				String user=sol.get("?user").toString();
-				String couleur=rdfBC.getMaxColorMusicByUser(idMusic,user);
+				String couleur=rdfBC.getMaxColorMusicByUser(idMusic,pseudo);
 				emotion.put(new Emotion(pochette,mot,couleur), i);
 				think.put(new Think(mot,image),i);
 				i++;
 				
 			}
 			hg.ajouterPochetteMotRelationImage(emotion,think);
-			hg.endGraph();
+			hg.endGraph(pseudo);
 		}finally{
 			qexec.close();
 		}

@@ -63,12 +63,12 @@ public class HyperGraph {
 	/**
 	 * Permet de finir le graphe et de fabriquer l'image résultante
 	 */
-	public void endGraph(){
+	public void endGraph(String nom_graph){
 		gv.addln(gv.end_graph());
 		//System.out.println(gv.getDotSource());
 		String type = "jpg";
 		String representationType="circo";
-		File out = new File("public/graph/hypergraph." + type);
+		File out = new File("public/graph/hypergraph_"+nom_graph+"." + type);
 		gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type , representationType), out );
 	}
 	

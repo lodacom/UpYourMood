@@ -152,7 +152,7 @@ public class RDFBuildingColors {
 		while (rs.hasNext())
 		{ 
 			QuerySolution s = rs.nextSolution();
-			RDFNode r=s.get("?t");
+			RDFNode r=s.get("?times");
 			if (r!=null){
 				Integer v = s.get("?times").asLiteral().getInt();
 			
