@@ -17,6 +17,10 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 import controllers.Application;
 
+/**
+ * Classe permettant de construire le fichier upyourmood.rdf.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ */
 @SuppressWarnings("deprecation")
 public class RDFBuilding {
 	private static volatile RDFBuilding instance = null;
@@ -24,32 +28,27 @@ public class RDFBuilding {
 	private static Model m=null;
 	public static long cpt = 0;
 	public CompteurRDF cRDF;
-	//private final static String cfgProp = "app/models/compteur.txt";
-
+	
+	/**
+	 * Constructeur permettant de charger le fichier upyourmood.rdf afin de l'enrichir par la suite.
+	 * Le constructeur récupère également la valeur actuelle du compteur, servant à numéroter une expérience musicale.
+	 */
+	
 	private RDFBuilding(){
 		try{
 			m=FileManager.get().loadModel(rdf_file);
 		}catch(RiotException e){
 			m = ModelFactory.createDefaultModel();
 		}
-		/*String chaine="";
-		try{
-			InputStream ips=new FileInputStream(cfgProp); 
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
-			String ligne;
-			while ((ligne=br.readLine())!=null){
-				chaine+=ligne;
-			}
-			br.close();
-		}catch(IOException ex){
-			
-		}
-		cpt=Integer.parseInt(chaine.split("\\s")[1]);*/
 		cRDF=new CompteurRDF();
 		cpt=cRDF.select();
 	}
 
+	/**
+	 * <p> Récupérer l'instance de RDFBuilding, ou la créer avec les préfixes nécessaires ainsi
+	 * que les notions de sous-propriétés. </p>
+	 * @return l'instance de RDFBuilding 
+	 */
 	public final static RDFBuilding getInstance() {
 		if (RDFBuilding.instance == null) {
 			synchronized(RDFBuilding.class) {
@@ -78,17 +77,12 @@ public class RDFBuilding {
 	}
 
 	/**
-	 * fonction principale qu'il faudra appeler dans la classe Application
-	 * @param List<String> infoMusic information de la musique courante
+	 * Fonction principale qu'il faudra appeler dans la classe Application
+	 * @param infoMusic information de la musique courante
 	 */
 	public void rdfUpYourMood(List<String> infoMusic,UserInformation userInfo,WordConnotation word,String urlImage){
 		ajouterMusique(infoMusic);
 		ajouterUtilisateur(userInfo, infoMusic, word, urlImage);
-		//ajouterMot_Connotation(word);
-
-		//............................................................................................
-
-		//............................................................................................
 		FileOutputStream outStream;
 		try {
 			outStream = new FileOutputStream("public/rdf/upyourmood.rdf");
@@ -127,9 +121,11 @@ public class RDFBuilding {
 
 	/**
 	 * Dans cette fonction on ajoute:
-	 * a minima:
 	 * <ul>
 	 * 	<li>le pseudo</li>
+	 *  <li>le mot associé à la musique</li>
+	 *  <li>la connotation du mot</li>
+	 *  <li>l'url de l'image associée au mot</li>
 	 * </ul>
 	 */
 	private void ajouterUtilisateur(UserInformation userInfo, List<String> infoMusic, WordConnotation word, String urlImage){
@@ -152,33 +148,5 @@ public class RDFBuilding {
 		m.add(OntologyUpYourMood.User,OntologyUpYourMood.hasMusicalExperience,OntologyUpYourMood.MusicalExperience);
 		cpt++;
 		cRDF.update();
-		/*try {
-			FileOutputStream fichier=new FileOutputStream(cfgProp);
-			String compteur="compteur "+cpt;
-			fichier.write(compteur.getBytes());
-			fichier.flush();
-			fichier.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
-
-	/*private void ajouterMot_Connotation(WordConnotation word){
-
-		OntologyUpYourMood.Word = m.createResource(OntologyUpYourMood.getUymWordConnotation()+word.getMot());
-		OntologyUpYourMood.connotation=m.createTypedLiteral(word.getConnotation(),XSDDatatype.XSDfloat);
-
-		OntologyUpYourMood.IsConnoted = m.createProperty(OntologyUpYourMood.getUymWordConnotation()+"IsConnoted");
-		OntologyUpYourMood.IsAssociatedBy = m.createProperty(OntologyUpYourMood.getUymWordConnotation()+"IsAssociatedBy");
-
-		OntologyUpYourMood.Word.addLiteral(OntologyUpYourMood.IsConnoted, OntologyUpYourMood.connotation);
-
-		m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.Word);
-
-		m.add(OntologyUpYourMood.Word,RDF.type,OntologyUpYourMood.IsConnoted);	
-		OntologyUpYourMood.User.addProperty(OntologyUpYourMood.IsAssociatedBy, OntologyUpYourMood.Word);
-		//m.add(OntologyUpYourMood.User,OntologyUpYourMood.IsAssociatedBy,OntologyUpYourMood.Word);
-
-	}*/
 }
