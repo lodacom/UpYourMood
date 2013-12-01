@@ -22,7 +22,11 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-
+/**
+ * <p>Classe permettant de construire le fichier uymcolors.rdf.</p>
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class RDFBuildingColors {
 
 	private static RDFBuildingColors instance;
@@ -31,6 +35,10 @@ public class RDFBuildingColors {
 
 	private static String prefixs = null;
 
+	/**
+	 * Constructeur qui charge le fichier rdf.
+	 * @throws RiotException Si le modèle est null.
+	 */
 	private RDFBuildingColors(){
 		try{
 			m=FileManager.get().loadModel(rdf_filecolors);
@@ -39,6 +47,10 @@ public class RDFBuildingColors {
 		}		
 	}
 
+	/**
+	 * <p> Récupérer l'instance de RDFBuildingCoolors, ou la créer avec les préfixes nécessaires.</p>
+	 * @return l'instance de RDFBuildingColors. 
+	 */
 	public final static RDFBuildingColors getInstance() {
 		if (RDFBuildingColors.instance == null) {
 			synchronized(RDFBuildingColors.class) {
@@ -58,6 +70,14 @@ public class RDFBuildingColors {
 		return RDFBuildingColors.instance;
 	}
 
+	/**
+	 * <p>Méthode qui ajoute une couleur pour une musique donnée, si celle-ci n'a pas déjà été associée par
+	 * cet utilisateur pour cette musique.</p>
+	 * @param music_number L'identifiant de la musique écoutée actuellement.
+	 * @param pseudo Le pseudo de l'utilisateur qui écoute la musique.
+	 * @param color_value La couleur choisie par l'utilisateur pour cette musique.
+	 * @see RDFBuildingColors#incrExistColor(String, String, String)
+	 */
 	public void rdfUYMAddColor(String music_number, String pseudo, String color_value){
 		if (!this.incrExistColor(music_number, pseudo, color_value)){
 			this.addColor(music_number, pseudo, color_value);
@@ -73,6 +93,15 @@ public class RDFBuildingColors {
 
 	}
 
+	/**
+	 * <p>Méthode qui permet de vérifier si c'est la première fois que cet utilisateur choisit cette couleur
+	 * pour cette musique. Si cette couleur a déjà été choisie, alors le rdf sera mis à jour dynamiquement,
+	 * le nombre de fois que cette couleur a été choisi par cet utilisateur sera incrémenté de 1.</p>
+	 * @param music_number L'identifiant de la musique en cours.
+	 * @param pseudo Le pseudo de l'utilisateur qui écoute la musique.
+	 * @param color_value La couleur choisie par l'utilisateur.
+	 * @return vrai si la couleur était déjà présente pour cette musique, faux sinon.
+	 */
 	private Boolean incrExistColor(String music_number, String pseudo, String color_value){
 		Resource Color = m.getResource(OntologyUpYourMood.getUymColor()+music_number+"/"+pseudo+"/"+color_value);
 		Property prop = m.getProperty(OntologyUpYourMood.getUymColor()+"isSelected");
@@ -87,6 +116,12 @@ public class RDFBuildingColors {
 		return false;
 	}
 
+	/**
+	 * Méthode qui ajoute au modèle les informations nécessaires et enrichit donc le fichier uymcolors.rdf.
+	 * @param music_number L'identifiant de la musique en cours.
+	 * @param pseudo Le pseudo de l'utilisateur qui écoute la musique.
+	 * @param color_value La couleur choisie.
+	 */
 	private void addColor(String music_number, String pseudo, String color_value){
 		OntologyUpYourMood.Music = m.createResource(OntologyUpYourMood.getUymMusic()+music_number);
 		OntologyUpYourMood.User = m.createResource(OntologyUpYourMood.getUymUser()+pseudo);
@@ -97,6 +132,13 @@ public class RDFBuildingColors {
 		m.add(m.createLiteralStatement(OntologyUpYourMood.Color,  OntologyUpYourMood.hasValue, color_value));
 	}
 
+	/**
+	 * <p>Méthode dans laquelle on récupère la couleur la plus de fois "cochée" par l'ensemble des utilisateurs
+	 * pour une musique donnée en paramètre. Cette couleur est récupérée via une requête SPARQL effectuée 
+	 * sur le fichier uymcolors.rdf.</p>
+	 * @param music_number La musique pour laquelle on souhaite récupérer la couleur la plus de fois sélectionnée.
+	 * @return la couleur ayant été sélectionné le plus de fois par l'ensemble des utilisateurs.
+	 */
 	public String getMaxColorMusic(String music_number){
 		String maxcolor = "#FFFFFF";
 		Integer value = 0;
@@ -129,6 +171,15 @@ public class RDFBuildingColors {
 		return maxcolor;
 	}
 
+	/**
+	 * <p>Méthode qui exécute la même requête SPARQL que précédemment, à la différence près
+	 * que l'utilisateur est également mis en paramètre. On cherche donc cette fois à savoir pour un
+	 * utilisateur donné quelle est la couleur qu'il a le plus de fois sélectionné pour une musique donnée.</p>
+	 * @param music_number L'identifiant de la musique pour laquelle on veut récupérer sa couleur "max".
+	 * @param pseudo L'utilisateur en lien avec la musique choisie.
+	 * @return la couleur sélectionnée le plus de fois par l'utilisateur pour la musique donnée.
+	 * @see RDFBuildingColors#getMaxColorMusic(String)
+	 */
 	public String getMaxColorMusicByUser(String music_number, String pseudo){
 		String maxcolor = "#FFFFFF";
 		Integer value = 0;
