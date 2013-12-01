@@ -1,10 +1,19 @@
 package models;
 import java.sql.*;
 
+/**
+ * Classe utilitaire permettant de se connecter/déconnecter/faire des
+ * requêtes sur la Base de données Postgres
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class ConnectionBase {
 
 	private static Connection conn;
 	
+	/**
+	 * Méthode permettant d'ouvrir une connection à la BD
+	 */
 	public static void open(){
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -17,6 +26,11 @@ public class ConnectionBase {
 	
 	}
 	
+	/**
+	 * Méthode permettant d'effectuer une requête sur la BD
+	 * @param req la requête 
+	 * @return ResultSet un résultat de la requête
+	 */
 	public static ResultSet requete(String req){
 		Statement stmt;
 		try {
@@ -28,6 +42,9 @@ public class ConnectionBase {
 		}
 	}
 	
+	/**
+	 * Méthode permettant de fermer la connection à la BD
+	 */
 	public static void close(){
 		try {
 			conn.close();
