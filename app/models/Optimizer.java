@@ -4,26 +4,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Classe permettant de construire le fichier upyourmood.rdf.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ */
 public class Optimizer
 {
 	public final String quoteCharacter="'";
+	/**
+	 * Contiendra l'ensemble des urls des images en rapport avec un mot précis.
+	 */
 	public ArrayList<String> urlImages;
 	
+	/**
+	 * Constructeur qui instancie une ArrayList, qui contiendra les urls  des images.
+	 */
 	public Optimizer(){
 		urlImages=new ArrayList<String>();
 	}
 
 	/**
-	 * Fonction permettant de regarder si l'image a déjà été téléchargé via la BD.
-	 * Si ce n'est pas le cas rajoute dans la BD et renvoie faux.
-	 * @param urlFlickrWrappr url du farm
-	 * @param host url de l'image
+	 * <p>Fonction permettant de vérifier si le mot entré par l'utilisateur a déjà été rentré 
+	 * par quelqu'un d'autre. Cela permet d'éviter d'aller interroger Flickr inutilement, car si le mot
+	 * a déjà été rentré, alors les urls associées sont déjà stockées dans la BDD.</p>
+	 * @param mot Le mot à vérifier dans la BDD.
+	 * @return vrai si le mot est présent dans la BDD, faux sinon.
 	 */
 	public boolean wordHasBeenAlreadyViewed(String mot){
-		//requête sur une vue qui rend seulement les hosts
-		//s'il n'y a rien mettre dans la BD urlFlickrWrappr|host|nom image
-		//renvoyer faux
-		//sinon renvoyer vrai
 		ConnectionBase.open();
 		ResultSet res=ConnectionBase.requete("SELECT * FROM \"Image\" WHERE \"motAssoc\"="+quoteCharacter+mot+quoteCharacter);
 		try {
@@ -44,9 +51,9 @@ public class Optimizer
 	}
 
 	/**
-	 * Fonction permettant de savoir si les images de l'url en paramètre
-	 * ont déjà été téléchargées. Si ce n'est pas le cas renvoie faux.
-	 * @param urlFlickrWrappr
+	 * Fonction permettant d'insérer dans la BDD les urls des images récupérées.
+	 * @param host Url de l'image
+	 * @param motAssoc Mot associé à l'url
 	 */
 	public void updateAlreadyTraversed(String host,String motAssoc){
 		//requête sur une vue qui rend seulement les urlFlickrWrappr
@@ -59,6 +66,11 @@ public class Optimizer
 		ConnectionBase.close();
 	}
 
+	/**
+	 * Méthode qui récupère via la BDD les urls des images, pour ensuite les proposer à l'utilisateur.
+	 * @param mot Mot rentré par l'utilisateur.
+	 * @throws SQLException Echec de connexion à la BDD.
+	 */
 	public void prepareImage(String mot){
 		ConnectionBase.open();
 		ResultSet res=ConnectionBase.requete("SELECT \"urlImage\" FROM \"Image\" WHERE \"motAssoc\"="+quoteCharacter+mot+quoteCharacter);
@@ -73,6 +85,10 @@ public class Optimizer
 		ConnectionBase.close();
 	}
 
+	/**
+	 * Getter qui renvoie l'ArrayList contenant les urls des images.
+	 * @return l'ArrayList urlImages.
+	 */
 	public ArrayList<String> urlImageToPrint(){
 		return urlImages;
 	}
