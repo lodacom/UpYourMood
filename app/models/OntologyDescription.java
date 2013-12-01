@@ -23,14 +23,26 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 
+/**
+ * Classe permettant de décrire l'ontologie UpYourMood créée par nos soins.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class OntologyDescription {
 	private  OntModel m=null;
 
+	/**
+	 * Constructeur permettant de créer notre modèle pour décrire notre ontologie.
+	 */
 	public OntologyDescription(){
 
 		m = ModelFactory.createOntologyModel ();
 	}
 
+	/**
+	 * 
+	 * @return le modèle sous le format "RDF/XML-ABBREV", consultable sous le lien "Notre ontologie".
+	 */
 	public String OwlDescription(){
 		constructionOfOWLOntology();
 		OutputStream out = new ByteArrayOutputStream();
@@ -38,6 +50,9 @@ public class OntologyDescription {
 		return out.toString();
 	}
 
+	/**
+	 * Méthode qui ajoute au modèle toutes les informations nécessaires pour décrire notre ontologie.
+	 */
 	private void constructionOfOWLOntology(){
 
 		/****************************************************************************************************************
