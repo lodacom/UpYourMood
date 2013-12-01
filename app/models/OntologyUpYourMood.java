@@ -6,7 +6,16 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
+/**
+ * <p>Classe qui implémente notre ontologie UpYourMood,
+ * contenant l'ensemble des préfixes, ressources, propriétés et littéraux.</p>
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class OntologyUpYourMood {
+	
+	// Préfixes
+	
 	private static final String uym="http://www.upyourmood.com/";
 	private static final String uymMusic=uym+"music/";
 	private static final String uymWordConnotation=uym+"wordconnotation/";
@@ -51,24 +60,42 @@ public class OntologyUpYourMood {
 	
 	public static Literal connotation=null;
 	
-	// Prefixes
-	
+	/**
+	 * Getter pour le préfixe uym.
+	 * @return la chaine de caractères uym.
+	 */
 	public static String getUym(){
 		return uym;
 	}
 	
+	/**
+	 * Getter pour le préfixe uymMusic.
+	 * @return la chaine de caractères uymMusic.
+	 */
 	public static String getUymMusic(){
 		return uymMusic;
 	}
 	
+	/**
+	 * Getter pour le préfixe uymWordConnotation.
+	 * @return la chaine de caractères uymWordConnotation.
+	 */	
 	public static String getUymWordConnotation(){
 		return uymWordConnotation;
 	}
 	
+	/**
+	 * Getter pour le préfixe uymUser.
+	 * @return la chaine de caractères uymUser.
+	 */
 	public static String getUymUser(){
 		return uymUser;
 	}
 	
+	/**
+	 * Getter pour le préfixe uymColor.
+	 * @return la chaine de caractères uymColor.
+	 */
 	public static String getUymColor(){
 		return uymColor;
 	}
