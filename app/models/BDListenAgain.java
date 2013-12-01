@@ -4,14 +4,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * Classe qui permet de récupérer les musiques préférées d'un utilisateur.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class BDListenAgain {
 
 	public HashMap<Think,Integer> again;
 	
+	/**
+	 * Constructeur qui instancie une HashMap ayant pour clé un objet Think et pour valeur un simple Integer.
+	 */
 	public BDListenAgain(){
 		again=new HashMap<Think,Integer>();
 	}
 	
+	/**
+	 * <p>Méthode qui permet de récupérer au plus les 10 musiques préférées pour un utilisateur donné, 
+	 * en interrogeant la BDD. Le résultat est stocké dans la HashMap instanciée dans le constructeur.</p>
+	 * @param pseudo Le pseudo de l'utilisateur dont on veut récupérer ses musiques préférées.
+	 * @throws SQLException Echec de connexion à la BDD.
+	 */
 	public void retreiveMusics(String pseudo){
 		Think t;
 		ConnectionBase.open();
@@ -37,6 +51,12 @@ public class BDListenAgain {
 		ConnectionBase.close();
 	}
 	
+	/**
+	 * <p>Méthode qui sert à déterminer si l'identifiant de la musique traité en ce moment est déjà présent
+	 * dans la HashMap.</p>
+	 * @param idMusique Identifiant de la musique traité actuellement.
+	 * @return vrai si l'identifiant de la musique est déjà présent dans la HashMap, faux sinon.
+	 */
 	private boolean test(String idMusique){
 		Set<Think> recup=again.keySet();
 		Iterator<Think> iter=recup.iterator();
