@@ -3,15 +3,29 @@ package models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Classe qui permet de gérer les informations des utilisateurs déjà inscris.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class UserInformation {
 
 	private User infoUser;
 	private static String quoteCharacter="'";
 
+	/**
+	 * Constructeur vide.
+	 */
 	public UserInformation(){
 
 	}
 
+	/**
+	 * <p>Méthode qui permet de récupérer l'ensemble des informations d'un utilisateur en 
+	 * interrogeant la BDD.</p>
+	 * @param pseudo Le pseudo pour lequel on souhaite récupérer les informations.
+	 * @throws SQLException Problème SQL.
+	 */
 	public void retrieveInformation(String pseudo) throws SQLException{
 		ConnectionBase.open();
 		ResultSet res=ConnectionBase.requete("SELECT * FROM \"UserInfo\" " +
@@ -30,6 +44,11 @@ public class UserInformation {
 		ConnectionBase.close();
 	}
 
+	/**
+	 * 
+	 * @param pseudo
+	 * @throws SQLException
+	 */
 	public void profil(String pseudo) throws SQLException{
 		ConnectionBase.open();
 		ResultSet res=ConnectionBase.requete("SELECT * FROM \"UserInfo\" " +
@@ -47,7 +66,7 @@ public class UserInformation {
 	/**
 	 * 
 	 * @param pseudo
-	 * @return vrai s'il y a déjà un pseudo égual au paramètre. Sinon faux
+	 * @return vrai s'il y a déjà un pseudo égal au paramètre. Sinon faux
 	 * @throws SQLException
 	 */
 	public boolean pseudoAlreadyExists(String pseudo) throws SQLException{
@@ -77,6 +96,10 @@ public class UserInformation {
 		return retour;
 	}
 	
+	/**
+	 * Getter permettant de récupérer un objet User contenant les informations d'un utilisateur.
+	 * @return
+	 */
 	public User getInfoUser() {
 		return infoUser;
 	}
