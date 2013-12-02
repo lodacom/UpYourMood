@@ -19,6 +19,11 @@ import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.vocabulary.DC;
 import com.hp.hpl.jena.vocabulary.RDF;
 
+/**
+ * <p>Classe qui permet d'interroger nos fichiers rdf.</p>
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class UpQueries {
 
 	public static final String NL = System.getProperty("line.separator");
@@ -36,6 +41,9 @@ public class UpQueries {
 	public HashMap<Think,Integer> think;
 	private static String quoteCharacter="'";
 	
+	/**
+	 * Constructeur dans lequel on instancie toutes les variables nécessaires.
+	 */
 	public UpQueries(){
 		m = ModelFactory.createOntologyModel();
 		String fil_URL = "file:public/rdf/upyourmood.rdf";
@@ -135,6 +143,12 @@ public class UpQueries {
 		}
 	}
 	
+	/**
+	 * <p>Simulation d'un "endpoint", mis à dispotion de l'utilisateur pour qu'il puisse lui aussi
+	 * interroger nos fichiers rdf.</p>
+	 * @param user_query Requête de l'utilisateur.
+	 * @return un objet EndPointQueries contenant la réponse de la requête.
+	 */
 	public EndPointQueries userQueriesFromEndPoint(String user_query){
 		/*
 		 * SELECT DISTINCT ?user WHERE { ?user user:hasMusicalExperience ?experi }
@@ -174,6 +188,11 @@ public class UpQueries {
 		return epq;
 	}
 	
+	/**
+	 * Méthode permettant de sélectionner au plus les 10 musiques les mieux notées pour un utilisateur donné,
+	 * afin qu'il puisse les réécouter.
+	 * @param pseudo Pseudo de l'utilisateur pour lequel on veut avoir le top10.
+	 */
 	public void listenAgainJamendo(String pseudo){
 		ResultSet rs=null;
 		ResultSet rs2=null;
@@ -242,23 +261,5 @@ public class UpQueries {
 		}
 		
 		ConnectionBase.close();
-		// Tentative de fusion des 2 requêtes précédentes.
-		/*String test = prolog1 + NL + prolog2 + NL + prolog3 + NL + prolog4 + NL + prolog5 + NL + prolog6 + NL + prolog7 +
-				"SELECT ?idmusique (AVG(?connotation) AS ?moyenne_connotation ) (SAMPLE(?url_image) AS ?url_image2) "+
-				"WHERE { "+
-				"?user user:hasMusicalExperience ?experi . " +
-				"?experi nicetag:makesMeFeel ?chose . " +
-				"?experi user:hasListen ?idmusique ."+
-				"?chose wordconnotation:isConnoted ?connotation . " +
-				" { "+
-				"SELECT ?url_image WHERE {"+
-				"?user user:hasMusicalExperience ?experi . " +
-				"?experi nicetag:makesMeFeel ?chose . " +
-				"?experi user:hasListen ?idmusique ."+
-				"?chose wordconnotation:makesMeThink ?url_image " +
-				"} "+
-				"} "+
-				"} GROUP BY ?idmusique "+
-				"ORDER BY DESC (?moyenne_connotation) ";*/
 	}
 }
