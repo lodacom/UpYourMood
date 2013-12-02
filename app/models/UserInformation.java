@@ -44,12 +44,8 @@ public class UserInformation {
 		ConnectionBase.close();
 	}
 
-	/**
-	 * 
-	 * @param pseudo
-	 * @throws SQLException
-	 */
-	public void profil(String pseudo) throws SQLException{
+	
+	/*public void profil(String pseudo) throws SQLException{
 		ConnectionBase.open();
 		ResultSet res=ConnectionBase.requete("SELECT * FROM \"UserInfo\" " +
 				"WHERE pseudo="+quoteCharacter+pseudo+quoteCharacter);
@@ -61,7 +57,7 @@ public class UserInformation {
 				res.getString("prenom"),
 				res.getString("email"));
 		ConnectionBase.close();
-	}
+	}*/
 
 	/**
 	 * 

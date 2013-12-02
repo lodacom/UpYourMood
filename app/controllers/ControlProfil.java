@@ -17,7 +17,7 @@ public class ControlProfil extends Controller {
 		if (Application.maSession.isConnected()){
 			UI=new UserInformation();
 			try {
-				UI.profil(Application.maSession.getPseudo());
+				UI.retrieveInformation(Application.maSession.getPseudo());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -33,7 +33,7 @@ public class ControlProfil extends Controller {
 		UI=new UserInformation();
 		if(filledForm.hasErrors()) {
 			try {
-				UI.profil(Application.maSession.getPseudo());
+				UI.retrieveInformation(Application.maSession.getPseudo());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -56,7 +56,7 @@ public class ControlProfil extends Controller {
 				User.update(filledForm.get(),Application.maSession.getPseudo());
 			}
 			try {
-				UI.profil(Application.maSession.getPseudo());
+				UI.retrieveInformation(Application.maSession.getPseudo());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
