@@ -7,6 +7,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
 import play.mvc.Controller;
 
+/**
+ * Classe permettant de récupérer les informations des musiques à partir de Jamendo, et donc de les écouter.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ */
 public class Jamendo {
 	static final String TRACKS_URL = "http://api.jamendo.com/v3.0/tracks/?format=json&groupby=artist_id&limit=all";
 	static final String CLIENT_ID = "59336032";
@@ -17,12 +21,8 @@ public class Jamendo {
 	private List<String> titres;
 	private List<String> pochetteAlbums;
 	
-	/*
-	 * artist_name
-	 * album_name
-	 * name -> correspond au titre de la chanson
-	 * album_image
-	 * audio
+	/**
+	 * Constructeur.
 	 */
 	public Jamendo(){
 		 idMusiques=new ArrayList<String>();
@@ -41,6 +41,11 @@ public class Jamendo {
 		}
 	}
 	
+	/**
+	 * Méthode qui permet de parser les informations renvoyées par Jamendo et de les stocker.
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public void play() throws ClientProtocolException, IOException{
 		String result=JSONLoader.loadTracksJSON( TRACKS_URL +"&client_id="+CLIENT_ID);
 		node=Json.parse(result);
@@ -51,6 +56,10 @@ public class Jamendo {
 		listTitre();
 	}
 	
+	/**
+	 * Méthode qui implémente le comportement du bouton "next", pour changer de musique.
+	 * @return l'identifiant de la musique suivante.
+	 */
 	public String next(){
 		String recupCompteur=Controller.session("compteur");
 		int compteur=Integer.parseInt(recupCompteur);
@@ -74,6 +83,10 @@ public class Jamendo {
 		}
 	}
 	
+	/**
+	 * Méthode qui implémente le comportement du bouton "previous", pour changer de musique.
+	 * @return l'identifiant de la musique précédente.
+	 */
 	public String previous(){
 		String recupCompteur=Controller.session("compteur");
 		int compteur=Integer.parseInt(recupCompteur);
@@ -97,12 +110,20 @@ public class Jamendo {
 		}
 	}
 	
+	/**
+	 * Méthode qui permet de récupérer l'identifiant de la musique en écoute.
+	 * @return l'identifiant de la musique en écoute.
+	 */
 	public String current(){
 		String recupCompteur=Controller.session("compteur");
 		int compteur=Integer.parseInt(recupCompteur);
 		return idMusiques.get(compteur);
 	}
 	
+	/**
+	 * Méthode qui permet de récupérer toutes les informations de la musique en écoute.
+	 * @return toutes les informations de la musique en écoute.
+	 */
 	public List<String> currentInfo(){
 		String recupCompteur=Controller.session("compteur");
 		int compteur=Integer.parseInt(recupCompteur);
@@ -115,6 +136,9 @@ public class Jamendo {
 		return info;
 	}
 	
+	/**
+	 * Informations de l'artiste.
+	 */
 	private void listArtistes(){
 		List<JsonNode> liste=node.findValues("artist_name");
 		for (JsonNode element :liste){
@@ -122,6 +146,9 @@ public class Jamendo {
 		}
 	}
 	
+	/**
+	 * Informations de l'album ( Son titre).
+	 */
 	private void listAlbums(){
 		List<JsonNode> liste=node.findValues("album_name");
 		for (JsonNode element :liste){
@@ -129,6 +156,9 @@ public class Jamendo {
 		}
 	}
 	
+	/**
+	 * Titre de la musique.
+	 */
 	private void listTitre(){
 		List<JsonNode> liste=node.findValues("name");
 		for (JsonNode element :liste){
@@ -136,6 +166,9 @@ public class Jamendo {
 		}
 	}
 	
+	/**
+	 * L'image de la pochette d'album.
+	 */
 	private void listPochetteAlbum(){
 		List<JsonNode> liste=node.findValues("album_image");
 		for (JsonNode element :liste){
@@ -143,15 +176,9 @@ public class Jamendo {
 		}
 	}
 	
-	/*public String listMusique(){
-		List<JsonNode> liste=node.findValues("audio");
-		String musiques="";
-		for (JsonNode element :liste){
-			musiques+=element.asText()+" ";
-		}
-		return musiques;
-	}*/
-	
+	/**
+	 * L'identifiant de la musique.
+	 */
 	private void listIdMusique(){
 		List<JsonNode> liste=node.findValues("id");
 		for (JsonNode element :liste){
