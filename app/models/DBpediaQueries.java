@@ -15,6 +15,12 @@ import org.apache.http.params.BasicHttpParams;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+/**
+ * <p>Classe permettant de récupérer les urls des images correspondant à un mot, en
+ * interrogeant via des requêtes SPARQL DBPedia.</p>
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ *
+ */
 public class DBpediaQueries {
 	public String service="http://dbpedia.org/sparql";
 	public String dbprop="PREFIX dbpprop: <http://dbpedia.org/property/>";
@@ -26,6 +32,12 @@ public class DBpediaQueries {
 	private ArrayList<String> urlImages;
 	private String mot;
 	
+	/**
+	 * Méthode qui permet d'interroger DBPedia pour avoir des urls pointant vers des "fermes" d'images de Flickr.
+	 * @param mot Le mot pour lequel on veut récupérer les images.
+	 * @param lang La langue appartenant au mot entré. (Pour avoir plus de pertinence)
+	 * @see DBpediaQueries#urlFromDBpedia()
+	 */
 	public void queryImage(String mot,String lang){
 		this.mot=mot;
 		urlImages=new ArrayList<String>();
@@ -42,6 +54,10 @@ public class DBpediaQueries {
 		urlFromDBpedia();
 	}
 
+/**
+ * Récupération des informations de la requête effectuée dans la méthode précédente.
+ * @see DBpediaQueries#queryImage(String, String)
+ */
 	private void urlFromDBpedia(){
 		urlListe=new ArrayList<String>();
 		try {
@@ -60,6 +76,13 @@ public class DBpediaQueries {
 		retreiveImages();
 	}
 
+	/**
+	 * Méthode qui :
+	 * <ul>
+	 *  <li>Récupère les pages correspondantes à l'url récupérée dans la méthode précédente</li>
+	 *  <li>Parse la page afin de trouver les urls des images</li>
+	 * </ul>
+	 */
 	private void retreiveImages(){
 		for (int i=0;i<urlListe.size();i++){
 
@@ -95,6 +118,10 @@ public class DBpediaQueries {
 		}
 	}
 
+	/**
+	 * Getter pour l'ArrayList urlImages.
+	 * @return les urls présentes dans l'ArrayList.
+	 */
 	public ArrayList<String> urlImagesReturn(){
 		return urlImages;
 	}
