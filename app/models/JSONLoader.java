@@ -8,10 +8,21 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 
+/**
+ * Classe utilisée pour charger les données retournées par Jamendo.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA Katsiaryna, SEGUIN Tristan
+ */
 public class JSONLoader {
 
 	private static String result;
 	
+	/**
+	 * Méthode permettant de récupérer les informations envoyées par Jamendo.
+	 * @param jsonURL
+	 * @return les informations sous format JSON envoyées par Jamendo.
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public static String loadTracksJSON(String jsonURL) throws ClientProtocolException, IOException{
 		DefaultHttpClient   httpclient = new DefaultHttpClient(new BasicHttpParams());
 		HttpGet httpget = new HttpGet(jsonURL);
