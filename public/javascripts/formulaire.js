@@ -16,7 +16,7 @@ $(function(){
 			'TransUrlImage': $(this).attr('src')
 		}, function(){
 			listWord.push(sentiment);
-			$('#words').append('<span>'+ sentiment + '</span>');
+			$('#words').append(' <span>'+ sentiment + '</span>');
 			cleanForm();
 		}).fail(function() {
 			alert('Une erreur s\'est produite pendant la validation');
