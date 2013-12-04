@@ -5,17 +5,16 @@ $(function(){
 	        autoplay: false,
 	        pagination: false
     	});
-		nextDiapo();
+		setTimeout(function(){nextDiapo();}, 3000);
 	}
 });
 
 function nextDiapo()
 {
 	var transitions = ['bars', 'blinds', 'blocks', 'blocks2', 'concentric', 'slide', 'warp', 'bars3d', 'blinds3d', 'cube', 'tiles3d'];
-	setTimeout(function(){
-		window.myFlux.next(transitions[mt_rand(0, transitions.length +1)]);
-		setTimeout(function(){nextDiapo();}, 1000);
-	}, 1000);
+	
+	window.myFlux.next(transitions[mt_rand(0, transitions.length +1)]);
+	setTimeout(function(){nextDiapo();}, 3000);
 }
 
 function mt_rand(low, high)
