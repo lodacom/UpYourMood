@@ -1,3 +1,28 @@
+$(function(){
+	if($('#slider').length > 0) 
+	{
+		window.myFlux = new flux.slider('#slider', {
+	        autoplay: false,
+	        pagination: false
+    	});
+		nextDiapo();
+	}
+});
+
+function nextDiapo()
+{
+	var transitions = ['bars', 'blinds', 'blocks', 'blocks2', 'concentric', 'slide', 'warp', 'bars3d', 'blinds3d', 'cube', 'tiles3d'];
+	setTimeout(function(){
+		window.myFlux.next(transitions[mt_rand(0, transitions.length +1)]);
+		setTimeout(function(){nextDiapo();}, 1000);
+	}, 1000);
+}
+
+function mt_rand(low, high)
+{
+    return Math.floor( Math.random()*(high-low+1) ) + low;
+}
+
 function ShowContent(f,a){
 	$.ajax({
 	    		type: "GET",

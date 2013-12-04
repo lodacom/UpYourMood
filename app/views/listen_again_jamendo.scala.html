@@ -2,17 +2,15 @@
 
 @main("Ayez de nouvelles sensations",sessionValues){
 
-<div style="width: 360px;" class="columns">
-            <br/>
-            <div align="center">   
+	<div style="width: 360px;" class="columns">
+      <br/>
+      <div align="center">   
 		@player_again(json)		
-            </div>
-        </div>
-        
+       </div>
+	</div>
+    <div id="slider">
        @for(img <- images) {
        	<img src=@img alt="image" height="100" width="80" />
        }
-        @************************************
-        * merci d'intégrer ici le diaporama *
-        ************************************@
+    </div>
 }

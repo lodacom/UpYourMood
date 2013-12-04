@@ -7,12 +7,23 @@
   <rdf:Description rdf:about="http://www.upyourmood.com/music/23962">
     <music:isColoredBy>
       <rdf:Description rdf:about="http://www.upyourmood.com/color/23962/guest/#FF8C00">
-        <color:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >#FF8C00</color:hasValue>
+        <user:givenBy rdf:resource="http://www.upyourmood.com/user/guest"/>
         <color:isSelected rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</color:isSelected>
-        <user:givenBy rdf:resource="http://www.upyourmood.com/user/guest"/>
+        <color:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >#FF8C00</color:hasValue>
       </rdf:Description>
     </music:isColoredBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/347339">
+    <color:isColoredBy>
+      <rdf:Description rdf:about="http://www.upyourmood.com/color/347339/guest/#808080">
+        <color:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >#808080</color:hasValue>
+        <color:isSelected rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</color:isSelected>
+        <color:givenBy rdf:resource="http://www.upyourmood.com/user/guest"/>
+      </rdf:Description>
+    </color:isColoredBy>
   </rdf:Description>
 </rdf:RDF>

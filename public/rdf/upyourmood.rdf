@@ -8,18 +8,6 @@
     xmlns:user="http://www.upyourmood.com/user/"
     xmlns:music="http://www.upyourmood.com/music/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/23962">
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/&quot;estratti&quot; da ballate di fine inverno"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/non giovanni"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s3/3310/covers/1.200.jpg"/>
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Attento"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/user/hasListen">
-    <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/albumTitle">
-    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/wordconnotation/makesMeThink">
     <rdfs:subPropertyOf>
       <rdf:Description rdf:about="http://ns.inria.fr/nicetag/2010/09/09/voc.html#makesMeFeel">
@@ -30,33 +18,51 @@
   <rdf:Description rdf:about="http://www.upyourmood.com/music/songTitle">
     <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.upyourmood.com/music/1082484">
-    <music:songTitle rdf:resource="http://www.upyourmood.com/music/JUMP IN MY SOUL"/>
-    <foaf:depiction rdf:resource="http://imgjam.com/albums/s128/128962/covers/1.200.jpg"/>
-    <dc:creator rdf:resource="http://www.upyourmood.com/music/marco sammartino"/>
-    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/Ce n&apos;est pas du Rock"/>
+  <rdf:Description rdf:about="http://www.upyourmood.com/user/hasListen">
+    <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/knows"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/albumTitle">
+    <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/title"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.upyourmood.com/music/347339">
+    <music:albumTitle rdf:resource="http://www.upyourmood.com/music/On The Road"/>
+    <dc:creator rdf:resource="http://www.upyourmood.com/music/Zubrick"/>
+    <foaf:depiction rdf:resource="http://imgjam.com/albums/s45/45645/covers/1.200.jpg"/>
+    <music:songTitle rdf:resource="http://www.upyourmood.com/music/Nuit à la Garde"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.upyourmood.com/user/guest">
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience12">
-        <user:hasListen>1082484</user:hasListen>
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience0">
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:makesMeThink>http://farm3.static.flickr.com/2513/3827690131_9a19df42ef_m.jpg</wordconnotation:makesMeThink>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6023/5919626804_78c31d5663_m.jpg</wordconnotation:makesMeThink>
           <wordconnotation:isConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
-          >7.0</wordconnotation:isConnoted>
-          <wordconnotation:isAssociatedBy>artiste</wordconnotation:isAssociatedBy>
+          >3.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>voiture</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+          >2.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm6.static.flickr.com/5290/5236133084_a5ca15496b_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>347339</user:hasListen>
       </rdf:Description>
     </user:hasMusicalExperience>
     <user:hasMusicalExperience>
-      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience11">
+      <rdf:Description rdf:about="http://www.upyourmood.com/user/guest/musicalExperience1">
         <nicetag:makesMeFeel rdf:parseType="Resource">
-          <wordconnotation:isAssociatedBy>artiste</wordconnotation:isAssociatedBy>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6022/5919491092_bf422213d8_m.jpg</wordconnotation:makesMeThink>
           <wordconnotation:isConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
-          >7.0</wordconnotation:isConnoted>
-          <wordconnotation:makesMeThink>http://farm3.static.flickr.com/2513/3827690131_9a19df42ef_m.jpg</wordconnotation:makesMeThink>
+          >5.0</wordconnotation:isConnoted>
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
         </nicetag:makesMeFeel>
-        <user:hasListen>23962</user:hasListen>
+        <nicetag:makesMeFeel rdf:parseType="Resource">
+          <wordconnotation:isAssociatedBy>chat</wordconnotation:isAssociatedBy>
+          <wordconnotation:isConnoted rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+          >5.0</wordconnotation:isConnoted>
+          <wordconnotation:makesMeThink>http://farm7.static.flickr.com/6142/5919154397_b67b09e8a3_m.jpg</wordconnotation:makesMeThink>
+        </nicetag:makesMeFeel>
+        <user:hasListen>347339</user:hasListen>
       </rdf:Description>
     </user:hasMusicalExperience>
   </rdf:Description>

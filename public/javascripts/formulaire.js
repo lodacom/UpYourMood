@@ -33,6 +33,18 @@ $(function(){
 	$(document).on('click', '#next_sing', function(){
 		$.get('player/next', function(dom){ $('#player_music').html(dom); });
 	});
+	
+	/*
+	$('#sentiment').autocomplete({
+			source: function( request, response ) {
+				var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+				response( $.grep( autocompleteWords, function( item ){
+					return matcher.test( item );
+			}) )
+		},	
+		appendTo: '#resultat_recherche'
+	});
+	*/
 });
 
 //widgets.jamendo.com/v3/track/1080651?autoplay=0&layout=standard&manualWidth=242& 	width=220&theme=light&highlight=0&tracklist=false&tracklist_n=3&embedCode=
@@ -84,4 +96,24 @@ function getPopUpChoixImage()
 {
  	if($('#choix_image').length == 0) return $('<div id="choix_image" />').appendTo('body');
  	else return $('#choix_image');
+}
+
+
+function addWordsToAutocompleteForm(word)
+{
+	$.ajax({
+     	url: 'http://www.jeuxdemots.org/rezo-xml.php?gotermrel=' + word,
+     	dataType: 'text',
+     	method: 'GET',
+     	crossDomain: true,
+     	success: function(data){
+     	alert(data);
+			items = data.substring(data.indexOf('<sortant>') + 9, data.indexOf('</sortant>'));
+			var tmp = $('<div style="display:none">' + items + '</div>').appendTo('body');
+			tmp.find('rel').each(function(k, v){
+				var self = $(this);
+				if(parseInt(self.attr('poids')) >= pertinenceRecherche) autocompleteWords.push(self.text());
+			});
+		}
+	});
 }
