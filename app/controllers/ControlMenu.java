@@ -7,8 +7,18 @@ import models.*;
 import play.mvc.*;
 import views.html.*;
 
+/*
+ * Classe utilisée pour récupérer les pages web par rapport à l'attribut: son nom.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA BEL Katsiaryna, SEGUIN Tristan
+ */
 public class ControlMenu extends Controller {
-	
+
+/*
+ * Méthode permettant de récupérer la page web et l'envoyer à client web.
+ * @param nom_de_la_page de request
+ * @return les informations sous format String de la web-page.
+ * @author BURC Pierre, DUPLOUY Olivier, KISIALIOVA BEL Katsiaryna, SEGUIN Tristan
+*/
 	public static Result showPage(){
 		final Map<String, String[]> queryParameters = request().queryString();
 		final String f = queryParameters.get("file")[0];
