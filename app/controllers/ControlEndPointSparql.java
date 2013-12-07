@@ -25,6 +25,10 @@ public class ControlEndPointSparql extends Controller{
 	private static String FUSEKI = configFile.getProperty("fusekiFor");
 	
 	public static Result index(){
+		return ok(endpoint_sparql.render(Application.maSession));
+	}
+	
+	public static Result fuseki(){
 		Runtime rt = Runtime.getRuntime();
 		String[] clean={FUSEKI+"s-update", "--service" ,"http://localhost:3030/ds/update", "'CLEAR DEFAULT'"};
 		String path="public/rdf/upyourmood.rdf";
@@ -39,8 +43,7 @@ public class ControlEndPointSparql extends Controller{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//return redirect("http://localhost:3030/");
-		return ok(endpoint_sparql.render(Application.maSession));
+		return redirect("http://localhost:3030/sparql.tpl");
 	}
 	
 	public static Result query(String query,String format){
