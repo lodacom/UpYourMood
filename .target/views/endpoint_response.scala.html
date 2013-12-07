@@ -12,12 +12,13 @@
 			</th>
 		}
 		</tr>
-		@for(tab <- param.colonne()){
+		@for(tab <- param.response){
 			<tr>
-				<td>
-				@tab
-				</td>
+			@for(string <- tab){
+				<td>@string</td>
+			}
 			</tr>
 		}
+				
 	</table>
 </html>

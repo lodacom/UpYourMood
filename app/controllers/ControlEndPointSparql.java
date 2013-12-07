@@ -1,8 +1,8 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 import models.EndPointQueries;
 import models.UpQueries;
@@ -14,22 +14,37 @@ public class ControlEndPointSparql extends Controller{
 
 	static Form<EndPointQueries> edqForm= Form.form(EndPointQueries.class);
 	
+	private final static String cfgProp = "app/controllers/fuseki.properties";
+	private final static Properties configFile = new Properties() {
+		private final static long serialVersionUID = 1L; {
+			try {
+				load(new FileInputStream(cfgProp));
+			} catch (Exception e) {}
+		}
+	};
+	private static String FUSEKI = configFile.getProperty("fusekiFor");
+	
 	public static Result index(){
+		Runtime rt = Runtime.getRuntime();
+		String[] clean={FUSEKI+"s-update", "--service" ,"http://localhost:3030/ds/update", "'CLEAR DEFAULT'"};
+		String path="public/rdf/upyourmood.rdf";
+		String path2="public/rdf/uymcolors.rdf";
+		String[] put={FUSEKI+"s-put" ,"http://localhost:3030/ds/data","default",path};
+		String[] put2={FUSEKI+"s-put" ,"http://localhost:3030/ds/data","default",path2};
+		try {
+			rt.exec(clean);
+			rt.exec(put);
+			rt.exec(put2);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//return redirect("http://localhost:3030/");
 		return ok(endpoint_sparql.render(Application.maSession));
 	}
 	
 	public static Result query(String query,String format){
-		/*final Map<String, String[]> values = request().body().asFormUrlEncoded();
-		String query=values.get("query")[0];
-		String format=values.get("format")[0];*/
-		/*Form<EndPointQueries> filledForm = edqForm.bindFromRequest();
-		if (filledForm.hasErrors()){
-			return ok(endpoint_sparql.render());
-		}else{*/
 			UpQueries uq=new UpQueries();
-			//String query=filledForm.field("query").value();
-			//String format=filledForm.field("format").value();
-			//System.out.println(query);
 			EndPointQueries epq=uq.userQueriesFromEndPoint(query);
 			
 			if(format.equals("auto") || format.equals("text/html")){
@@ -42,6 +57,5 @@ public class ControlEndPointSparql extends Controller{
 				
 			}
 			return ok(endpoint_sparql.render(Application.maSession));
-		//}
 	}
 }
