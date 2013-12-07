@@ -164,7 +164,7 @@ public class UpQueries {
 		List<Var> variables=query.getProjectVars();
 		try{
 			rs = qexec.execSelect() ;
-			
+
 			while(rs.hasNext()){
 				QuerySolution sol = (QuerySolution) rs.next();
 				for (int i=0;i<variables.size();i++){

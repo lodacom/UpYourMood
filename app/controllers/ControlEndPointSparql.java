@@ -4,11 +4,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import models.EndPointQueries;
 import models.UpQueries;
+import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 import play.data.Form;
+import sun.java2d.pipe.RenderBuffer;
 
 public class ControlEndPointSparql extends Controller{
 
@@ -54,7 +58,7 @@ public class ControlEndPointSparql extends Controller{
 				return ok(endpoint_response.render(epq));
 			}
 			if(format.contains("json")){
-				
+				return ok(Json.toJson(epq.response));
 			}
 			if(format.contains("rdf+xml")){
 				
