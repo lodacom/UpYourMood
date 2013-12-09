@@ -100,7 +100,13 @@ public class OntologyDescription {
 		OntClass MusicalExperienceClass = m.createClass(OntologyUpYourMood.getUymMusic()+"musicalexperience");
 		MusicalExperienceClass.addLabel("MusicalExperience Class","en");
 		MusicalExperienceClass.addComment("A MusicalExperience groups the Music that the User is listening and the associated word / connotation ", "en");
-
+		
+		//Color
+		OntClass ColorClass = m.createClass(OntologyUpYourMood.getUymColor());
+		ColorClass.addLabel("Color Class","en");
+		ColorClass.addComment("A Color describes the Music that the User has chosen for", "en");
+		
+		
 		/****************************************************************************************************************
 		 ****************************************************************************************************************
 		 **************************************** AJOUT DES PROPRIETES **************************************************
@@ -168,6 +174,36 @@ public class OntologyDescription {
 		songTitle.addLabel("A Music has a Title", "en");
 		songTitle.addComment("Link a Title Resource to a Music", "en");
 		songTitle.addSuperProperty(dcTitle);
+		
+		// isColoredBy
+		ObjectProperty isColoredBy = m.createObjectProperty(OntologyUpYourMood.getUymMusic()+"isColoredBy");
+		isColoredBy.addRange(ColorClass);
+		isColoredBy.addDomain(MusicClass);
+		isColoredBy.addLabel("A Music has an Assosiated Color", "en");
+		isColoredBy.addComment("Link a Color Resource to a Music", "en");
+		
+		// givenBy
+		ObjectProperty givenBy = m.createObjectProperty(OntologyUpYourMood.getUymUser() + "givenBy");
+		givenBy.addRange(UserClass);
+		givenBy.addDomain(ColorClass);
+		givenBy.addLabel("A Color was given by User", "en");
+		givenBy.addComment("Link a Color Resource to a User",	"en");
+		
+		// isSelected
+		ObjectProperty isSelected = m.createObjectProperty(OntologyUpYourMood.getUymColor() + "isSelected");
+		isSelected.addIsDefinedBy(RDFS.Literal);
+		isSelected.addRange(ColorClass);
+		isSelected.addDomain(ColorClass);
+		isSelected.addLabel("A Color was given by User * times", "en");
+		isSelected.addComment("Describe a Color Resource for some Music and some User",	"en");
+		
+		// hasValue
+		ObjectProperty hasValue = m.createObjectProperty(OntologyUpYourMood.getUymColor() + "hasValue");
+		hasValue.addIsDefinedBy(RDFS.Literal);
+		hasValue.addRange(ColorClass);
+		hasValue.addDomain(ColorClass);
+		hasValue.addLabel("A Color was value html/css", "en");
+		hasValue.addComment("Describe a Color Resource by his html/css identificateur",	"en");
 		
 		// DC.creator
 		ObjectProperty creator = m.createObjectProperty(DC.getURI()+"creator");
