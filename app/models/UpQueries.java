@@ -166,7 +166,6 @@ public class UpQueries {
 		List<Var> variables=query.getProjectVars();
 		try{
 			rs = qexec.execSelect() ;
-
 			while(rs.hasNext()){
 				QuerySolution sol = (QuerySolution) rs.next();
 				for (int i=0;i<variables.size();i++){
@@ -189,6 +188,11 @@ public class UpQueries {
 		return epq;
 	}
 
+	/**
+	 * Traitement de la requête utilisateur, la réponse étant rendue en format RDF/XML
+	 * @param user_query Requête de l'utilisateur.
+	 * @return le résultat de la requête.
+	 */
 	public String userQueriesResponseFromRDF(String user_query){
 		ResultSet rs=null;
 		String rdf_response = "";
@@ -197,15 +201,20 @@ public class UpQueries {
 				prolog5 + NL + prolog6 + NL + prolog7 + NL + user_query;
 		Query query = QueryFactory.create(req1);
 		QueryExecution qexec = QueryExecutionFactory.create(query, m);
-
-		try{
-			rs = qexec.execSelect();
+		int queryType = query.getQueryType();
+		switch (queryType) {
+		case Query.QueryTypeAsk:
+			boolean b = qexec.execAsk();
+		    ResultSetFormatter.outputAsRDF(baos, "RDF/XML", b);
+		    rdf_response = baos.toString();
+		    break;
+		case Query.QueryTypeSelect:
+		    rs = qexec.execSelect();
 			ResultSetFormatter.outputAsRDF(baos, "RDF/XML", rs);
-			rdf_response = baos.toString();		
-			System.out.println(rdf_response);
-		}finally{
-			qexec.close();
+		    rdf_response = baos.toString();
+		    break;
 		}
+		qexec.close();
 		return rdf_response;
 	}
 
