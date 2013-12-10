@@ -213,6 +213,12 @@ public class UpQueries {
 			ResultSetFormatter.outputAsRDF(baos, "RDF/XML", rs);
 		    rdf_response = baos.toString();
 		    break;
+		case Query.QueryTypeConstruct:
+			rdf_response = "Requête CONSTRUCT non prise en charge par notre endpoint.";
+			break;
+		case Query.QueryTypeDescribe:
+			rdf_response = "Requête DESCRIBE non prise en charge par notre endpoint.";
+			break;			
 		}
 		qexec.close();
 		return rdf_response;
