@@ -53,6 +53,7 @@ public class ControlEndPointSparql extends Controller{
 	public static Result query(String query,String format){
 			UpQueries uq=new UpQueries();
 			EndPointQueries epq=uq.userQueriesFromEndPoint(query);
+			String rdf_response=uq.userQueriesResponseFromRDF(query);
 			
 			if(format.equals("auto") || format.equals("text/html")){
 				return ok(endpoint_response.render(epq));
@@ -61,7 +62,7 @@ public class ControlEndPointSparql extends Controller{
 				return ok(Json.toJson(epq.response));
 			}
 			if(format.contains("rdf+xml")){
-				
+				return ok(endpoint_rdf_response.render(rdf_response));
 			}
 			return ok(endpoint_sparql.render(Application.maSession));
 	}
