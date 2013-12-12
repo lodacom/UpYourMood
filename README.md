@@ -82,3 +82,11 @@ set compteur=0; dans un terminal SQL
  6. Pour pouvoir générer les différents hyper-graphes, veuillez copier les fichiers colors.xml et 
  ConnectionBase.java dans /public/rdf dans un projet à part puis exécuter la classe java
  qui vous est donnée.
+ 
+ 7. Vous voulez utiliser le EndPoint mis en place par [Fuseki](http://jena.apache.org/documentation/serving_data/)?
+ Pour cela rien de plus simple, dézipper le fichier fuseki.zip se trouvant dans /public/fuseki sur
+ votre Bureau par exemple. Attribuez les droit ainsi: chmod 777 fuseki* puis chmod 777 s-*  .
+ Ensuite lancer le serveur ainsi: ./fuseki-server --update --mem /ds (à partir du dossier de fuseki).
+ Enfin rendez-vous dans la section "Dévellopeurs" et cliquez sur le lien adéquat. Remarque:
+ attention si vous déployez ce serveur vous vous exposez à de grande faille de sécurité. 
+ C'est pour cela qu'il vaut mieux utiliser ce serveur <b>seulement en local</b>.
